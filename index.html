@@ -2244,7 +2244,10 @@ async function engineBinary(onProgress){
   }catch(e){}
   const net = await fetch(ENGINE_WASM);
   if(!net.ok) throw new Error("HTTP " + net.status);
-  const total = +(net.headers.get("content-length") || 0);
+  /* گیت‌هاب فایل را فشرده می‌فرستد، پس content-length اندازهٔ فشرده است در حالی که
+     خواننده بایت‌های بازشده را می‌دهد؛ برای درصد، اندازهٔ واقعی مبنا قرار می‌گیرد. */
+  const sent = +(net.headers.get("content-length") || 0);
+  const total = sent > 15000000 ? sent : 18485010;
   let buf;
   if(total && net.body && net.body.getReader){
     const reader = net.body.getReader(); const parts = []; let got = 0;
