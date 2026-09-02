@@ -1,0 +1,2286 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#F7F6F3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131519" media="(prefers-color-scheme: dark)">
+<meta name="description" content="دستیار احیا ۲۰۲۵ — پاسخ فوری به پرسش‌های احیای قلبی‌ریوی بر پایهٔ گایدلاین AHA 2025، با پرسش صوتی و خواندن پاسخ به فارسی.">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="دستیار احیا">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%23B81E17'/%3E%3Cpath d='M3.2 12h3l1.5-4 2.5 8 2.1-5.7 1.4 3.2h4.6' fill='none' stroke='%23fff' stroke-width='1.7' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E">
+<title>دستیار احیا ۲۰۲۵</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* ===== TOKENS — light is the base; dark redefines tokens only ===== */
+:root{
+  --ground:#F7F6F3; --surface:#FFFFFF; --surface-2:#EFEDE8; --surface-3:#E4E1DA;
+  --ink:#17191C; --ink-2:#4A4F57; --ink-3:#7C828C;
+  --line:#DEDBD4; --line-2:#CBC7BE;
+  --alarm:#B81E17; --alarm-bg:#FAEBE9; --alarm-line:#E8B5B0;
+  --focus:#1E4B8F;
+  --c-bls:#0B6E62; --c-acls:#1E4B8F; --c-peds:#A34A06; --c-neonate:#63409A;
+  --c-post:#3C6413; --c-special:#94205C; --c-system:#4A5461;
+  --shadow:0 1px 2px rgba(23,25,28,.05), 0 8px 24px -12px rgba(23,25,28,.16);
+  --shadow-lg:0 2px 4px rgba(23,25,28,.06), 0 24px 48px -20px rgba(23,25,28,.28);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#131519; --surface:#1B1E23; --surface-2:#23272D; --surface-3:#2C3138;
+    --ink:#ECEEF1; --ink-2:#A6ADB6; --ink-3:#767D87;
+    --line:#2E333A; --line-2:#3B4149;
+    --alarm:#FF6F60; --alarm-bg:#2D1917; --alarm-line:#5C2A25;
+    --focus:#7FAEF0;
+    --c-bls:#4FD1BE; --c-acls:#85B4F5; --c-peds:#F2A462; --c-neonate:#C2A4F2;
+    --c-post:#A7D26C; --c-special:#F291C2; --c-system:#A8B2BE;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+    --shadow-lg:0 2px 4px rgba(0,0,0,.5), 0 24px 48px -20px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#131519; --surface:#1B1E23; --surface-2:#23272D; --surface-3:#2C3138;
+  --ink:#ECEEF1; --ink-2:#A6ADB6; --ink-3:#767D87;
+  --line:#2E333A; --line-2:#3B4149;
+  --alarm:#FF6F60; --alarm-bg:#2D1917; --alarm-line:#5C2A25;
+  --focus:#7FAEF0;
+  --c-bls:#4FD1BE; --c-acls:#85B4F5; --c-peds:#F2A462; --c-neonate:#C2A4F2;
+  --c-post:#A7D26C; --c-special:#F291C2; --c-system:#A8B2BE;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+  --shadow-lg:0 2px 4px rgba(0,0,0,.5), 0 24px 48px -20px rgba(0,0,0,.8);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:Vazirmatn,"Segoe UI",system-ui,sans-serif;
+  font-size:16px; line-height:1.75; text-align:start;
+  -webkit-font-smoothing:antialiased;
+}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums; direction:ltr; unicode-bidi:isolate}
+button{font:inherit; color:inherit; cursor:pointer; border:0; background:none}
+:focus-visible{outline:2.5px solid var(--focus); outline-offset:2px; border-radius:4px}
+b,strong{font-weight:700; color:var(--ink)}
+
+/* ===== SHELL ===== */
+.wrap{max-width:940px; margin:0 auto; padding:0 16px}
+
+/* ===== HEADER ===== */
+header{
+  position:sticky; top:0; z-index:40; background:var(--ground);
+  border-bottom:1px solid var(--line);
+}
+.brand{display:flex; align-items:center; gap:12px; padding:14px 0 12px}
+.mark{
+  flex:none; width:36px; height:36px; border-radius:9px; background:var(--alarm);
+  display:grid; place-items:center; box-shadow:0 2px 8px -2px color-mix(in srgb,var(--alarm) 55%,transparent);
+}
+.mark svg{width:21px; height:21px; fill:#fff}
+.brand h1{margin:0; font-size:1.06rem; font-weight:800; letter-spacing:-.01em; line-height:1.25}
+.brand p{margin:1px 0 0; font-size:.72rem; color:var(--ink-3); line-height:1.4; font-weight:500}
+.brand-spacer{flex:1}
+.theme-btn{
+  flex:none; width:36px; height:36px; border-radius:9px; border:1px solid var(--line);
+  background:var(--surface); display:grid; place-items:center; color:var(--ink-2);
+  transition:border-color .15s, color .15s;
+}
+.theme-btn:hover{border-color:var(--line-2); color:var(--ink)}
+.lang-sel{
+  flex:none; height:36px; padding:0 8px; border-radius:9px; border:1px solid var(--line);
+  background:var(--surface); color:var(--ink-2); font:inherit; font-size:.82rem; font-weight:600;
+  cursor:pointer; transition:border-color .15s, color .15s; max-width:104px;
+}
+.lang-sel:hover{border-color:var(--line-2); color:var(--ink)}
+.theme-btn svg{width:17px; height:17px; fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round}
+
+/* ===== PATIENT TABS ===== */
+.tabs{display:grid; grid-template-columns:repeat(3,1fr); gap:6px; padding-bottom:12px}
+.tab{
+  position:relative; padding:9px 6px 10px; border-radius:10px; border:1.5px solid var(--line);
+  background:var(--surface); text-align:center; transition:border-color .15s, background .15s;
+}
+.tab strong{display:block; font-size:.92rem; font-weight:700; color:var(--ink-2); transition:color .15s}
+.tab span{display:block; font-size:.68rem; color:var(--ink-3); font-weight:500; margin-top:-2px}
+.tab[aria-pressed="true"]{background:var(--tint); border-color:var(--hue)}
+.tab[aria-pressed="true"] strong{color:var(--hue)}
+.tab:hover:not([aria-pressed="true"]){border-color:var(--line-2)}
+.tab[data-pt="adult"]{--hue:var(--c-acls); --tint:color-mix(in srgb,var(--c-acls) 9%,var(--surface))}
+.tab[data-pt="peds"]{--hue:var(--c-peds); --tint:color-mix(in srgb,var(--c-peds) 9%,var(--surface))}
+.tab[data-pt="neonate"]{--hue:var(--c-neonate); --tint:color-mix(in srgb,var(--c-neonate) 9%,var(--surface))}
+
+/* ===== VITALS READOUT ===== */
+.readout{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(106px,1fr)); gap:1px;
+  background:var(--line); border:1px solid var(--line); border-radius:12px; overflow:hidden;
+  margin-bottom:12px;
+}
+.vt{background:var(--surface); padding:9px 11px 10px; min-width:0}
+.vt-k{
+  font-size:.63rem; font-weight:600; letter-spacing:.06em; color:var(--ink-3);
+  text-transform:uppercase; margin-bottom:1px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+/* هرگز کوتاه نشود: عدد بریده‌شده از نبودِ عدد بدتر است — به‌جای ellipsis می‌شکند */
+.vt-v{font-size:1.02rem; font-weight:600; color:var(--pt-hue); line-height:1.35; overflow-wrap:anywhere}
+.vt-u{font-size:.68rem; color:var(--ink-3); font-weight:500; unicode-bidi:plaintext; line-height:1.5}
+body[data-pt="adult"]{--pt-hue:var(--c-acls)}
+body[data-pt="peds"]{--pt-hue:var(--c-peds)}
+body[data-pt="neonate"]{--pt-hue:var(--c-neonate)}
+
+/* ===== SEARCH ===== */
+.searchbar{display:flex; gap:8px; padding-bottom:14px}
+.field{
+  flex:1; position:relative; display:flex; align-items:center;
+  background:var(--surface); border:1.5px solid var(--line-2); border-radius:13px;
+  transition:border-color .15s, box-shadow .15s; min-width:0;
+}
+.field:focus-within{border-color:var(--focus); box-shadow:0 0 0 3.5px color-mix(in srgb,var(--focus) 16%,transparent)}
+#q{
+  flex:1; min-width:0; border:0; background:none; color:var(--ink);
+  font:inherit; font-size:1rem; font-weight:500; padding:13px 15px 14px; outline:none;
+}
+#q::placeholder{color:var(--ink-3); font-weight:400}
+#q::-webkit-search-cancel-button,#q::-webkit-search-decoration{-webkit-appearance:none; appearance:none}
+.clear{
+  flex:none; width:34px; height:34px; margin-inline-start:5px; border-radius:8px; display:none;
+  place-items:center; color:var(--ink-3);
+}
+.clear:hover{color:var(--ink); background:var(--surface-2)}
+.clear svg{width:15px; height:15px; fill:none; stroke:currentColor; stroke-width:2.2; stroke-linecap:round}
+body.has-q .clear{display:grid}
+
+.mic{
+  flex:none; width:56px; border-radius:13px; background:var(--alarm); color:#fff;
+  display:grid; place-items:center; position:relative;
+  box-shadow:0 2px 10px -3px color-mix(in srgb,var(--alarm) 60%,transparent);
+  transition:transform .12s, filter .15s;
+}
+.mic:hover{filter:brightness(1.07)}
+.mic:active{transform:scale(.96)}
+.mic svg{width:23px; height:23px; fill:currentColor; position:relative; z-index:1}
+.mic[data-state="off"]{background:var(--surface-3); color:var(--ink-3); box-shadow:none; cursor:not-allowed}
+.mic[data-state="on"]::before,.mic[data-state="on"]::after{
+  content:""; position:absolute; inset:0; border-radius:13px;
+  border:2.5px solid var(--alarm); animation:ping 1.6s cubic-bezier(0,0,.2,1) infinite;
+}
+.mic[data-state="on"]::after{animation-delay:.8s}
+@keyframes ping{0%{transform:scale(1); opacity:.85} 100%{transform:scale(1.55); opacity:0}}
+@media (prefers-reduced-motion:reduce){
+  .mic[data-state="on"]::before,.mic[data-state="on"]::after{animation:none; opacity:.5; transform:scale(1.15)}
+  *{scroll-behavior:auto!important}
+}
+
+/* کلید خواندن خودکار: خاموش که باشد، ضربدر روی بلندگو می‌آید و موج‌ها می‌روند */
+.speak-toggle svg{fill:none; stroke:currentColor; stroke-width:1.85; stroke-linecap:round; stroke-linejoin:round}
+.speak-toggle svg path:first-child{fill:currentColor; stroke-width:1.2}
+.speak-toggle .wx{display:none}
+.speak-toggle[aria-pressed="true"]{color:var(--alarm); border-color:color-mix(in srgb,var(--alarm) 40%,var(--line))}
+.speak-toggle[aria-pressed="false"] .w1,
+.speak-toggle[aria-pressed="false"] .w2{display:none}
+.speak-toggle[aria-pressed="false"] .wx{display:block}
+
+.mic-banner{
+  display:flex; align-items:flex-start; gap:9px; padding:10px 13px 11px; margin-bottom:12px;
+  background:var(--alarm-bg); border:1px solid var(--alarm-line); border-radius:10px;
+  font-size:.83rem; line-height:1.65; color:var(--alarm); font-weight:500;
+}
+.mic-banner svg{flex:none; width:17px; height:17px; margin-top:4px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linejoin:round}
+.mic-banner svg circle{fill:currentColor; stroke:none}
+.open-tab{
+  flex:none; margin-inline-start:auto; align-self:center; padding:5px 11px 6px; border-radius:7px;
+  background:var(--alarm); color:#fff; text-decoration:none; font-size:.79rem; font-weight:700; white-space:nowrap;
+}
+.open-tab:hover{filter:brightness(1.08)}
+@media (max-width:560px){
+  .mic-banner{flex-wrap:wrap}
+  .open-tab{margin-inline-start:26px; margin-top:2px}
+}
+
+.listening{
+  display:none; align-items:center; gap:9px; padding:9px 13px; margin-bottom:12px;
+  background:var(--alarm-bg); border:1px solid var(--alarm-line); border-radius:10px;
+  font-size:.85rem; font-weight:600; color:var(--alarm);
+}
+body.listening .listening{display:flex}
+.bars{display:flex; align-items:flex-end; gap:2.5px; height:15px}
+.bars i{width:3px; background:var(--alarm); border-radius:2px; animation:eq .9s ease-in-out infinite}
+.bars i:nth-child(1){height:40%; animation-delay:0s}
+.bars i:nth-child(2){height:85%; animation-delay:.15s}
+.bars i:nth-child(3){height:55%; animation-delay:.3s}
+.bars i:nth-child(4){height:100%; animation-delay:.45s}
+@keyframes eq{0%,100%{transform:scaleY(.35)} 50%{transform:scaleY(1)}}
+@media (prefers-reduced-motion:reduce){.bars i{animation:none}}
+
+/* ===== MAIN ===== */
+main{padding:16px 0 64px}
+.sect-label{
+  display:flex; align-items:center; gap:9px; font-size:.7rem; font-weight:700;
+  letter-spacing:.08em; color:var(--ink-3); text-transform:uppercase; margin:0 0 11px;
+}
+.sect-label::after{content:""; flex:1; height:1px; background:var(--line)}
+
+/* ===== CATEGORY CHIPS ===== */
+.chips{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px}
+@media (max-width:640px){                       /* روی موبایل به‌جای چهار ردیف، یک نوار افقی */
+  .chips{
+    flex-wrap:nowrap; overflow-x:auto; margin-inline:-16px; padding:2px 16px 8px;
+    scrollbar-width:none; -webkit-overflow-scrolling:touch;
+  }
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:none}
+}
+.chip{
+  padding:6px 13px 7px; border-radius:99px; border:1.5px solid var(--line);
+  background:var(--surface); font-size:.82rem; font-weight:600; color:var(--ink-2);
+  transition:border-color .15s, color .15s, background .15s;
+}
+.chip:hover{border-color:var(--line-2); color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--hue); border-color:var(--hue); color:var(--surface)}
+:root[data-theme="dark"] .chip[aria-pressed="true"],
+.chip[aria-pressed="true"]{color:var(--ground)}
+
+/* ===== CARDS ===== */
+.results{display:flex; flex-direction:column; gap:10px}
+.card{
+  background:var(--surface); border:1px solid var(--line); border-radius:13px;
+  border-inline-start:4px solid var(--hue); box-shadow:var(--shadow); overflow:hidden;
+}
+.card-top{
+  display:flex; align-items:flex-start; gap:12px; width:100%;
+  padding:14px 15px; text-align:start; transition:background .12s;
+}
+.card-top:hover{background:var(--surface-2)}
+.card-q{flex:1; min-width:0; font-size:1.01rem; font-weight:700; line-height:1.55; letter-spacing:-.005em}
+.card-cat{
+  display:block; font-size:.66rem; font-weight:700; letter-spacing:.05em;
+  color:var(--hue); text-transform:uppercase; margin-bottom:3px;
+}
+.speak-btn{
+  flex:none; width:34px; height:34px; margin-top:-1px; border-radius:9px;
+  display:grid; place-items:center; color:var(--ink-3);
+  border:1px solid var(--line); background:var(--surface);
+  transition:color .15s, border-color .15s, background .15s;
+}
+.speak-btn svg{width:17px; height:17px; fill:none; stroke:currentColor; stroke-width:1.85; stroke-linecap:round; stroke-linejoin:round}
+.speak-btn svg path:first-child{fill:currentColor; stroke-width:1.2}
+.speak-btn:hover{color:var(--hue); border-color:var(--hue)}
+.card.speaking .speak-btn{color:var(--surface); background:var(--hue); border-color:var(--hue)}
+:root[data-theme="dark"] .card.speaking .speak-btn,
+.card.speaking .speak-btn{color:var(--ground)}
+.card.speaking{box-shadow:0 0 0 2px var(--hue), var(--shadow)}
+.card.speaking .speak-btn svg{animation:pulse 1.1s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1} 50%{opacity:.45}}
+@media (prefers-reduced-motion:reduce){.card.speaking .speak-btn svg{animation:none}}
+
+.caret{
+  flex:none; width:22px; height:22px; margin-top:5px; color:var(--ink-3);
+  transition:transform .2s ease;
+}
+.caret svg{width:100%; height:100%; fill:none; stroke:currentColor; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round}
+.card[open] .caret{transform:rotate(180deg)}
+.card-body{padding:0 15px 15px; display:none}
+.card[open] .card-body{display:block}
+.answer{
+  font-size:1.02rem; line-height:1.85; color:var(--ink);
+  padding:13px 15px; background:var(--surface-2); border-radius:10px;
+  border-inline-start:3px solid color-mix(in srgb,var(--hue) 45%,transparent);
+}
+.answer b{color:var(--hue); font-weight:700}
+.card.harm .answer{background:var(--alarm-bg); border-inline-start-color:var(--alarm)}
+.card.harm .answer b{color:var(--alarm)}
+.meta{
+  display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-top:11px;
+  font-size:.72rem; color:var(--ink-3);
+}
+.badge{
+  display:inline-flex; align-items:center; gap:5px; padding:3px 9px 4px; border-radius:6px;
+  background:var(--surface-2); border:1px solid var(--line); font-size:.7rem; font-weight:600;
+}
+.badge em{font-style:normal; color:var(--ink-3); font-weight:500}
+.badge.cor-1{background:color-mix(in srgb,var(--c-post) 13%,var(--surface)); border-color:color-mix(in srgb,var(--c-post) 32%,transparent); color:var(--c-post)}
+.badge.cor-2{background:color-mix(in srgb,var(--c-acls) 12%,var(--surface)); border-color:color-mix(in srgb,var(--c-acls) 30%,transparent); color:var(--c-acls)}
+.badge.cor-3{background:var(--alarm-bg); border-color:var(--alarm-line); color:var(--alarm)}
+.src{margin-inline-start:auto; font-size:.7rem; color:var(--ink-3); font-weight:500}
+
+/* card hues */
+.card[data-cat="bls"],.chip[data-cat="bls"]{--hue:var(--c-bls)}
+.card[data-cat="acls"],.chip[data-cat="acls"]{--hue:var(--c-acls)}
+.card[data-cat="peds"],.chip[data-cat="peds"]{--hue:var(--c-peds)}
+.card[data-cat="neonate"],.chip[data-cat="neonate"]{--hue:var(--c-neonate)}
+.card[data-cat="post"],.chip[data-cat="post"]{--hue:var(--c-post)}
+.card[data-cat="special"],.chip[data-cat="special"]{--hue:var(--c-special)}
+.card[data-cat="system"],.chip[data-cat="system"]{--hue:var(--c-system)}
+.chip[data-cat="all"]{--hue:var(--ink-2)}
+
+/* ===== EMPTY ===== */
+.empty{
+  padding:36px 22px; text-align:center; background:var(--surface);
+  border:1px dashed var(--line-2); border-radius:13px; color:var(--ink-2);
+}
+.empty strong{display:block; font-size:1.02rem; margin-bottom:5px}
+.empty span{font-size:.87rem; color:var(--ink-3)}
+
+/* ===== FOOTER ===== */
+footer{border-top:1px solid var(--line); padding:22px 0 40px; margin-top:34px}
+.legend{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:8px 22px;
+  font-size:.79rem; color:var(--ink-2); margin-bottom:18px;
+}
+.legend div{display:flex; gap:8px; line-height:1.6}
+.legend b{flex:none; font-family:"IBM Plex Mono",monospace; font-size:.75rem; min-width:58px}
+.note{font-size:.79rem; color:var(--ink-3); line-height:1.8}
+.note strong{color:var(--ink-2)}
+
+@media (max-width:560px){
+  .brand h1{font-size:1rem}
+  .vt-v{font-size:1rem}
+  .card-q{font-size:.97rem}
+  .answer{font-size:.98rem; padding:12px 13px}
+  .mic{width:52px}
+}
+
+/* ===== موبایل: چیزهایی که فقط روی گوشی معنا دارند ===== */
+html{-webkit-text-size-adjust:100%; text-size-adjust:100%}
+body{-webkit-tap-highlight-color:transparent; overflow-wrap:break-word}
+img,svg{max-width:100%}
+button,select,a,input{touch-action:manipulation}
+/* حاشیهٔ امن گوشی‌های ناچ‌دار */
+.wrap{padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px))}
+main{padding-bottom:calc(64px + env(safe-area-inset-bottom,0px))}
+
+/* دکمهٔ شناور میکروفون: روی گوشی، هدر با صفحه بالا می‌رود؛ پس میکروفون
+   همیشه در دسترسِ شست می‌ماند — حین احیا نباید دنبال دکمه گشت. */
+.mic-fab{
+  position:fixed; z-index:60; display:none; place-items:center;
+  inset-inline-end:max(16px, env(safe-area-inset-right,0px));
+  bottom:calc(18px + env(safe-area-inset-bottom,0px));
+  width:60px; height:60px; border-radius:50%;
+  background:var(--alarm); color:#fff; box-shadow:var(--shadow-lg);
+}
+.mic-fab svg{width:26px; height:26px; fill:currentColor}
+.mic-fab[data-state="off"]{background:var(--surface-3); color:var(--ink-3)}
+.mic-fab[data-state="on"]::before{
+  content:""; position:absolute; inset:0; border-radius:50%;
+  border:3px solid var(--alarm); animation:ping 1.6s cubic-bezier(0,0,.2,1) infinite;
+}
+@media (max-width:700px){
+  /* هدر روی گوشی چسبان نیست: چهار ردیفِ آن بیش از نیمی از صفحه را می‌گرفت */
+  header{position:static}
+  .mic-fab.show{display:grid}
+}
+@media (prefers-reduced-motion:reduce){.mic-fab[data-state="on"]::before{animation:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand">
+      <div class="mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M3 12h3.2l1.6-4.2 2.6 8.4 2.2-6 1.5 3.4h1.9a3.4 3.4 0 100-1.6h-.9l-2.6-5.9-2.2 6.1L7.9 4 5.7 10.4H3z"/></svg>
+      </div>
+      <div>
+        <h1 id="brand-h1">دستیار احیا ۲۰۲۵</h1>
+        <p id="brand-p">گایدلاین AHA 2025 · پاسخ فوری با صدا یا تایپ</p>
+      </div>
+      <div class="brand-spacer"></div>
+      <select class="lang-sel" id="lang" aria-label="language"></select>
+      <button class="theme-btn speak-toggle" id="autospeak" aria-pressed="true" aria-label="خواندن خودکار پاسخ">
+        <svg viewBox="0 0 24 24"><path d="M4 9.5h3.4L12 5.4v13.2L7.4 14.5H4z"/><path class="w1" d="M15.6 9.4a3.6 3.6 0 010 5.2"/><path class="w2" d="M18.2 6.8a7.3 7.3 0 010 10.4"/><path class="wx" d="M16.4 9.8l4.4 4.4M20.8 9.8l-4.4 4.4"/></svg>
+      </button>
+      <button class="theme-btn" id="theme" aria-label="تغییر تم روشن و تاریک">
+        <svg id="theme-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4"/></svg>
+      </button>
+    </div>
+
+    <div class="tabs" role="group" aria-label="گروه سنی بیمار">
+      <button class="tab" data-pt="adult"   aria-pressed="true"><strong>بزرگسال</strong><span>Adult</span></button>
+      <button class="tab" data-pt="peds"    aria-pressed="false"><strong>اطفال</strong><span>Infant &amp; Child</span></button>
+      <button class="tab" data-pt="neonate" aria-pressed="false"><strong>نوزاد</strong><span>Newborn</span></button>
+    </div>
+
+    <div class="readout" id="readout" aria-live="polite"></div>
+
+    <div class="searchbar">
+      <div class="field">
+        <input id="q" type="search" autocomplete="off" enterkeyhint="search"
+               placeholder="سؤال خود را بپرسید — مثلاً: دوز آدرنالین چقدر است؟"
+               aria-label="جستجوی سؤال">
+        <button class="clear" id="clear" aria-label="پاک کردن">
+          <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <button class="mic" id="mic" aria-label="پرسش صوتی">
+        <svg viewBox="0 0 24 24"><path d="M12 14.5a3.2 3.2 0 003.2-3.2V5.7a3.2 3.2 0 10-6.4 0v5.6a3.2 3.2 0 003.2 3.2z"/><path d="M17.8 11a.9.9 0 10-1.8 0 4 4 0 01-8 0 .9.9 0 10-1.8 0 5.8 5.8 0 004.9 5.7v1.9H8.9a.9.9 0 100 1.8h6.2a.9.9 0 100-1.8h-2.2v-1.9a5.8 5.8 0 004.9-5.7z"/></svg>
+      </button>
+    </div>
+
+    <div class="listening" id="listening">
+      <span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span id="listening-txt">در حال شنیدن… سؤالتان را بگویید</span>
+    </div>
+
+    <div class="mic-banner" id="mic-banner" hidden>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2a1 1 0 01.87.5l8.5 15a1 1 0 01-.87 1.5H3.5a1 1 0 01-.87-1.5l8.5-15a1 1 0 01.87-.5z"/><path d="M12 9v4.6" stroke-width="1.9"/><circle cx="12" cy="16.8" r="1.05"/></svg>
+      <span id="mic-banner-txt"></span>
+      <a class="open-tab" id="open-tab" target="_blank" rel="noopener" hidden>باز کردن در تب جدید ↗</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="chips" id="chips"></div>
+    <h2 class="sect-label" id="sect">دسترسی سریع</h2>
+    <div class="results" id="results"></div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="legend" id="legend">
+      <div><b>کلاس ۱</b><span>توصیه می‌شود / باید انجام شود</span></div>
+      <div><b>کلاس 2a</b><span>معقول است / احتمالاً مفید</span></div>
+      <div><b>کلاس 2b</b><span>ممکن است معقول باشد</span></div>
+      <div><b>کلاس ۳</b><span>توصیه نمی‌شود یا مضر است</span></div>
+      <div><b>LOE A/B</b><span>شواهد از کارآزمایی یا مطالعات</span></div>
+      <div><b>LOE C</b><span>داده محدود یا نظر تخصصی</span></div>
+    </div>
+    <p class="note" id="note">
+      <strong>منبع:</strong> کل محتوای این ابزار مستقیماً از <strong>2025 American Heart Association Guidelines for CPR and ECC</strong>،
+      بخش‌های ۱ تا ۱۲ (<span class="mono">Circulation. 2025;152(suppl 2)</span>) استخراج شده است — شامل NRP نوزاد با همکاری AAP.
+      <br>
+      <strong>حالت آفلاین:</strong> پاسخ‌ها داخل همین صفحه ذخیره شده‌اند و بدون اینترنت کار می‌کنند. فقط <strong>پرسش صوتی</strong> برای تبدیل گفتار به متن به اینترنت نیاز دارد.
+      <br>
+      <strong>توجه:</strong> این ابزار مرجع سریع کنار بالین است و جایگزین قضاوت بالینی، پروتکل مرکز درمانی شما یا متن کامل گایدلاین نیست.
+    </p>
+  </div>
+</footer>
+
+<button class="mic-fab" id="mic-fab" aria-label="پرسش صوتی">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 14.5a3.2 3.2 0 003.2-3.2V5.7a3.2 3.2 0 10-6.4 0v5.6a3.2 3.2 0 003.2 3.2z"/><path d="M17.8 11a.9.9 0 10-1.8 0 4 4 0 01-8 0 .9.9 0 10-1.8 0 5.8 5.8 0 004.9 5.7v1.9H8.9a.9.9 0 100 1.8h6.2a.9.9 0 100-1.8h-2.2v-1.9a5.8 5.8 0 004.9-5.7z"/></svg>
+</button>
+
+<script>
+// ===== بخش ۱: احیای پایه بزرگسال (Adult BLS - Part 7) =====
+const KB_BLS = [
+{id:"bls-depth", cat:"bls", q:"عمق ماساژ قلبی در بزرگسال چقدر است؟",
+ alt:"عمق فشردن قفسه سینه چند سانتی متر compression depth عمق کمپرشن چقدر فشار بدهم ۵ سانتی متر",
+ a:"حداقل ۲ اینچ = <b>۵ سانتی‌متر</b>، و از عمق بیش از حد (بیشتر از ۲٫۴ اینچ = <b>۶ سانتی‌متر</b>) پرهیز شود.",
+ cor:"1", loe:"B-NR", src:"Part 7 – Adult BLS"},
+
+{id:"bls-rate", cat:"bls", q:"سرعت ماساژ قلبی در بزرگسال چقدر است؟",
+ alt:"تعداد فشردن در دقیقه rate compression سرعت کمپرشن چند تا در دقیقه ریت ماساژ",
+ a:"<b>۱۰۰ تا ۱۲۰ بار در دقیقه</b> (100–120/min).",
+ cor:"2a", loe:"B-NR", src:"Part 7 – Adult BLS"},
+
+{id:"bls-ratio", cat:"bls", q:"نسبت ماساژ به تنفس در بزرگسال چند است؟",
+ alt:"ratio نسبت کمپرشن به ونتیلاسیون ۳۰ به ۲ 30:2 نسبت ماساژ تنفس بزرگسال",
+ a:"<b>۳۰ ماساژ به ۲ تنفس (30:2)</b> پیش از گذاشتن راه هوایی پیشرفته — هم برای امدادگر عادی و هم کادر درمان.",
+ cor:"2a", loe:"B-NR", src:"Part 7 – Adult BLS"},
+
+{id:"bls-adv-airway-vent", cat:"bls", q:"بعد از گذاشتن لوله تراشه، تعداد تنفس چقدر باشد؟",
+ alt:"advanced airway ventilation rate راه هوایی پیشرفته تنفس هر ۶ ثانیه ۱۰ تنفس در دقیقه لوله تراشه",
+ a:"<b>۱ تنفس هر ۶ ثانیه (۱۰ تنفس در دقیقه)</b> همراه با ماساژ مداوم و بدون وقفه.",
+ cor:"2b", loe:"C-LD", src:"Part 9 – Adult ALS"},
+
+{id:"bls-respiratory-arrest", cat:"bls", q:"در ایست تنفسی با نبض، تنفس را چطور بدهم؟",
+ alt:"respiratory arrest ایست تنفسی نبض دارد rescue breathing تنفس نجات هر ۶ ثانیه",
+ a:"<b>۱ تنفس هر ۶ ثانیه (۱۰ تنفس در دقیقه)</b>، هر تنفس با بالا آمدن قابل مشاهدهٔ قفسه سینه. نبض هر ۲ دقیقه چک شود.",
+ cor:"2a", loe:"C-LD", src:"Part 7 – Adult BLS"},
+
+{id:"bls-pulse-check", cat:"bls", q:"چک نبض چقدر طول بکشد؟",
+ alt:"pulse check زمان بررسی نبض ۱۰ ثانیه تشخیص ایست قلبی کادر درمان",
+ a:"<b>حداکثر ۱۰ ثانیه</b>. اگر نبض قطعی لمس نشد، فرض کنید ایست قلبی است و فوراً ماساژ را شروع کنید.",
+ cor:"1", loe:"C-LD", src:"Part 7 – Adult BLS"},
+
+{id:"bls-recognition", cat:"bls", q:"چطور ایست قلبی را تشخیص بدهم؟",
+ alt:"recognition تشخیص ایست قلبی گاسپینگ gasping بیهوش تنفس غیرطبیعی نفس بریده",
+ a:"بزرگسال <b>بیهوش/بدون پاسخ</b> با <b>تنفس نبود یا غیرطبیعی (فقط گاسپینگ)</b> = ایست قلبی. امدادگر عادی: بدون چک نبض شروع کند. کادر درمان: حداکثر ۱۰ ثانیه چک نبض.",
+ cor:"1", loe:"C-LD", src:"Part 7 – Adult BLS"},
+
+{id:"bls-lone-rescuer", cat:"bls", q:"امدادگر تنها اول چه کاری کند؟",
+ alt:"lone rescuer امدادگر تنها اول تماس بگیرم یا CPR اورژانس زنگ بزنم ۱۱۵ activate",
+ a:"اول <b>سیستم اورژانس را فعال کن</b>، بعد فوراً CPR را <b>با ماساژ قلبی</b> شروع کن. با موبایل: تماس بگیر و همزمان ماساژ را شروع کن.",
+ cor:"1", loe:"B-NR", src:"Part 7 – Adult BLS"},
+
+{id:"bls-hand-position", cat:"bls", q:"دست را کجای قفسه سینه بگذارم؟",
+ alt:"hand position جای دست وسط قفسه سینه استرنوم نیمه پایینی جناغ محل ماساژ",
+ a:"کف یک دست روی <b>مرکز قفسه سینه — نیمهٔ پایینی تا یک‌سوم پایینی جناغ (sternum)</b> و کف دست دیگر روی آن، انگشتان درهم.",
+ cor:"1", loe:"C-LD", src:"Part 7 – Adult BLS"},
+
+{id:"bls-position-2025", cat:"bls", q:"موقعیت بدن امدادگر هنگام ماساژ چگونه باشد؟ (تغییر ۲۰۲۵)",
+ alt:"positioning موقعیت امدادگر زانو torso سطح زانو جدید ۲۰۲۵ new",
+ a:"<b>تنهٔ بیمار تقریباً هم‌سطح زانوی امدادگر</b> باشد. سطح <b>سفت</b> و بیمار <b>به پشت (supine)</b>، به شرطی که شروع ماساژ را به تأخیر نیندازد.",
+ cor:"1", loe:"B-NR", src:"Part 7 – Adult BLS"},
+
+{id:"bls-where", cat:"bls", q:"بیمار را برای احیا جابه‌جا کنم؟",
+ alt:"location محل احیا جابجایی بیمار انتقال همانجا که پیدا شده",
+ a:"خیر — احیا <b>همان‌جا که بیمار پیدا شده</b> انجام شود، تا وقتی CPR باکیفیت به‌صورت ایمن و مؤثر ممکن باشد.",
+ cor:"1", loe:"C-EO", src:"Part 7 – Adult BLS"},
+
+{id:"bls-switch", cat:"bls", q:"هر چند وقت جای ماساژدهنده عوض شود؟",
+ alt:"switch compressor تعویض امدادگر خستگی هر ۲ دقیقه ۵ سیکل",
+ a:"تقریباً <b>هر ۲ دقیقه</b> (یا حدود ۵ سیکل ۳۰:۲)، یا زودتر در صورت خستگی.",
+ cor:"2a", loe:"B-R", src:"Part 7 – Adult BLS"},
+
+{id:"bls-ccf", cat:"bls", q:"کسر زمان ماساژ (CCF) چقدر باید باشد؟",
+ alt:"chest compression fraction CCF کسر فشردن حداقل ۶۰ درصد وقفه",
+ a:"<b>حداقل ۶۰٪</b>. وقفه‌های پیش و پس از شوک تا حد ممکن کوتاه باشند.",
+ cor:"2b", loe:"C-LD", src:"Part 7 – Adult BLS"},
+
+{id:"bls-postshock", cat:"bls", q:"بعد از شوک، ریتم را چک کنم یا ماساژ را شروع کنم؟",
+ alt:"post shock بعد از شوک ریتم چک ماساژ فوری resume compressions",
+ a:"<b>بلافاصله ماساژ را از سر بگیرید</b>؛ برای چک ریتم پس از شوک، CPR را متوقف نکنید.",
+ cor:"2a", loe:"B-R", src:"Part 7 – Adult BLS"},
+
+{id:"bls-recoil", cat:"bls", q:"برگشت کامل قفسه سینه چقدر مهم است؟",
+ alt:"recoil ریکویل برگشت قفسه سینه تکیه دادن leaning",
+ a:"<b>برگشت کامل قفسه سینه</b> پس از هر ماساژ لازم است — بین ماساژها روی قفسه سینه تکیه ندهید.",
+ cor:"2a", loe:"C-LD", src:"Part 7 – Adult BLS"},
+
+{id:"bls-tidal", cat:"bls", q:"حجم هر تنفس چقدر باشد؟",
+ alt:"tidal volume حجم تنفس بالا آمدن قفسه سینه chest rise هایپرونتیلاسیون",
+ a:"فقط به اندازه‌ای که <b>بالا آمدن قفسه سینه دیده شود</b>؛ هر تنفس در <b>۱ ثانیه</b>. از کم‌تهویه‌ای و بیش‌تهویه‌ای (hyperventilation) پرهیز کنید — بیش‌تهویه‌ای <b>مضر</b> است.",
+ cor:"2a / 3: Harm", loe:"C-LD", src:"Part 7 – Adult BLS"},
+
+{id:"bls-bvm", cat:"bls", q:"تکنیک صحیح آمبوبگ (bag-mask) چیست؟",
+ alt:"bag mask آمبوبگ ماسک دو نفره دو دست seal",
+ a:"ترجیحاً <b>دو امدادگر</b>: یکی با <b>دو دست</b> راه هوایی را باز و ماسک را آب‌بندی می‌کند، دیگری بگ را فشار می‌دهد.",
+ cor:"2a", loe:"C-LD", src:"Part 7 – Adult BLS"},
+
+{id:"bls-airway", cat:"bls", q:"راه هوایی را چگونه باز کنم؟",
+ alt:"head tilt chin lift jaw thrust باز کردن راه هوایی سر عقب چانه بالا ترومای گردن",
+ a:"بدون شک به آسیب گردن: <b>head tilt–chin lift</b>. با ترومای سر و گردن: <b>jaw thrust بدون اکستنشن سر</b>؛ اگر jaw thrust مؤثر نبود، از head tilt–chin lift استفاده کنید.",
+ cor:"1", loe:"C-EO", src:"Part 7 – Adult BLS"},
+
+{id:"bls-cricoid", cat:"bls", q:"فشار کریکوئید در احیا توصیه می‌شود؟",
+ alt:"cricoid pressure فشار کریکوئید سلیک توصیه نمی‌شود",
+ a:"<b>خیر</b> — استفادهٔ روتین از فشار کریکوئید در ایست قلبی بزرگسال <b>توصیه نمی‌شود</b>.",
+ cor:"3: No Benefit", loe:"C-LD", src:"Part 7 – Adult BLS"},
+
+{id:"bls-mechanical", cat:"bls", q:"دستگاه ماساژ مکانیکی توصیه می‌شود؟",
+ alt:"mechanical CPR device لوکاس LUCAS دستگاه ماساژ خودکار",
+ a:"استفادهٔ <b>روتین توصیه نمی‌شود</b>. فقط در شرایط خاص (وقتی ماساژ دستی باکیفیت دشوار یا خطرناک است) قابل بررسی است، با حداقل وقفه هنگام نصب و برداشتن.",
+ cor:"3: No Benefit / 2b", loe:"B-R", src:"Part 7 – Adult BLS"},
+
+{id:"bls-fbao-conscious", cat:"bls", q:"در خفگی با جسم خارجی (بزرگسال هوشیار) چه کنم؟",
+ alt:"FBAO خفگی جسم خارجی هایملیک heimlich ضربه پشتی back blow abdominal thrust ۵ تا ۵ تا",
+ a:"<b>تغییر ۲۰۲۵:</b> سیکل‌های <b>۵ ضربهٔ بین دو کتف (back blows)</b> سپس <b>۵ فشار شکمی (abdominal thrusts)</b>، تکرار تا خروج جسم یا بیهوش شدن بیمار. اورژانس را فعال کنید. در انسداد <b>خفیف</b>: فقط بگذارید سرفه کند و تحت نظر باشد.",
+ cor:"1", loe:"B-NR", src:"Part 7 – Adult BLS"},
+
+{id:"bls-fbao-unconscious", cat:"bls", q:"اگر بیمار با انسداد راه هوایی بیهوش شد؟",
+ alt:"FBAO unconscious بیهوش خفگی finger sweep انگشت کور",
+ a:"<b>CPR را با ماساژ قلبی شروع کنید</b> و اورژانس را فعال کنید. هنگام باز کردن راه هوایی برای تنفس، جسم خارجی <b>قابل مشاهده</b> را خارج کنید. <b>جاروب کور با انگشت (blind finger sweep) ممنوع است.</b>",
+ cor:"1 / 3: Harm", loe:"C-LD", src:"Part 7 – Adult BLS"},
+
+{id:"bls-fbao-special", cat:"bls", q:"خفگی در بارداری یا بیمار چاق چه فرقی دارد؟",
+ alt:"FBAO pregnancy بارداری چاق نمی‌توانم دور شکم را بگیرم chest thrust فشار قفسه سینه",
+ a:"اگر نتوانید دور شکم بیمار را بگیرید، یا در <b>بارداری اواخر</b>: سیکل‌های <b>۵ ضربهٔ پشتی + ۵ فشار قفسهٔ سینه (chest thrusts)</b> به‌جای فشار شکمی.",
+ cor:"1", loe:"C-EO", src:"Part 7 – Adult BLS"},
+
+{id:"bls-obesity", cat:"bls", q:"CPR در بیمار چاق چه تفاوتی دارد؟",
+ alt:"obesity چاقی تکنیک احیا بیمار چاق بک بورد backboard",
+ a:"<b>همان تکنیک استاندارد</b>. ممکن است لازم باشد نیروی بیشتری برای رسیدن به عمق کافی به کار برود. بردِ CPR (partial backboard) در IHCA <b>سودی ندارد</b>.",
+ cor:"1", loe:"C-LD", src:"Part 7 – Adult BLS"},
+
+{id:"bls-prone", cat:"bls", q:"بیمار در وضعیت دمر (prone) دچار ایست قلبی شده، چه کنم؟",
+ alt:"prone دمر شکم خوابیده اتاق عمل چرخاندن بیمار",
+ a:"ترجیحاً بیمار را به <b>پشت (supine)</b> برگردانید. اگر برگرداندن ایمن ممکن نیست، انجام <b>CPR در وضعیت دمر</b> قابل بررسی است.",
+ cor:"2b", loe:"C-LD", src:"Part 7 – Adult BLS"},
+
+{id:"bls-pads", cat:"bls", q:"پدهای دفیبریلاتور را کجا بچسبانم؟",
+ alt:"pads placement جای پد anterolateral anteroposterior قطر پد سوتین",
+ a:"<b>anterolateral</b> یا <b>anteroposterior</b> روی قفسه سینهٔ برهنه؛ قطر پد/پدال <b>بیشتر از ۸ سانتی‌متر</b>. برای سوتین، جابه‌جا کردن آن به‌جای درآوردن کافی است.",
+ cor:"2a", loe:"C-LD", src:"Part 7 – Adult BLS"},
+
+{id:"bls-cpr-before-shock", cat:"bls", q:"قبل از شوک، CPR بدهم یا فوری شوک؟",
+ alt:"CPR before defibrillation اول شوک یا ماساژ witnessed monitored شاهد داشته",
+ a:"CPR تا آماده شدن دستگاه ادامه یابد. در ایست <b>دیده‌شده/مانیتورشدهٔ VF/pVT</b> که دفیبریلاتور همان لحظه در دسترس است: <b>شوک فوری</b>. در ایست بدون مانیتور: یک دورهٔ کوتاه CPR تا آماده شدن دستگاه معقول است.",
+ cor:"1 / 2a", loe:"C-LD / B-R", src:"Part 7 – Adult BLS"},
+
+{id:"bls-ppe", cat:"bls", q:"استفاده از وسایل حفاظت فردی حین CPR؟",
+ alt:"PPE ماسک دستکش حفاظت فردی",
+ a:"استفاده از <b>PPE</b> حین CPR معقول است، هر زمان که فوراً در دسترس باشد.",
+ cor:"2a", loe:"C-LD", src:"Part 7 – Adult BLS"},
+];
+
+// ===== بخش ۲: احیای پیشرفته بزرگسال (Adult ACLS - Part 9) =====
+const KB_ACLS = [
+{id:"acls-epi", cat:"acls", q:"دوز آدرنالین (اپی‌نفرین) در ایست قلبی بزرگسال چقدر است؟",
+ alt:"epinephrine adrenaline آدرنالین اپی نفرین دوز ۱ میلی گرم هر ۳ تا ۵ دقیقه اپینفرین",
+ a:"<b>۱ میلی‌گرم IV/IO هر ۳ تا ۵ دقیقه</b>.",
+ cor:"1 / 2a", loe:"B-R", src:"Part 9 – Adult ALS, Figure 2"},
+
+{id:"acls-epi-timing", cat:"acls", q:"آدرنالین را چه زمانی بدهم؟",
+ alt:"epinephrine timing زمان آدرنالین ریتم شوک‌پذیر غیرشوک‌پذیر asystole PEA اول یا بعد از شوک",
+ a:"<b>ریتم غیرشوک‌پذیر (Asystole/PEA): در اسرع وقت (ASAP)</b>.<br><b>ریتم شوک‌پذیر (VF/pVT): پس از شکست تلاش‌های اولیهٔ دفیبریلاسیون</b>.",
+ cor:"2a", loe:"B-NR", src:"Part 9 – Adult ALS"},
+
+{id:"acls-amiodarone", cat:"acls", q:"دوز آمیودارون در ایست قلبی بزرگسال چقدر است؟",
+ alt:"amiodarone آمیودارون دوز ۳۰۰ میلی گرم ۱۵۰ VF مقاوم آنتی آریتمی",
+ a:"<b>دوز اول: ۳۰۰ میلی‌گرم IV/IO بولوس</b><br><b>دوز دوم: ۱۵۰ میلی‌گرم</b><br>برای VF/pVT مقاوم به دفیبریلاسیون.",
+ cor:"2b", loe:"B-R", src:"Part 9 – Adult ALS, Figure 2"},
+
+{id:"acls-lidocaine", cat:"acls", q:"دوز لیدوکائین در ایست قلبی بزرگسال چقدر است؟",
+ alt:"lidocaine لیدوکائین دوز ۱ تا ۱.۵ میلی گرم بر کیلوگرم جایگزین آمیودارون",
+ a:"<b>دوز اول: ۱ تا ۱٫۵ mg/kg IV/IO</b><br><b>دوز دوم: ۰٫۵ تا ۰٫۷۵ mg/kg</b><br>جایگزین آمیودارون برای VF/pVT مقاوم.",
+ cor:"2b", loe:"B-R", src:"Part 9 – Adult ALS, Figure 2"},
+
+{id:"acls-energy", cat:"acls", q:"انرژی شوک در بزرگسال چقدر باشد؟",
+ alt:"defibrillation energy انرژی شوک ژول joule بای فازیک biphasic مونوفازیک ۳۶۰ ۲۰۰ ۱۲۰",
+ a:"<b>بای‌فازیک:</b> طبق توصیهٔ سازندهٔ دستگاه (معمولاً دوز اولیهٔ <b>۱۲۰ تا ۲۰۰ ژول</b>)؛ اگر نامعلوم است، <b>حداکثر انرژی موجود</b>.<br><b>مونوفازیک: ۳۶۰ ژول</b>.<br>شوک‌های بعدی مساوی یا بالاتر.",
+ cor:"2a / 2b", loe:"C-LD", src:"Part 9 – Adult ALS, Figure 2"},
+
+{id:"acls-single-shock", cat:"acls", q:"شوک تکی بدهم یا پشت سر هم (stacked)؟",
+ alt:"single shock stacked shocks شوک پشت سر هم تکی سه تایی",
+ a:"<b>استراتژی شوک تکی</b> بر شوک‌های پشت‌سرهم (stacked) ارجحیت دارد. بلافاصله پس از شوک، ماساژ از سر گرفته شود.",
+ cor:"2a", loe:"B-NR", src:"Part 9 – Adult ALS"},
+
+{id:"acls-dsd", cat:"acls", q:"دفیبریلاسیون دوگانه (DSD) یا تغییر وکتور در VF مقاوم؟",
+ alt:"double sequential defibrillation DSD vector change دو دستگاه شوک VF مقاوم سه شوک",
+ a:"در VF/pVT پایدار پس از ≥۳ شوک متوالی، <b>سودمندی هیچ‌کدام اثبات نشده است</b> (نه تغییر وکتور، نه دفیبریلاسیون دوگانهٔ متوالی).",
+ cor:"2b", loe:"B-R", src:"Part 9 – Adult ALS"},
+
+{id:"acls-access", cat:"acls", q:"اول IV بگیرم یا IO؟",
+ alt:"vascular access IV IO رگ گیری داخل استخوانی مسیر تزریق سنترال",
+ a:"<b>اول تلاش برای IV</b> (کلاس ۱، سطح A). اگر IV ناموفق یا نشدنی بود: <b>IO</b> (کلاس 2a، سطح A). دسترسی ورید مرکزی فقط اگر هر دو ناموفق باشد و فرد آموزش‌دیده باشد.",
+ cor:"1 / 2a", loe:"A", src:"Part 9 – Adult ALS"},
+
+{id:"acls-vasopressin", cat:"acls", q:"وازوپرسین به‌جای آدرنالین بدهم؟",
+ alt:"vasopressin وازوپرسین جایگزین آدرنالین دوز بالا high dose epinephrine",
+ a:"<b>خیر.</b> وازوپرسین (تنها یا با آدرنالین) هیچ برتری‌ای بر آدرنالین ندارد. <b>آدرنالین با دوز بالا هم توصیه نمی‌شود.</b>",
+ cor:"3: No Benefit", loe:"B-R", src:"Part 9 – Adult ALS"},
+
+{id:"acls-no-routine", cat:"acls", q:"کلسیم، بی‌کربنات و منیزیم را روتین بدهم؟",
+ alt:"calcium bicarbonate magnesium کلسیم بی کربنات سدیم منیزیم روتین استروئید",
+ a:"<b>خیر — هیچ‌کدام روتین توصیه نمی‌شوند</b> (کلسیم، بی‌کربنات سدیم، منیزیم). سودمندی استروئید هم نامشخص است.",
+ cor:"3: No Benefit", loe:"B-R", src:"Part 9 – Adult ALS"},
+
+{id:"acls-hs-ts", cat:"acls", q:"علل برگشت‌پذیر ایست قلبی (H و T) کدامند؟",
+ alt:"reversible causes Hs Ts علل برگشت پذیر هایپوولمی هایپوکسی تامپوناد پنوموتوراکس ترومبوز",
+ a:"<b>H:</b> Hypovolemia (کم‌حجمی) · Hypoxia (هیپوکسی) · Hydrogen ion / اسیدوز · Hypo-/Hyperkalemia (اختلال پتاسیم) · Hypothermia (هیپوترمی)<br><b>T:</b> Tension pneumothorax · Tamponade قلبی · Toxins (سموم) · Thrombosis ریوی (PE) · Thrombosis کرونری (MI)",
+ sp:"پنج علت با ح: کم‌حجمی، هیپوکسی، اسیدوز، اختلال پتاسیم چه کاهش چه افزایش، و هیپوترمی. پنج علت با ت: پنوموتوراکس فشارنده، تامپوناد قلبی، مسمومیت‌ها، آمبولی ریه، و انسداد عروق کرونر یا سکته قلبی.",
+ cor:"—", loe:"—", src:"Part 9 – Adult ALS, Figure 2"},
+
+{id:"acls-etco2-rosc", cat:"acls", q:"ETCO2 چه کاربردی در احیا دارد؟",
+ alt:"ETCO2 کاپنوگرافی end tidal دی اکسید کربن تشخیص ROSC کیفیت CPR",
+ a:"<b>افزایش ناگهانی ETCO2</b> می‌تواند نشانهٔ <b>ROSC</b> باشد. کاپنوگرافی موجی برای تأیید و پایش لولهٔ تراشه <b>توصیهٔ کلاس ۱</b> است. اگر ETCO2 پایین یا در حال کاهش است، کیفیت CPR را بازبینی کنید.",
+ cor:"2b / 1", loe:"B-NR / C-LD", src:"Part 9 – Adult ALS"},
+
+{id:"acls-tor", cat:"acls", q:"چه زمانی احیا را خاتمه بدهم؟",
+ alt:"termination of resuscitation TOR خاتمه احیا ۲۰ دقیقه ETCO2 کمتر از ۱۰ تمام کردن احیا قطع احیا متوقف کردن کی تموم کنم تا کی ادامه بدهم",
+ sp:"از قواعد استاندارد خاتمه احیا استفاده کنید. در بیمار لوله‌گذاری‌شده، ناتوانی در رسیدن به کربن‌دی‌اکسید بازدمی بیشتر از 10 میلی‌متر جیوه پس از 20 دقیقه احیای پیشرفته، می‌تواند یکی از اجزای یک تصمیم چندوجهی باشد. در بیمار بدون لوله تراشه، هیچ عدد کربن‌دی‌اکسید بازدمی نباید مبنای خاتمه احیا باشد؛ این کار مضر است.",
+ a:"از <b>قواعد TOR</b> (BLS TOR، ALS TOR، Universal TOR) استفاده کنید. در بیمار <b>لوله‌گذاری‌شده</b>، ناتوانی در رسیدن به <b>ETCO2 &gt; ۱۰ mmHg پس از ۲۰ دقیقه</b> ALS می‌تواند <u>یکی از اجزای</u> تصمیم چندوجهی باشد. در بیمار <b>بدون لوله</b>، هیچ عدد ETCO2 نباید مبنای خاتمه باشد (مضر).",
+ cor:"1 / 2b / 3: Harm", loe:"B-NR / C-LD", src:"Part 9 – Adult ALS"},
+
+{id:"acls-airway-timing", cat:"acls", q:"چه زمانی لوله‌گذاری کنم؟",
+ alt:"advanced airway timing لوله گذاری زمان انتوباسیون وقفه ماساژ SGA",
+ a:"اگر گذاشتن راه هوایی پیشرفته باعث <b>قطع ماساژ</b> شود، آن را به <b>پس از شکست CPR و دفیبریلاسیون اولیه یا پس از ROSC</b> موکول کنید. کاپنوگرافی موجی مطمئن‌ترین روش تأیید محل لوله است.",
+ cor:"1", loe:"C-LD", src:"Part 9 – Adult ALS"},
+
+{id:"acls-sga-vs-eti", cat:"acls", q:"SGA بگذارم یا لوله تراشه؟",
+ alt:"supraglottic airway SGA endotracheal ETI لارنژیال ماسک انتخاب راه هوایی",
+ a:"در OHCA با <b>نرخ موفقیت پایین لوله‌گذاری یا آموزش کم</b>: <b>SGA</b> پذیرفتنی است. در مراکز با <b>نرخ موفقیت بالا</b>: هر دو قابل قبول‌اند. در بیمارستان توسط متخصص آموزش‌دیده: هر دو. حتی <b>آمبوبگ تنها</b> هم بسته به شرایط و مهارت قابل بررسی است.",
+ cor:"2a", loe:"B-R", src:"Part 9 – Adult ALS"},
+
+{id:"acls-oxygen-cpr", cat:"acls", q:"حین CPR چه غلظت اکسیژنی بدهم؟",
+ alt:"oxygen during CPR اکسیژن حین احیا صد درصد FiO2 حداکثر",
+ a:"<b>حداکثر غلظت اکسیژن قابل دسترس</b> حین CPR معقول است.",
+ cor:"2b", loe:"C-LD", src:"Part 9 – Adult ALS"},
+
+{id:"acls-headup", cat:"acls", q:"CPR با سر بالا (head-up) توصیه می‌شود؟",
+ alt:"head up CPR سر بالا elevated",
+ a:"<b>خیر</b> — به‌جز در چارچوب کارآزمایی بالینی، توصیه نمی‌شود.",
+ cor:"3: No Benefit", loe:"C-LD", src:"Part 9 – Adult ALS"},
+
+{id:"acls-pmvt", cat:"acls", q:"تاکی‌کاردی بطنی چندشکلی (torsades) را چطور درمان کنم؟",
+ alt:"polymorphic VT torsades de pointes تورساد QT طولانی منیزیم شوک غیرهمزمان",
+ a:"<b>شوک غیرهمزمان فوری (unsynchronized)</b> برای VT چندشکلی پایدار.<br>با <b>QT طولانی (torsades)</b>: منیزیم قابل بررسی است.<br>با <b>QT طبیعی</b>: منیزیم روتین توصیه نمی‌شود؛ لیدوکائین/آمیودارون IV و درمان ایسکمی قابل بررسی.",
+ cor:"1 / 2b", loe:"B-NR", src:"Part 9 – Adult ALS"},
+
+{id:"acls-svt", cat:"acls", q:"درمان تاکی‌کاردی منظم با QRS باریک در بزرگسال؟",
+ alt:"narrow complex tachycardia SVT وگال adenosine آدنوزین دیلتیازم وراپامیل کاردیوورژن",
+ a:"۱) <b>مانورهای وگال</b> (کلاس ۱)<br>۲) <b>آدنوزین</b> (کلاس ۱)<br>۳) <b>کاردیوورژن همزمان</b> اگر ناپایدار — یا اگر پایدار ولی مقاوم به وگال و دارو<br>۴) دیلتیازم یا وراپامیل IV، یا بتابلوکر IV در بیمار پایدار",
+ cor:"1", loe:"B-R", src:"Part 9 – Adult ALS"},
+
+{id:"acls-wct", cat:"acls", q:"درمان تاکی‌کاردی با QRS پهن در بزرگسال؟",
+ alt:"wide complex tachycardia WCT پهن آمیودارون پروکایین آمید سوتالول وراپامیل ممنوع",
+ a:"<b>ناپایدار → کاردیوورژن همزمان فوری</b> (کلاس ۱).<br>پایدار: آمیودارون، پروکائین‌آمید یا سوتالول IV قابل بررسی؛ آدنوزین فقط در نوع <u>منظم و مونومورفیک</u>.<br><b>هشدار (3: Harm): وراپامیل و دیلتیازم ممنوع.</b> آدنوزین در نوع ناپایدار، نامنظم یا چندشکلی ممنوع.",
+ cor:"1 / 3: Harm", loe:"B-NR", src:"Part 9 – Adult ALS"},
+
+{id:"acls-af-energy", cat:"acls", q:"انرژی کاردیوورژن در فیبریلاسیون/فلوتر دهلیزی چقدر است؟",
+ alt:"atrial fibrillation flutter cardioversion انرژی AF فلوتر ۲۰۰ ژول",
+ a:"<b>فیبریلاسیون دهلیزی: حداقل ۲۰۰ ژول</b> بای‌فازیک، با افزایش پله‌ای در صورت شکست.<br><b>فلوتر دهلیزی: ۲۰۰ ژول</b> اولیه معقول است.<br>در بی‌ثباتی همودینامیک: <b>کاردیوورژن فوری</b>.",
+ cor:"2a / 1", loe:"B-R / C-LD", src:"Part 9 – Adult ALS"},
+
+{id:"acls-af-drugs", cat:"acls", q:"داروی کنترل ضربان در AF با پاسخ بطنی سریع؟",
+ alt:"rate control AF دیلتیازم متوپرولول اسمولول دیگوکسین آمیودارون دوز",
+ a:"<b>دیلتیازم:</b> ۰٫۲۵ mg/kg IV در ۲ دقیقه؛ انفوزیون ۵–۱۰ mg/h<br><b>وراپامیل:</b> ۰٫۰۷۵–۰٫۱۵ mg/kg IV در ۲ دقیقه<br><b>متوپرولول:</b> ۲٫۵–۵ mg در ۲ دقیقه، تا ۳ دوز<br><b>اسمولول:</b> ۵۰۰ mcg/kg در ۱ دقیقه؛ انفوزیون ۵۰–۳۰۰ mcg/kg/min<br><b>آمیودارون:</b> ۳۰۰ mg IV در ۱ ساعت؛ انفوزیون ۱۰–۵۰ mg/h<br><b>دیگوکسین:</b> ۰٫۲۵ mg IV، تکرار تا حداکثر ۱٫۵ mg در ۲۴ ساعت",
+ cor:"1 / 2a", loe:"B-NR", src:"Part 9 – Adult ALS, Table 2"},
+
+{id:"acls-af-danger", cat:"acls", q:"در AF با پیش‌تحریک (WPW) چه داروهایی ممنوع است؟",
+ alt:"preexcitation WPW ولف پارکینسون دیگوکسین ممنوع خطرناک نارسایی قلبی",
+ a:"<b>3: Harm —</b> در AF/فلوتر با <b>پیش‌تحریک</b>: دیگوکسین، مسدودکننده‌های کلسیمی non-dihydropyridine، بتابلوکرها و آمیودارون IV <b>ممنوع</b> (خطر تشدید پاسخ بطنی و VF).<br>در <b>نارسایی قلبی جبران‌نشده</b> با اختلال سیستولیک LV: CCB و بتابلوکر IV ممنوع.",
+ cor:"3: Harm", loe:"C-LD", src:"Part 9 – Adult ALS"},
+
+{id:"acls-brady", cat:"acls", q:"برادی‌کاردی علامت‌دار بزرگسال را چطور درمان کنم؟",
+ alt:"bradycardia برادی کاردی آتروپین دوپامین پیس ترانس کوتانئوس بلوک",
+ a:"۱) درمان علل برگشت‌پذیر (کلاس ۱)<br>۲) <b>آتروپین</b> در بی‌ثباتی همودینامیک (کلاس 2a)<br>۳) اگر پاسخ نداد: <b>آگونیست‌های آدرنرژیک IV (آدرنالین، دوپامین)</b> یا <b>پیس‌میکر ترانس‌کوتانئوس</b><br>۴) <b>پیس‌میکر ترانس‌ونوس موقت</b> در موارد مقاوم (کلاس 2a)",
+ cor:"1 / 2a", loe:"B-NR / C-LD", src:"Part 9 – Adult ALS"},
+
+{id:"acls-pocus", cat:"acls", q:"سونوگرافی حین احیا مفید است؟",
+ alt:"POCUS ultrasound سونوگرافی اکو حین احیا پروگنوز",
+ a:"استفاده از POCUS برای تشخیص علل برگشت‌پذیر یا برای پیش‌آگهی <b>هنوز اثبات‌نشده است</b>. اگر انجام می‌شود، نباید ماساژ را مختل کند.",
+ cor:"2b", loe:"C-LD", src:"Part 9 – Adult ALS"},
+];
+
+// ===== بخش ۳: احیای اطفال (PBLS Part 6 + PALS Part 8) =====
+const KB_PEDS = [
+{id:"ped-depth", cat:"peds", q:"عمق ماساژ قلبی در شیرخوار و کودک چقدر است؟",
+ alt:"pediatric compression depth عمق ماساژ اطفال کودک شیرخوار یک سوم قطر قدامی خلفی ۴ سانتی متر ۵ سانتی متر",
+ a:"<b>حداقل یک‌سوم قطر قدامی–خلفی قفسه سینه</b>:<br>• <b>شیرخوار: حدود ۱٫۵ اینچ = ۴ سانتی‌متر</b><br>• <b>کودک: حدود ۲ اینچ = ۵ سانتی‌متر</b>",
+ cor:"2a", loe:"C-LD", src:"Part 6 – Pediatric BLS"},
+
+{id:"ped-rate", cat:"peds", q:"سرعت ماساژ قلبی در اطفال چقدر است؟",
+ alt:"pediatric rate سرعت ماساژ کودک شیرخوار ۱۰۰ تا ۱۲۰",
+ a:"<b>۱۰۰ تا ۱۲۰ بار در دقیقه</b> — مانند بزرگسال.",
+ cor:"2a", loe:"C-LD", src:"Part 6 – Pediatric BLS"},
+
+{id:"ped-ratio", cat:"peds", q:"نسبت ماساژ به تنفس در اطفال چند است؟",
+ alt:"pediatric ratio نسبت اطفال ۱۵ به ۲ ۳۰ به ۲ 15:2 30:2 دو امدادگر تک امدادگر",
+ a:"بدون راه هوایی پیشرفته:<br>• <b>یک امدادگر: ۳۰:۲</b><br>• <b>دو امدادگر: ۱۵:۲</b><br>در الگوریتم PALS: ۱۵:۲ با دو امدادگر <b>پیش از بلوغ</b>، و ۳۰:۲ با دو امدادگر <b>پس از شروع بلوغ</b>.",
+ cor:"2a", loe:"C-EO", src:"Part 6 – Pediatric BLS / Part 8 Figure 2"},
+
+{id:"ped-vent-adv", cat:"peds", q:"با راه هوایی پیشرفته، تعداد تنفس در اطفال چقدر است؟",
+ alt:"pediatric advanced airway ventilation rate تنفس اطفال ۲۰ تا ۳۰ هر ۲ تا ۳ ثانیه",
+ a:"<b>۲۰ تا ۳۰ تنفس در دقیقه (۱ تنفس هر ۲ تا ۳ ثانیه)</b>، متناسب با سن و شرایط بالینی. بیش‌تهویه‌ای همودینامیک را مختل می‌کند.",
+ cor:"2b", loe:"C-LD", src:"Part 8 – PALS"},
+
+{id:"ped-resp-arrest", cat:"peds", q:"در کودک با نبض ولی تنفس ناکافی چه کنم؟",
+ alt:"pediatric respiratory arrest تنفس ناکافی نبض دارد ۲۰ تا ۳۰ تنفس در دقیقه",
+ a:"تنفس بدهید: <b>۱ تنفس هر ۲ تا ۳ ثانیه (۲۰ تا ۳۰ تنفس در دقیقه)</b>.",
+ cor:"2a", loe:"C-EO", src:"Part 6 – Pediatric BLS"},
+
+{id:"ped-brady-cpr", cat:"peds", q:"در کودک با ضربان قلب زیر ۶۰ چه کنم؟",
+ alt:"pediatric bradycardia HR less than 60 برادیکاردی برادی کاردی ضربان زیر شصت شروع CPR اطفال کاهش پرفیوژن آتروپین کودک",
+ a:"اگر ضربان قلب <b>کمتر از ۶۰ در دقیقه</b> همراه با <b>اختلال قلبی‌ریوی</b> علی‌رغم <b>تهویهٔ مؤثر با اکسیژن</b> ادامه یابد → <b>CPR را شروع کنید</b>.<br>اگر پس از اصلاح هیپوکسی هم ادامه یافت: <b>آدرنالین IV/IO</b>. در برادی‌کاردی ناشی از تون واگ یا بلوک AV: <b>آتروپین</b>.",
+ cor:"1", loe:"C-EO", src:"Part 8 – PALS"},
+
+{id:"ped-epi", cat:"peds", q:"دوز آدرنالین در ایست قلبی اطفال چقدر است؟",
+ alt:"pediatric epinephrine dose آدرنالین اطفال ۰.۰۱ میلی گرم بر کیلوگرم حداکثر ۱ میلی گرم غلظت",
+ a:"<b>۰٫۰۱ mg/kg IV/IO</b> (معادل <b>۰٫۱ mL/kg از غلظت ۰٫۱ mg/mL</b>). <b>حداکثر تک‌دوز: ۱ میلی‌گرم.</b> تکرار <b>هر ۳ تا ۵ دقیقه</b> تا ROSC.",
+ cor:"2b", loe:"C-LD", src:"Part 8 – PALS, Figure 2"},
+
+{id:"ped-epi-timing", cat:"peds", q:"آدرنالین در اطفال چه زمانی داده شود؟",
+ alt:"pediatric epinephrine timing زمان آدرنالین اطفال ریتم شوک پذیر دو شوک",
+ a:"<b>ریتم غیرشوک‌پذیر: در اسرع وقت (هرچه زودتر بهتر)</b>.<br><b>ریتم شوک‌پذیر: پس از ۲ تلاش دفیبریلاسیون</b> — یا زودتر اگر دفیبریلاسیون سریع ممکن نیست.",
+ cor:"2a / 2b", loe:"C-LD", src:"Part 8 – PALS"},
+
+{id:"ped-amio", cat:"peds", q:"دوز آمیودارون و لیدوکائین در ایست قلبی اطفال چقدر است؟",
+ alt:"pediatric amiodarone lidocaine dose آمیودارون اطفال ۵ میلی گرم بر کیلوگرم لیدوکائین ۱",
+ a:"<b>آمیودارون: ۵ mg/kg IV/IO بولوس</b> (حداکثر ۳۰۰ mg). قابل تکرار تا <b>۳ دوز</b> (حداکثر ۱۵۰ mg در دوزهای بعدی).<br><b>یا لیدوکائین: ۱ mg/kg IV/IO</b>.",
+ cor:"—", loe:"—", src:"Part 8 – PALS, Figure 2"},
+
+{id:"ped-energy", cat:"peds", q:"انرژی شوک در اطفال چقدر است؟",
+ alt:"pediatric defibrillation energy انرژی شوک اطفال ۲ ژول بر کیلوگرم ۴ ژول ۱۰ ژول حداکثر",
+ a:"<b>شوک اول: ۲ J/kg</b> (بازهٔ ۲–۴ J/kg؛ برای سادگی آموزش ۲ J/kg)<br><b>شوک دوم: ۴ J/kg</b><br><b>شوک‌های بعدی: ≥۴ J/kg</b>، حداکثر <b>۱۰ J/kg</b> یا دوز حداکثر بزرگسال.",
+ cor:"2a / 2b", loe:"C-LD", src:"Part 8 – PALS, Figure 2"},
+
+{id:"ped-cardioversion", cat:"peds", q:"انرژی کاردیوورژن همزمان در اطفال چقدر است؟",
+ alt:"pediatric synchronized cardioversion SVT کاردیوورژن اطفال ۰.۵ تا ۱ ژول ۲ ژول",
+ a:"<b>شروع با ۰٫۵ تا ۱ J/kg</b>؛ در صورت ناموفق بودن، افزایش به <b>۲ J/kg</b>. (هم برای SVT و هم تاکی‌کاردی QRS پهن همراه با اختلال قلبی‌ریوی.)",
+ cor:"2a", loe:"C-LD", src:"Part 8 – PALS"},
+
+{id:"ped-aed", cat:"peds", q:"در کودک زیر ۸ سال از AED استفاده کنم؟",
+ alt:"pediatric AED attenuator تضعیف کننده کودک زیر هشت سال دستگاه شوک خودکار",
+ a:"در کودکان <b>زیر ۸ سال</b>: استفاده از <b>تضعیف‌کنندهٔ اطفال (pediatric attenuator)</b> توصیه می‌شود.<br>اگر نه دفیبریلاتور دستی و نه AED با تضعیف‌کننده در دسترس نیست: <b>AED معمولی قابل استفاده است</b> — چون دفیبریلاسیون تنها درمان مؤثر ریتم شوک‌پذیر است و ممکن است نجات‌بخش باشد.",
+ cor:"1 / 2b", loe:"C-LD / C-EO", src:"Part 6 – Pediatric BLS"},
+
+{id:"ped-technique", cat:"peds", q:"تکنیک ماساژ در شیرخوار چگونه است؟",
+ alt:"infant technique شیرخوار دو انگشت دو شست heel of hand کف دست تکنیک ماساژ نوزاد",
+ a:"<b>تغییر ۲۰۲۵:</b> برای شیرخوار، از <b>تکنیک کف یک دست (heel of one hand)</b> یا <b>تکنیک دو شست با احاطهٔ قفسه سینه</b> استفاده کنید. اگر امدادگر نتواند قفسه سینه را احاطه کند: <b>کف یک دست</b>.<br>برای کودک: یک یا دو دست، هر دو قابل قبول.",
+ cor:"1", loe:"B-NR", src:"Part 6 – Pediatric BLS"},
+
+{id:"ped-pulse-check", cat:"peds", q:"در کودک بی‌هوش نبض چک کنم؟",
+ alt:"pediatric pulse check نبض کودک امدادگر عادی کادر درمان ۱۰ ثانیه",
+ a:"<b>امدادگر عادی: نبض چک نکند</b> — بلافاصله CPR را شروع کند.<br><b>کادر درمان: حداکثر ۱۰ ثانیه</b>؛ اگر نبض قطعی حس نشد، ماساژ را شروع کند.<br>چک ریتم توسط کادر درمان: حداکثر ۱۰ ثانیه، حدوداً هر ۲ دقیقه.",
+ cor:"1 / 2a", loe:"C-LD", src:"Part 6 – Pediatric BLS"},
+
+{id:"ped-conventional", cat:"peds", q:"در اطفال CPR فقط با ماساژ کافی است؟",
+ alt:"compression only CPR اطفال فقط ماساژ تنفس لازم conventional",
+ a:"<b>خیر — CPR متعارف (ماساژ + تنفس) برای اطفال توصیه می‌شود</b> (کلاس ۱)، چون علت غالب ایست قلبی در اطفال تنفسی است.<br>فقط اگر امدادگر عادی نتواند یا نخواهد تنفس بدهد، <b>CPR فقط با ماساژ</b> معقول است.",
+ cor:"1 / 2a", loe:"B-NR", src:"Part 6 – Pediatric BLS"},
+
+{id:"ped-pause", cat:"peds", q:"حداکثر وقفه در ماساژ اطفال چقدر باشد؟",
+ alt:"pediatric interruption pause وقفه اطفال کمتر از ۱۰ ثانیه",
+ a:"وقفه‌ها به حداقل برسند و <b>کمتر از ۱۰ ثانیه</b> باشند.",
+ cor:"1", loe:"B-NR", src:"Part 6 – Pediatric BLS"},
+
+{id:"ped-fbao", cat:"peds", q:"خفگی با جسم خارجی در شیرخوار و کودک؟",
+ alt:"pediatric FBAO خفگی شیرخوار کودک ضربه پشتی فشار قفسه سینه فشار شکمی هایملیک",
+ a:"<b>شیرخوار:</b> سیکل‌های <b>۵ ضربهٔ پشتی + ۵ فشار قفسهٔ سینه (chest thrusts)</b> — <u>فشار شکمی در شیرخوار ممنوع</u> (خطر آسیب احشای شکمی).<br><b>کودک:</b> سیکل‌های <b>۵ ضربهٔ پشتی + ۵ فشار شکمی</b>.<br>در صورت بیهوش شدن: <b>CPR با ماساژ شروع شود — نبض چک نکنید.</b> جاروب کور با انگشت ممنوع.",
+ cor:"1 / 3: Harm", loe:"C-LD", src:"Part 6 – Pediatric BLS"},
+
+{id:"ped-airway-peds", cat:"peds", q:"در ایست قلبی خارج‌بیمارستانی اطفال، آمبوبگ یا لوله؟",
+ alt:"pediatric OHCA airway آمبوبگ اطفال بگ ماسک لوله گذاری خارج بیمارستان",
+ a:"در <b>OHCA اطفال: آمبوبگ (bag-mask) ترجیح دارد</b> بر مداخلات راه هوایی پیشرفته (کلاس 2a).<br>در <b>IHCA</b>: هر دو (آمبوبگ یا راه هوایی پیشرفته) قابل بررسی است.",
+ cor:"2a", loe:"C-LD", src:"Part 8 – PALS"},
+
+{id:"ped-ett-cuffed", cat:"peds", q:"لوله تراشه کاف‌دار در کودکان استفاده کنم؟",
+ alt:"cuffed ETT کاف دار لوله تراشه اطفال فشار کاف",
+ a:"<b>بله — لولهٔ کاف‌دار بر بدون کاف ترجیح دارد</b> (کلاس 2a). به سایز، موقعیت و <b>فشار کاف (معمولاً کمتر از ۲۰ تا ۲۵ cmH₂O)</b> توجه شود.",
+ cor:"2a / 1", loe:"B-NR / C-EO", src:"Part 8 – PALS"},
+
+{id:"ped-atropine", cat:"peds", q:"دوز آتروپین برای پیش‌دارو در لوله‌گذاری اطفال؟",
+ alt:"pediatric atropine premedication آتروپین اطفال ۰.۰۲ میلی گرم بر کیلوگرم حداقل دوز",
+ a:"<b>۰٫۰۲ mg/kg</b> — <b>بدون حداقل دوز</b>، برای پیشگیری از برادی‌کاردی حین لوله‌گذاری اورژانسی.",
+ cor:"2b", loe:"C-LD", src:"Part 8 – PALS"},
+
+{id:"ped-fluid", cat:"peds", q:"مایع‌درمانی در شوک سپتیک اطفال چگونه است؟",
+ alt:"pediatric septic shock fluid bolus مایع اطفال ۱۰ تا ۲۰ میلی لیتر بر کیلوگرم نوراپی نفرین",
+ a:"مایع را در <b>بولوس‌های ۱۰ یا ۲۰ mL/kg</b> با <b>ارزیابی مکرر پس از هر بولوس</b> بدهید (پاسخ به مایع و علائم اضافه‌بار).<br>کریستالوئید ایزوتونیک یا کلوئید، بالانس یا نابالانس — همه مؤثرند.<br>در شوک مقاوم به مایع: <b>آدرنالین یا نوراپی‌نفرین</b> به‌عنوان اینوتروپ اول.",
+ cor:"1 / 2a", loe:"C-LD", src:"Part 8 – PALS"},
+
+{id:"ped-dbp", cat:"peds", q:"هدف فشار دیاستولیک حین CPR در اطفال چقدر است؟",
+ alt:"pediatric diastolic blood pressure CPR فشار دیاستولیک اطفال ۲۵ ۳۰ میلی متر جیوه",
+ a:"در صورت وجود مانیتورینگ تهاجمی شریانی: هدف <b>فشار دیاستولیک ≥۲۵ mmHg در شیرخوار</b> و <b>≥۳۰ mmHg در کودک ≥۱ سال</b>.",
+ cor:"2b", loe:"C-LD", src:"Part 8 – PALS"},
+
+{id:"ped-ttm", cat:"peds", q:"کنترل دما پس از احیا در اطفال چگونه است؟",
+ alt:"pediatric TTM targeted temperature management دما اطفال ۳۲ تا ۳۴ ۳۶ تا ۳۷.۵ پنج روز",
+ a:"پایش دمای مرکزی مداوم <b>الزامی</b> (کلاس ۱، سطح A). <b>از دمای مرکزی بالای ۳۷٫۵ °C پرهیز شود.</b><br>در کودکان <b>۲۴ ساعت تا ۱۸ سال</b> که کوماتوز می‌مانند: دورهٔ <b>۵ روزه TTM</b> — یا <b>۳۲–۳۴ °C</b> و سپس ۳۶–۳۷٫۵ °C، یا فقط <b>۳۶–۳۷٫۵ °C</b>.",
+ cor:"1 / 2a", loe:"A / B-R", src:"Part 8 – PALS"},
+
+{id:"ped-post-bp", cat:"peds", q:"هدف فشار خون پس از احیا در اطفال چیست؟",
+ alt:"pediatric post arrest blood pressure فشار خون پس از احیا اطفال صدک دهم",
+ a:"فشار سیستولیک و متوسط شریانی <b>بالاتر از صدک دهم (10th percentile) برای سن</b> حفظ شود. پایش تهاجمی مداوم فشار شریانی توصیه می‌شود.",
+ cor:"1", loe:"B-NR", src:"Part 8 – PALS"},
+
+{id:"ped-post-o2", cat:"peds", q:"هدف اکسیژن‌رسانی پس از احیا در اطفال چیست؟",
+ alt:"pediatric post arrest oxygenation اکسیژن اطفال ۹۴ تا ۹۹ درصد نورموکسی",
+ a:"هدف <b>نورموکسمی</b> متناسب با بیماری زمینه‌ای؛ اکسیژن را تا اشباع <b>۹۴٪ تا ۹۹٪</b> کاهش دهید. از هیپرکاپنی و هیپوکاپنی پرهیز شود.",
+ cor:"2b", loe:"C-LD", src:"Part 8 – PALS"},
+
+{id:"ped-weight", cat:"peds", q:"وزن کودک را نمی‌دانم، دوز دارو را چطور حساب کنم؟",
+ alt:"weight based dosing نوار قد بروسلو broselow تخمین وزن کودک دوز دارو",
+ a:"دوز بر اساس <b>وزن بدن</b> محاسبه شود و از دوز بزرگسال فراتر نرود (کلاس ۱).<br>اگر وزن نامعلوم است: <b>نوار قد (length-based tape)</b> و ابزارهای کمکی شناختی قابل استفاده‌اند.",
+ cor:"1 / 2b", loe:"C-EO", src:"Part 8 – PALS"},
+
+{id:"ped-trauma", cat:"peds", q:"ایست قلبی تروماتیک در کودک را چطور مدیریت کنم؟",
+ alt:"pediatric traumatic cardiac arrest تروما کودک خونریزی پنوموتوراکس تامپوناد توراکوتومی",
+ a:"ارزیابی و درمان علل برگشت‌پذیر: <b>خونریزی، پنوموتوراکس فشارنده، تامپوناد پریکارد</b> (کلاس ۱).<br>در تروای نافذ قفسه سینه با زمان انتقال کوتاه: <b>توراکوتومی احیایی</b> قابل بررسی است.",
+ cor:"1 / 2b", loe:"C-EO / C-LD", src:"Part 8 – PALS"},
+];
+
+// ===== بخش ۴: احیای نوزاد (NRP - Part 5) =====
+const KB_NEO = [
+{id:"neo-ratio", cat:"neonate", q:"نسبت ماساژ به تنفس در نوزاد چند است؟",
+ alt:"neonatal ratio نسبت نوزاد ۳ به ۱ 3:1 نود ماساژ سی تنفس",
+ a:"<b>۳ ماساژ به ۱ تنفس (3:1)</b> — یعنی حدود <b>۹۰ ماساژ و ۳۰ تنفس در دقیقه</b>.",
+ cor:"2b", loe:"C-LD", src:"Part 5 – Neonatal Resuscitation"},
+
+{id:"neo-compression-start", cat:"neonate", q:"چه زمانی در نوزاد ماساژ قلبی شروع کنم؟",
+ alt:"neonatal chest compression start ضربان زیر ۶۰ نوزاد ۳۰ ثانیه تهویه",
+ a:"وقتی ضربان قلب <b>کمتر از ۶۰ در دقیقه</b> باقی بماند <b>علی‌رغم ۳۰ ثانیه تهویهٔ مؤثر</b> که ریه‌ها را باد کند (با حرکت قفسه سینه تأیید شود).<br>حین ماساژ، تهویه <b>با لولهٔ تراشه</b> توصیه می‌شود و <b>اکسیژن ۱۰۰٪</b> معقول است.",
+ cor:"1", loe:"C-EO", src:"Part 5 – Neonatal Resuscitation"},
+
+{id:"neo-technique", cat:"neonate", q:"تکنیک و محل ماساژ در نوزاد چیست؟",
+ alt:"neonatal compression technique دو شست نوزاد یک سوم پایینی جناغ عمق",
+ a:"<b>تکنیک دو شست با احاطهٔ قفسه سینه</b> (بر روش دو انگشتی ترجیح دارد).<br><b>محل:</b> یک‌سوم پایینی جناغ، بالای زائدهٔ خنجری.<br><b>عمق:</b> یک‌سوم قطر قدامی–خلفی قفسه سینه.<br>تعویض ماساژدهنده هر <b>۲ تا ۵ دقیقه</b>.",
+ cor:"2b", loe:"C-LD", src:"Part 5 – Neonatal Resuscitation"},
+
+{id:"neo-epi", cat:"neonate", q:"دوز آدرنالین در نوزاد چقدر است؟",
+ alt:"neonatal epinephrine dose آدرنالین نوزاد ۰.۰۱ تا ۰.۰۳ داخل تراشه ۰.۰۵ تا ۰.۱ بند ناف",
+ a:"<b>داخل عروقی (IV/UVC/IO): ۰٫۰۱ تا ۰٫۰۳ mg/kg</b> — وقتی ضربان با تهویه و ماساژ بهینه به ۶۰ یا بیشتر نرسد.<br><b>داخل تراشه (ETT): ۰٫۰۵ تا ۰٫۱ mg/kg</b> (دوز بالاتر) در حین گرفتن دسترسی عروقی.<br>تکرار <b>هر ۳ تا ۵ دقیقه</b>، ترجیحاً داخل عروقی، اگر ضربان زیر ۶۰ بماند.",
+ cor:"1 / 2a", loe:"B-NR", src:"Part 5 – Neonatal Resuscitation"},
+
+{id:"neo-access", cat:"neonate", q:"مسیر عروقی اورژانسی در نوزاد چیست؟",
+ alt:"neonatal vascular access UVC کاتتر ورید نافی IO داخل استخوانی نوزاد",
+ a:"<b>کاتتر ورید نافی (UVC)</b> روش توصیه‌شده است (کلاس ۱).<br>اگر IV ناموفق یا نشدنی بود: <b>دسترسی داخل استخوانی (IO)</b> مفید است (کلاس 2a).",
+ cor:"1 / 2a", loe:"C-LD", src:"Part 5 – Neonatal Resuscitation"},
+
+{id:"neo-volume", cat:"neonate", q:"دوز بسط‌دهندهٔ حجم در نوزاد چقدر است؟",
+ alt:"neonatal volume expander نرمال سالین خون ۱۰ تا ۲۰ میلی لیتر بر کیلوگرم هایپوولمی",
+ a:"<b>نرمال سالین (NaCl 0.9%) یا خون، ۱۰ تا ۲۰ mL/kg</b> — در نوزاد با شواهد هیپوولمی که با وجود تهویه، ماساژ و آدرنالین همچنان ضربان زیر ۶۰ دارد.",
+ cor:"2b", loe:"C-EO", src:"Part 5 – Neonatal Resuscitation"},
+
+{id:"neo-vent-timing", cat:"neonate", q:"چه زمانی تهویه با فشار مثبت را در نوزاد شروع کنم؟",
+ alt:"neonatal PPV start تهویه فشار مثبت نوزاد ۶۰ ثانیه اپنه گاسپینگ برادی کاردی زیر ۱۰۰",
+ a:"<b>ظرف ۶۰ ثانیه پس از تولد</b>، در نوزادی که <b>گاسپینگ یا آپنه</b> دارد یا <b>ضربان قلب مداوم کمتر از ۱۰۰ در دقیقه</b> است، علی‌رغم انجام مراحل اولیه.",
+ cor:"1", loe:"B-NR", src:"Part 5 – Neonatal Resuscitation"},
+
+{id:"neo-pip", cat:"neonate", q:"فشار تهویه (PIP) و تعداد آن در نوزاد چقدر است؟",
+ alt:"neonatal PIP peak inflation pressure فشار تهویه ونتیلاسیون نوزاد ۲۰ تا ۳۰ سانتی متر آب ۳۰ تا ۶۰ در دقیقه PEEP زمان دم",
+ a:"<b>فشار اوج دمی (PIP) اولیه: ۲۰ تا ۳۰ cmH₂O</b>، با تنظیم بر اساس اثربخشی.<br><b>تعداد: ۳۰ تا ۶۰ inflation در دقیقه</b>.<br><b>زمان دم: ۰٫۵ تا ۱ ثانیه</b>.<br>PEEP معقول است. <b>فشار بیش از حد مضر است.</b>",
+ cor:"2a", loe:"C-LD", src:"Part 5 – Neonatal Resuscitation"},
+
+{id:"neo-sustained", cat:"neonate", q:"تهویه پایدار (sustained inflation) در نوزاد نارس؟",
+ alt:"sustained inflation نوزاد نارس زیر ۲۸ هفته مضر بیش از ۵ ثانیه",
+ a:"<b>3: Harm —</b> در نوزادان نارس <b>کمتر از ۲۸ هفته</b>، استفادهٔ روتین از <b>sustained inflation (بیش از ۵ ثانیه)</b> برای شروع تهویه <b>بالقوه مضر است و نباید انجام شود</b>.",
+ cor:"3: Harm", loe:"B-R", src:"Part 5 – Neonatal Resuscitation"},
+
+{id:"neo-oxygen", cat:"neonate", q:"با چند درصد اکسیژن احیای نوزاد را شروع کنم؟",
+ alt:"neonatal oxygen concentration درصد اکسیژن نوزاد ۲۱ درصد ۳۰ درصد نارس سن حاملگی",
+ a:"<b>≥۳۵ هفته (ترم و نزدیک ترم): شروع با ۲۱٪ (هوای اتاق)</b><br><b>۳۲ تا ۳۴+6/7 هفته: شروع با ۲۱٪ تا ۳۰٪</b><br><b>کمتر از ۳۲ هفته: شروع با ۳۰٪ تا ۱۰۰٪</b><br>سپس بر اساس اهداف اشباع اکسیژن تیتره شود؛ پالس‌اکسیمتر در اسرع وقت وصل شود.",
+ cor:"2b / 1", loe:"C-LD", src:"Part 5 – Neonatal Resuscitation"},
+
+{id:"neo-spo2-targets", cat:"neonate", q:"اهداف اشباع اکسیژن نوزاد در دقایق اول چیست؟",
+ alt:"target oxygen saturation table اشباع اکسیژن نوزاد جدول SpO2 دقیقه دوم سوم دهم",
+ a:"<b>جدول هدف SpO₂ پس از تولد:</b><br>• <b>۲ دقیقه: ۶۵٪–۷۰٪</b><br>• <b>۳ دقیقه: ۷۰٪–۷۵٪</b><br>• <b>۴ دقیقه: ۷۵٪–۸۰٪</b><br>• <b>۵ دقیقه: ۸۰٪–۸۵٪</b><br>• <b>۱۰ دقیقه: ۸۵٪–۹۵٪</b>",
+ cor:"1", loe:"C-EO", src:"Part 5 – Neonatal Resuscitation, Figure 2"},
+
+{id:"neo-temp", cat:"neonate", q:"دمای بدن نوزاد چقدر باید باشد؟",
+ alt:"neonatal temperature normothermia دمای نوزاد ۳۶.۵ تا ۳۷.۵ هیپوترمی هایپرترمی",
+ a:"دما <b>بین ۳۶٫۵ °C و ۳۷٫۵ °C</b> پایش و حفظ شود.<br><b>هیپوترمی (کمتر از ۳۶ °C) باید پیشگیری شود.</b><br><b>هیپرترمی (بیشتر از ۳۸ °C) هم باید پیشگیری شود.</b>",
+ cor:"1", loe:"B-NR", src:"Part 5 – Neonatal Resuscitation"},
+
+{id:"neo-cord", cat:"neonate", q:"کلامپ بند ناف چه زمانی انجام شود؟",
+ alt:"cord clamping بند ناف تاخیری ۶۰ ثانیه milking دوشیدن نارس ترم",
+ a:"<b>ترم (بدون نیاز به احیای فوری): کلامپ تأخیری حداقل ۶۰ ثانیه</b> (کلاس 2a).<br><b>نارس زیر ۳۷ هفته (بدون نیاز به احیای فوری): کلامپ تأخیری حداقل ۶۰ ثانیه</b> — کلاس ۱، سطح A.<br><b>۲۸+0 تا ۳۶+6 هفته</b> که کلامپ تأخیری ممکن نیست: <b>دوشیدن بند ناف (cord milking)</b> معقول است.<br><b>3: Harm — زیر ۲۸+0 هفته: دوشیدن بند ناف نباید انجام شود.</b>",
+ cor:"1 / 2b / 3: Harm", loe:"A / B-R", src:"Part 5 – Neonatal Resuscitation"},
+
+{id:"neo-suction", cat:"neonate", q:"ساکشن روتین در نوزاد لازم است؟",
+ alt:"neonatal suction ساکشن نوزاد مکونیوم روتین توصیه نمی‌شود",
+ a:"<b>3: No Benefit —</b> ساکشن روتین دهانی، بینی، اوروفارنژیال یا داخل تراشه <b>توصیه نمی‌شود</b>، صرف‌نظر از اینکه مایع شفاف باشد یا آغشته به <b>مکونیوم</b>.<br>ساکشن فقط اگر <b>تهویه لازم است و راه هوایی مسدود به نظر می‌رسد</b>.",
+ cor:"3: No Benefit / 2a", loe:"B-R / C-EO", src:"Part 5 – Neonatal Resuscitation"},
+
+{id:"neo-hr", cat:"neonate", q:"ضربان قلب نوزاد را چطور بسنجم؟",
+ alt:"neonatal heart rate assessment ضربان قلب نوزاد ECG سمع پالس اکسیمتر",
+ a:"<b>ECG</b> برای ارزیابی سریع و دقیق مفید است (کلاس 2a، سطح B-NR).<br><b>سمع (auscultation)</b> و <b>پالس‌اکسیمتری</b> جایگزین‌های معقولی هستند.",
+ cor:"2a", loe:"B-NR / C-LD", src:"Part 5 – Neonatal Resuscitation"},
+
+{id:"neo-cpap", cat:"neonate", q:"CPAP در نوزاد نارس چه جایگاهی دارد؟",
+ alt:"neonatal CPAP نارس تنفس خودبه‌خودی به جای لوله گذاری",
+ a:"در نوزادان نارس با <b>تنفس خودبه‌خودی</b> که بلافاصله پس از تولد نیاز به حمایت تنفسی دارند: <b>CPAP بر لوله‌گذاری و تهویهٔ مکانیکی ترجیح دارد</b> (کلاس 2a، سطح A).",
+ cor:"2a", loe:"A", src:"Part 5 – Neonatal Resuscitation"},
+
+{id:"neo-hie", cat:"neonate", q:"هیپوترمی درمانی برای HIE چه زمانی؟",
+ alt:"therapeutic hypothermia HIE انسفالوپاتی هیپوکسیک ایسکمیک ۳۶ هفته سرد کردن",
+ a:"نوزادان <b>≥۳۶ هفته</b> با <b>HIE متوسط تا شدید</b> باید <b>هیپوترمی درمانی</b> تحت پروتکل‌های مشخص دریافت کنند — <b>کلاس ۱، سطح A</b>.",
+ cor:"1", loe:"A", src:"Part 5 – Neonatal Resuscitation"},
+
+{id:"neo-glucose", cat:"neonate", q:"پس از احیای نوزاد چه چیزی را پایش کنم؟",
+ alt:"neonatal postresuscitation glucose قند خون پس از احیا نوزاد گرم کردن مجدد",
+ a:"نوزادانی که تهویهٔ طولانی یا احیای پیشرفته (لوله‌گذاری، ماساژ، آدرنالین) گرفته‌اند باید از نزدیک پایش شوند، از جمله <b>چک زودهنگام قند خون</b> تا تثبیت در محدودهٔ طبیعی.<br>در هیپوترمی ناخواسته (کمتر از ۳۶ °C): <b>گرم کردن مجدد لازم است</b>.",
+ cor:"1", loe:"B-NR / C-LD", src:"Part 5 – Neonatal Resuscitation"},
+
+{id:"neo-stop", cat:"neonate", q:"چه زمانی احیای نوزاد را متوقف کنم؟",
+ alt:"neonatal stop resuscitation توقف احیا نوزاد ۲۰ دقیقه بدون ضربان",
+ a:"اگر <b>هیچ ضربان قلبی وجود ندارد</b> و <b>تمام مراحل احیا انجام شده</b>، توقف باید با تیم و خانواده در میان گذاشته شود. <b>چارچوب زمانی معقول: حدود ۲۰ دقیقه پس از تولد</b>.<br>عدم شروع احیا و قطع درمان حیات‌بخش، از نظر اخلاقی <b>معادل</b> در نظر گرفته می‌شوند.",
+ cor:"1", loe:"C-LD", src:"Part 5 – Neonatal Resuscitation"},
+
+{id:"neo-lma", cat:"neonate", q:"ماسک لارنژیال در نوزاد کی استفاده می‌شود؟",
+ alt:"laryngeal mask LMA نوزاد ۳۴ هفته لوله گذاری ناموفق ویدئو لارنگوسکوپی",
+ a:"در نوزادان <b>≥۳۴ هفته</b> که لوله‌گذاری ممکن یا موفق نیست، <b>ماسک لارنژیال</b> جایگزین معقولی حین ماساژ است (کلاس 2b).<br><b>ویدئو لارنگوسکوپی</b> برای نوزادانی که نیاز به لوله‌گذاری دارند مفید است (کلاس 2a، سطح B-R).",
+ cor:"2b / 2a", loe:"C-EO / B-R", src:"Part 5 – Neonatal Resuscitation"},
+];
+
+// ===== بخش ۵: مراقبت پس از احیا (Part 11) =====
+const KB_POST = [
+{id:"post-o2", cat:"post", q:"هدف اکسیژن‌رسانی پس از ROSC در بزرگسال چیست؟",
+ alt:"post ROSC oxygenation اکسیژن پس از احیا ۹۰ تا ۹۸ درصد PaO2 هایپراکسی",
+ a:"ابتدا <b>اکسیژن ۱۰۰٪</b> تا زمانی که SpO₂ یا PaO₂ قابل اندازه‌گیری مطمئن شود (کلاس ۱).<br>سپس FiO₂ را تیتره کنید تا <b>SpO₂ = ۹۰٪ تا ۹۸٪ (PaO₂ = ۶۰ تا ۱۰۵ mmHg)</b> — از هیپوکسمی و هیپراکسمی هر دو پرهیز شود.<br>توجه: پالس‌اکسیمتری در پوست تیره‌تر ممکن است هیپوکسمی را پنهان کند.",
+ cor:"1 / 2a", loe:"B-R", src:"Part 11 – Post–Cardiac Arrest Care"},
+
+{id:"post-co2", cat:"post", q:"هدف PaCO2 پس از احیا چیست؟",
+ alt:"post ROSC ventilation PaCO2 دی اکسید کربن ۳۵ تا ۴۵ نورموکاپنی",
+ a:"<b>PaCO₂ در محدودهٔ طبیعی فیزیولوژیک: عموماً ۳۵ تا ۴۵ mmHg</b> در بیمار کوماتوز پس از ROSC — کلاس ۱، سطح B-R.",
+ cor:"1", loe:"B-R", src:"Part 11 – Post–Cardiac Arrest Care"},
+
+{id:"post-map", cat:"post", q:"هدف فشار خون پس از احیا در بزرگسال چیست؟",
+ alt:"post ROSC blood pressure MAP فشار متوسط شریانی ۶۵ میلی متر جیوه هیپوتانسیون",
+ a:"<b>از افت فشار پرهیز شود؛ حداقل MAP = ۶۵ mmHg</b> حفظ شود — کلاس ۱، سطح B-R.",
+ cor:"1", loe:"B-R", src:"Part 11 – Post–Cardiac Arrest Care"},
+
+{id:"post-ttm", cat:"post", q:"کنترل دما پس از احیا در بزرگسال چگونه است؟",
+ alt:"temperature control TTM هیپوترمی درمانی ۳۲ تا ۳۷.۵ ۳۶ ساعت بزرگسال دمای هدف کنترل دما بعد از احیا سرد کردن نورموترمی",
+ a:"استراتژی <b>پروتکل‌محور و عمدی</b> کنترل دما برای <b>همهٔ</b> بزرگسالانی که پس از ROSC به فرمان کلامی پاسخ نمی‌دهند — صرف‌نظر از محل ایست و ریتم اولیه (کلاس ۱).<br><b>دمای هدف: بین ۳۲ °C و ۳۷٫۵ °C</b> (کلاس ۱، سطح B-R).<br><b>مدت: حداقل ۳۶ ساعت</b> (کلاس 2a).<br>از گرم کردن سریع‌تر از <b>۰٫۵ °C در ساعت</b> پرهیز شود.<br><b>3: No Benefit —</b> انفوزیون سریع روتین مایع سرد پیش‌بیمارستانی توصیه نمی‌شود.",
+ cor:"1 / 2a", loe:"B-R", src:"Part 11 – Post–Cardiac Arrest Care"},
+
+{id:"post-ecg", cat:"post", q:"بعد از ROSC چه بررسی‌هایی انجام دهم؟ (نوار قلب، CT، اکو)",
+ alt:"post ROSC diagnostics ECG نوار قلب دوازده لید ۱۲ لید CT سی تی اسکن اکو اکوکاردیوگرافی بررسی اولیه",
+ a:"<b>ECG دوازده‌لید در اسرع وقت برای همهٔ بیماران</b> (کلاس ۱).<br>CT سر تا لگن (head-to-pelvis) برای یافتن علت و عوارض احیا قابل بررسی است (کلاس 2b).<br>اکوکاردیوگرافی یا سونوگرافی قلبی POC هم قابل بررسی است (کلاس 2b).",
+ cor:"1", loe:"B-NR", src:"Part 11 – Post–Cardiac Arrest Care"},
+
+{id:"post-pci", cat:"post", q:"چه زمانی آنژیوگرافی اورژانسی پس از احیا انجام شود؟",
+ alt:"coronary angiography PCI آنژیوگرافی اورژانسی ST elevation کاتتریزاسیون",
+ a:"<b>کلاس ۱ — اورژانسی:</b> همهٔ بیماران با علت قلبی مشکوک و <b>بالا رفتن پایدار قطعهٔ ST</b>، <u>صرف‌نظر از وجود کما</u>.<br><b>کلاس 2a:</b> بیماران منتخب <b>بدون</b> ST-elevation که <b>شوک کاردیوژنیک، آریتمی بطنی مکرر یا ایسکمی فعال قابل‌توجه</b> دارند.<br><b>3: No Benefit:</b> آنژیوگرافی اورژانسی در بیمار کوماتوز <b>بدون</b> ST-elevation، شوک، بی‌ثباتی الکتریکی یا ایسکمی — بر استراتژی تأخیری/انتخابی برتری ندارد.",
+ cor:"1 / 2a / 3: No Benefit", loe:"B-NR / B-R", src:"Part 11 – Post–Cardiac Arrest Care"},
+
+{id:"post-seizure", cat:"post", q:"تشنج پس از احیا را چطور مدیریت کنم؟",
+ alt:"post arrest seizure EEG تشنج پس از احیا نوار مغز پروفیلاکسی",
+ a:"<b>EEG سریع</b> برای تشخیص تشنج در بیمار که پس از ROSC فرمان نمی‌برد (کلاس ۱).<br><b>تشنج بالینی آشکار درمان شود</b> (کلاس ۱).<br>درمان تشنج غیرتشنجی (فقط با EEG) معقول است (کلاس 2a).<br><b>3: No Benefit — پروفیلاکسی روتین ضدتشنج توصیه نمی‌شود.</b>",
+ cor:"1 / 2a / 3: No Benefit", loe:"C-LD / B-R", src:"Part 11 – Post–Cardiac Arrest Care"},
+
+{id:"post-glucose", cat:"post", q:"هدف قند خون پس از احیا چیست؟",
+ alt:"post arrest glucose قند خون پس از احیا هیپوگلیسمی هایپرگلیسمی ۷۰ ۱۸۰",
+ a:"معقول است از <b>هیپوگلیسمی (قند کمتر از ۷۰ mg/dL)</b> و <b>هیپرگلیسمی (قند بیشتر از ۱۸۰ mg/dL)</b> هر دو پرهیز شود (کلاس 2b).",
+ cor:"2b", loe:"B-NR", src:"Part 11 – Post–Cardiac Arrest Care"},
+
+{id:"post-prognosis", cat:"post", q:"چه زمانی می‌توانم دربارهٔ پیش‌آگهی عصبی قضاوت کنم؟",
+ alt:"neuroprognostication پیش آگهی عصبی ۷۲ ساعت مولتی مودال چندوجهی سداتیو",
+ a:"<b>هرگز بر اساس یک یافتهٔ منفرد</b> — رویکرد باید <b>چندوجهی (multimodal)</b> باشد (کلاس ۱).<br>قضاوت باید به تعویق بیفتد تا اثر داروها و معاینهٔ گذرای بد اولیه برطرف شود (کلاس ۱).<br><b>تجمیع ارزیابی‌ها: حداقل ۷۲ ساعت پس از رسیدن به نورموترمی و قطع آرام‌بخش‌ها</b> (کلاس 2a).",
+ cor:"1 / 2a", loe:"B-NR", src:"Part 11 – Post–Cardiac Arrest Care"},
+
+{id:"post-abx", cat:"post", q:"آنتی‌بیوتیک پیشگیرانه و استروئید پس از احیا؟",
+ alt:"prophylactic antibiotics steroids آنتی بیوتیک پیشگیری استروئید پس از احیا",
+ a:"سودمندی <b>آنتی‌بیوتیک پیشگیرانه</b> نامشخص است (کلاس 2b).<br>استفادهٔ روتین از <b>استروئید</b> در بیمار با شوک پس از ROSC، ارزش نامشخصی دارد (کلاس 2b).",
+ cor:"2b", loe:"B-R", src:"Part 11 – Post–Cardiac Arrest Care"},
+];
+
+// ===== بخش ۶: شرایط خاص (Part 10) =====
+const KB_SPECIAL = [
+{id:"sp-pregnancy", cat:"special", q:"احیای بیمار باردار چه تفاوت‌هایی دارد؟",
+ alt:"pregnancy cardiac arrest بارداری ایست قلبی سزارین احیایی ۵ دقیقه جابجایی رحم",
+ a:"<b>کلاس ۱ — نکات حیاتی:</b><br>• <b>زایمان احیایی (resuscitative delivery)</b> اگر <b>ارتفاع فوندوس در یا بالای ناف</b> است و ROSC حاصل نشده.<br>• آماده‌سازی <b>از لحظهٔ تشخیص ایست</b>، با هدف <b>اتمام زایمان تا دقیقهٔ ۵</b>.<br>• در IHCA: <b>همان‌جا انجام شود</b> — بیمار را به اتاق عمل منتقل نکنید.<br>• <b>جابه‌جایی دستی رحم به چپ (LUD)</b> همراه با ماساژ.<br>• <b>مدیریت راه هوایی در اولویت</b>.<br>• دسترسی IV/IO در <b>اندام فوقانی</b> (کلاس 2a).<br>• اگر حین دریافت <b>منیزیم سولفات</b> ایست کرده: <b>کلسیم بدهید</b> (کلاس 2a).<br>• <b>3: No Benefit — مانیتور جنین برداشته شود</b> و پایش جنین انجام نشود.",
+ cor:"1", loe:"B-NR / C-LD", src:"Part 10 – Special Circumstances"},
+
+{id:"sp-opioid", cat:"special", q:"در مسمومیت با اوپیوئید چه کنم؟ (نالوکسان)",
+ alt:"opioid overdose naloxone نالوکسان مسمومیت مخدر اورژانس تنفس",
+ a:"<b>ایست تنفسی با نبض قطعی:</b> تهویه بدهید <u>و</u> <b>نالوکسان</b> تزریق کنید (هر دو کلاس ۱).<br><b>بدون پاسخ و تنفس غیرطبیعی (امدادگر عادی):</b> <b>CPR همراه با تنفس</b> (کلاس ۱).<br><b>مهم (کلاس ۱):</b> تجویز نالوکسان یا انتظار برای پاسخ آن <b>نباید</b> احیای استاندارد یا فعال‌سازی اورژانس را به تأخیر بیندازد.<br>در ایست قلبی: نالوکسان قابل بررسی است به شرط عدم اختلال در CPR باکیفیت (کلاس 2b).<br>پس از پاسخ: بیمار تا رفع خطر دپرسیون تنفسی راجعه <b>تحت نظر بماند</b>؛ دوز تکراری در صورت عود مفید است.",
+ cor:"1", loe:"B-NR", src:"Part 10 – Special Circumstances"},
+
+{id:"sp-drowning", cat:"special", q:"احیای غریق چه تفاوتی دارد؟",
+ alt:"drowning غرق شدگی غریق آب تنفس اول CPR with breaths",
+ a:"پس از خارج کردن از آب: <b>CPR با تنفس و ماساژ</b> — کلاس ۱، سطح B-NR (تنفس اینجا ضروری است).<br>برای امدادگر آموزش‌دیده، شروع CPR <b>با تنفس و سپس ماساژ</b> قابل بررسی است (کلاس 2b).<br>اگر امدادگر نمی‌تواند/نمی‌خواهد تنفس بدهد: در بزرگسال فقط ماساژ معقول است (کلاس 2a).",
+ cor:"1", loe:"B-NR", src:"Part 10 – Special Circumstances"},
+
+{id:"sp-hypothermia", cat:"special", q:"احیا در هیپوترمی شدید چگونه است؟",
+ alt:"hypothermia هیپوترمی سرمازدگی زیر ۳۰ درجه ECLS شوک آدرنالین به تعویق",
+ a:"<b>احیای کامل فوری</b> و همزمان با گرم کردن (کلاس ۱).<br>در دمای مرکزی <b>کمتر از ۳۰ °C</b>:<br>• <b>یک بار شوک</b>؛ اگر ناموفق بود، شوک بعدی را تا رسیدن دما به <b>≥۳۰ °C</b> به تعویق بیندازید (کلاس 2b).<br>• <b>تجویز آدرنالین را تا دمای ≥۳۰ °C به تعویق بیندازید</b> (کلاس 2b).<br>گرم کردن با <b>ECLS</b> معقول است (کلاس 2a)، با سرعت <b>۱٫۵ تا ۵ °C در ساعت</b>.<br>انتقال به مرکز دارای ECLS اگر ظرف <b>۶ ساعت</b> قابل دسترسی است.<br><b>3: No Benefit — ETCO₂ برای پیش‌بینی پیامد در هیپوترمی استفاده نشود.</b>",
+ cor:"1 / 2a / 2b", loe:"C-LD / B-NR", src:"Part 10 – Special Circumstances"},
+
+{id:"sp-hyperkalemia", cat:"special", q:"در ایست قلبی ناشی از هایپرکالمی چه بدهم؟",
+ alt:"hyperkalemia هایپرکالمی پتاسیم بالا کلسیم بی کربنات انسولین گلوکز",
+ a:"<b>اثربخشی هیچ‌کدام به‌خوبی اثبات نشده است</b> (همه کلاس 2b): کلسیم IV، بی‌کربنات سدیم IV، انسولین و گلوکز IV.<br><b>3: No Benefit — بتا۲-آگونیست استنشاقی در ایست قلبی توصیه نمی‌شود.</b><br>(توجه: این توصیه‌ها مربوط به <u>ایست قلبی</u> است، نه هایپرکالمی بدون ایست.)",
+ cor:"2b / 3: No Benefit", loe:"C-LD / C-EO", src:"Part 10 – Special Circumstances"},
+
+{id:"sp-pe", cat:"special", q:"ایست قلبی ناشی از آمبولی ریه را چطور درمان کنم؟",
+ alt:"pulmonary embolism PE آمبولی ریه فیبرینولیز ترومبولیتیک امبولکتومی",
+ a:"در PE <b>تأییدشده</b> به‌عنوان علت ایست: <b>فیبرینولیز سیستمیک، امبولکتومی جراحی یا امبولکتومی مکانیکی پرکوتانئوس</b> — همه گزینه‌های معقول (کلاس 2a).<br>استفاده از <b>ECLS</b> در PE تأییدشده یا مشکوک معقول است (کلاس 2a).<br>در PE <b>مشکوک</b>: فیبرینولیز سیستمیک قابل بررسی است (کلاس 2b).",
+ cor:"2a", loe:"B-NR", src:"Part 10 – Special Circumstances"},
+
+{id:"sp-last", cat:"special", q:"در مسمومیت با بی‌حس‌کننده موضعی (LAST) چه کنم؟",
+ alt:"local anesthetic systemic toxicity LAST لیپید امولسیون ILE بی حسی موضعی لیدوکائین مسمومیت",
+ a:"<b>کلاس ۱ — <span dir=ltr>ILE</span> (امولسیون لیپید داخل وریدی) باید تجویز شود.</b><br><b>کلاس ۱ — بنزودیازپین</b> برای تشنج ناشی از LAST.<br><b>کلاس 2a —</b> بی‌کربنات سدیم برای تاکی‌کاردی QRS پهن ناشی از LAST.<br><b>کلاس 2a —</b> ECLS در شوک کاردیوژنیک مقاوم.",
+ cor:"1", loe:"C-LD", src:"Part 10 – Special Circumstances"},
+
+{id:"sp-ccb", cat:"special", q:"در مسمومیت با مسدودکننده کانال کلسیم چه کنم؟",
+ alt:"calcium channel blocker CCB مسمومیت کلسیم بلوکر انسولین دوز بالا وازوپرسور",
+ a:"<b>کلاس ۱ — انسولین با دوز بالا (high-dose insulin)</b> برای افت فشار.<br><b>کلاس ۱ — وازوپرسور</b> برای افت فشار.<br><b>کلاس 2a — کلسیم</b> تجویز شود؛ و <b>ECLS</b> در موارد مقاوم به دارو.<br>سودمندی گلوکاگون، متیلن بلو و ILE نامشخص است (کلاس 2b).",
+ cor:"1", loe:"B-NR / C-LD", src:"Part 10 – Special Circumstances"},
+
+{id:"sp-bb", cat:"special", q:"در مسمومیت با بتابلوکر چه کنم؟",
+ alt:"beta blocker poisoning مسمومیت بتابلوکر گلوکاگون انسولین دوز بالا همودیالیز",
+ a:"<b>کلاس ۱ — انسولین با دوز بالا / یوگلایسمی</b> برای افت فشار مقاوم به وازوپرسور.<br><b>کلاس ۱ — وازوپرسور</b> برای افت فشار.<br><b>کلاس 2a — گلوکاگون</b> (بولوس سپس انفوزیون) برای برادی‌کاردی یا افت فشار علامت‌دار؛ و <b>ECLS</b> در شوک کاردیوژنیک مقاوم.<br><b>کلاس 2b —</b> همودیالیز برای مسمومیت با آتنولول، نادولول یا سوتالول؛ کلسیم هم قابل بررسی.",
+ cor:"1 / 2a", loe:"C-LD", src:"Part 10 – Special Circumstances"},
+
+{id:"sp-ecmo", cat:"special", q:"VA-ECMO در مسمومیت‌ها چه جایگاهی دارد؟",
+ alt:"VA-ECMO ECLS اکمو مسمومیت شوک کاردیوژنیک مقاوم",
+ a:"<b>کلاس 2a</b> — استفاده از VA-ECMO در بزرگسال و کودک با <b>شوک کاردیوژنیک پایدار یا ایست قلبی ناشی از مسمومیت</b> که به درمان دارویی پاسخ نمی‌دهد، معقول است؛ همچنین برای <b>آریتمی‌های مقاوم</b> ناشی از مسمومیت.",
+ cor:"2a", loe:"B-NR", src:"Part 10 – Special Circumstances"},
+
+{id:"sp-precordial", cat:"special", q:"ضربه پیش‌قلبی (precordial thump) و cough CPR توصیه می‌شود؟",
+ alt:"precordial thump cough CPR ضربه پیش قلبی سرفه احیا پرکاشن پیسینگ",
+ a:"این مداخلات (ضربهٔ پیش‌قلبی، پیسینگ ضربه‌ای، cough CPR) <b>جایگاه روتین در احیا ندارند</b> و شواهد پشتیبان آن‌ها بسیار محدود است — هرگز نباید جای CPR باکیفیت و دفیبریلاسیون سریع را بگیرند.",
+ cor:"2b / 3", loe:"C-LD", src:"Part 10 – Special Circumstances"},
+];
+
+// ===== بخش ۷: سیستم مراقبت، آموزش و اخلاق (Parts 1, 3, 4, 12) =====
+const KB_SYS = [
+{id:"sys-tcpr", cat:"system", q:"اپراتور اورژانس چه دستوری به تماس‌گیرنده بدهد؟",
+ alt:"telecommunicator CPR T-CPR اپراتور ۱۱۵ دستور تلفنی احیا",
+ a:"<b>بزرگسال: CPR فقط با ماساژ (compression-only)</b> — کلاس ۱، سطح A.<br><b>شیرخوار و کودک: CPR متعارف همراه با تنفس</b> — کلاس ۱.<br>اگر بیمار بدون پاسخ با تنفس غیرطبیعی، آگونال یا بدون تنفس است، اپراتور باید <b>فرض کند ایست قلبی است</b> و دستور شروع CPR بدهد. ابتدا <b>محل حادثه</b> را بگیرد تا اعزام همزمان انجام شود.",
+ cor:"1", loe:"A / C-LD", src:"Part 4 – Systems of Care"},
+
+{id:"sys-ihca-prevention", cat:"system", q:"چطور از ایست قلبی داخل بیمارستان پیشگیری کنم؟",
+ alt:"IHCA prevention early warning score EWS rapid response team RRT پیشگیری ایست قلبی بیمارستان",
+ a:"<b>کلاس 2a:</b><br>• <b>سیستم‌های هشدار زودهنگام (EWS)</b> برای تشخیص وخامت بالینی<br>• <b>تیم پاسخ سریع (RRT) یا تیم اورژانس پزشکی (MET)</b> — به‌ویژه در بخش‌های عمومی<br>• <b>Safety huddles</b> برای افزایش آگاهی موقعیتی دربارهٔ بیماران پرخطر",
+ cor:"2a", loe:"B-R / B-NR", src:"Part 4 – Systems of Care"},
+
+{id:"sys-naloxone", cat:"system", q:"توزیع عمومی نالوکسان توصیه می‌شود؟",
+ alt:"public access naloxone نالوکسان عمومی توزیع قانون مصونیت",
+ a:"<b>کلاس ۱ —</b> سیاست‌های عمومی باید اجازهٔ <b>نگهداری، استفاده و مصونیت قانونی</b> برای تجویز با حسن نیت نالوکسان توسط امدادگران عادی را بدهند.<br><b>کلاس 2a —</b> برنامه‌های توزیع نالوکسان مفیدند و مرگ‌ومیر ناشی از اوردوز را کاهش می‌دهند.",
+ cor:"1 / 2a", loe:"B-NR", src:"Part 4 – Systems of Care"},
+
+{id:"sys-ecpr", cat:"system", q:"ECPR چه جایگاهی دارد؟",
+ alt:"ECPR extracorporeal CPR اکمو احیا معیار انتخاب بیمار انتقال حین احیا",
+ a:"مراکز دارای برنامهٔ ECPR باید <b>معیارهای انتخاب بیمار</b> را تدوین و مرتب بازبینی کنند (کلاس 2a).<br>رویکرد <b>منطقه‌ای (regionalized)</b> معقول است.<br>کانوله‌کنندهٔ ECPR محیطی باید در تکنیک پرکوتانئوس <b>باتجربه</b> باشد.<br>انتقال سریع حین ایست برای ECPR فقط در <b>گروه محدود و بسیار منتخبی</b> از بیماران OHCA قابل بررسی است (کلاس 2b).",
+ cor:"2a / 2b", loe:"C-LD / B-R", src:"Part 4 – Systems of Care"},
+
+{id:"sys-debrief", cat:"system", q:"دیبریفینگ بالینی پس از احیا لازم است؟",
+ alt:"clinical debriefing دیبریفینگ بازخورد تیم پس از احیا",
+ a:"<b>دیبریفینگ بالینی</b> پس از رویدادهای احیا برای بهبود عملکرد تیم و کیفیت مراقبت توصیه می‌شود.",
+ cor:"2a", loe:"—", src:"Part 4 – Systems of Care"},
+
+{id:"sys-chain", cat:"system", q:"زنجیره بقا شامل چه حلقه‌هایی است؟",
+ alt:"chain of survival زنجیره بقا حلقه های نجات تشخیص فعال سازی CPR دفیبریلاسیون",
+ a:"در ۲۰۲۵، AHA به <b>یک زنجیرهٔ بقای واحد</b> رسیده است: <b>تشخیص ایست قلبی → فعال‌سازی پاسخ اورژانس → CPR باکیفیت → دفیبریلاسیون سریع → مراقبت پیشرفته → مراقبت پس از احیا → بهبودی (Recovery)</b>.<br>اهداف ۲۰۳۰: افزایش CPR توسط ناظرین به بیش از <b>۵۰٪</b> و کاربرد AED پیش از رسیدن اورژانس به بیش از <b>۲۰٪</b>.",
+ cor:"—", loe:"—", src:"Part 1 – Executive Summary / Part 7"},
+
+{id:"sys-2025-changes", cat:"system", q:"مهم‌ترین تغییرات گایدلاین ۲۰۲۵ چیست؟",
+ alt:"what is new 2025 تغییرات جدید ۲۰۲۵ چه چیزی عوض شد نکات کلیدی",
+ a:"<b>عمده‌ترین تغییرات ۲۰۲۵:</b><br>• <b>خفگی بزرگسال:</b> حالا سیکل‌های <b>۵ ضربهٔ پشتی + ۵ فشار شکمی</b> (پیش‌تر فقط فشار شکمی)<br>• <b>موقعیت امدادگر:</b> تنهٔ بیمار هم‌سطح زانوی امدادگر<br>• <b>احیا در محل:</b> بیمار جابه‌جا نشود<br>• <b>شیرخوار با خفگی:</b> تکنیک <b>کف یک دست</b> برای chest thrust<br>• <b>نالوکسان</b> رسماً وارد الگوریتم BLS بزرگسال شد<br>• <b>دستگاه ماساژ مکانیکی:</b> استفادهٔ روتین توصیه نمی‌شود<br>• فصل‌های جدید: <b>مراقبت پس از احیا</b>، <b>شرایط خاص</b>، <b>اخلاق</b><br>• همکاری مشترک AHA و <b>AAP</b> برای فصول اطفال و نوزاد",
+ cor:"—", loe:"—", src:"Part 1 – Executive Summary"},
+
+{id:"sys-cor-loe", cat:"system", q:"کلاس توصیه (COR) و سطح شواهد (LOE) یعنی چه؟",
+ alt:"class of recommendation level of evidence COR LOE کلاس توصیه سطح شواهد یعنی چه معنی",
+ a:"<b>کلاس توصیه (COR) — قدرت توصیه:</b><br>• <b>۱ (Strong):</b> توصیه می‌شود / باید انجام شود<br>• <b>2a (Moderate):</b> معقول است / می‌تواند مفید باشد<br>• <b>2b (Weak):</b> ممکن است معقول باشد / قابل بررسی<br>• <b>3: No Benefit:</b> توصیه نمی‌شود (بی‌فایده)<br>• <b>3: Harm:</b> نباید انجام شود (مضر)<br><br><b>سطح شواهد (LOE) — کیفیت شواهد:</b><br>• <b>A:</b> شواهد باکیفیت از بیش از یک RCT<br>• <b>B-R:</b> شواهد متوسط از RCT<br>• <b>B-NR:</b> شواهد متوسط غیرتصادفی‌شده<br>• <b>C-LD:</b> داده‌های محدود<br>• <b>C-EO:</b> نظر تخصصی (Expert Opinion)",
+ sp:"کلاس توصیه، قدرت توصیه را نشان می‌دهد. کلاس یک یعنی توصیه می‌شود و باید انجام شود. کلاس دو آ یعنی معقول است و احتمالاً مفید. کلاس دو ب یعنی ممکن است معقول باشد. کلاس سه بدون فایده یعنی توصیه نمی‌شود. کلاس سه مضر یعنی نباید انجام شود. سطح شواهد، کیفیت شواهد را نشان می‌دهد. سطح آ یعنی شواهد باکیفیت از بیش از یک کارآزمایی تصادفی. سطح بی آر یعنی شواهد متوسط از کارآزمایی تصادفی. سطح بی ان آر یعنی شواهد متوسط غیرتصادفی. سطح سی ال دی یعنی داده‌های محدود. سطح سی ای او یعنی نظر تخصصی.",
+ cor:"—", loe:"—", src:"Part 2 – Evidence Evaluation"},
+
+{id:"sys-family", cat:"system", q:"حضور خانواده حین احیا مجاز است؟",
+ alt:"family presence حضور خانواده والدین حین احیا اطفال",
+ a:"حضور خانواده حین احیا در صورت امکان و با حمایت مناسب <b>توصیه می‌شود</b> — به‌ویژه در اطفال، جایی که به والدین باید فرصت حضور داده شود، همراه با یک عضو تیم برای پشتیبانی و توضیح.",
+ cor:"—", loe:"—", src:"Part 8 – PALS / Part 3 – Ethics"},
+];
+
+/* ترجمهٔ انگلیسی — بخش ۱: بزرگسال پایه و پیشرفته. متن نزدیک به عبارت اصلی گایدلاین. */
+const T_EN_1 = {
+"bls-depth":["What is the chest compression depth in adults?","<b>At least 2 inches (5 cm)</b> for an average adult, while avoiding excessive depth (<b>more than 2.4 inches / 6 cm</b>)."],
+"bls-rate":["What is the chest compression rate in adults?","<b>100 to 120 compressions per minute</b>."],
+"bls-ratio":["What is the compression-to-ventilation ratio in adults?","<b>30 compressions to 2 breaths (30:2)</b> before an advanced airway is placed — for both lay rescuers and health care professionals."],
+"bls-adv-airway-vent":["With an advanced airway in place, what ventilation rate?","<b>1 breath every 6 seconds (10 breaths/min)</b> with continuous, uninterrupted chest compressions."],
+"bls-respiratory-arrest":["Respiratory arrest with a pulse — how do I ventilate?","<b>1 breath every 6 seconds (10 breaths/min)</b>, each producing visible chest rise. Recheck the pulse every 2 minutes."],
+"bls-pulse-check":["How long should a pulse check take?","<b>No more than 10 seconds.</b> If no definite pulse is felt, assume cardiac arrest and start compressions immediately."],
+"bls-recognition":["How do I recognise cardiac arrest?","An adult who is <b>unresponsive</b> with <b>absent or abnormal breathing (only gasping)</b> is in cardiac arrest. Lay rescuer: start without a pulse check. Health care professional: pulse check for no more than 10 seconds."],
+"bls-lone-rescuer":["What should a lone rescuer do first?","<b>Activate the emergency response system first</b>, then immediately begin CPR <b>starting with chest compressions</b>. With a mobile phone: call and start compressions at the same time."],
+"bls-hand-position":["Where do I place my hands on the chest?","Heel of one hand on the <b>centre of the chest — the lower half to lower third of the sternum</b>, with the heel of the other hand on top, hands overlapped."],
+"bls-position-2025":["What position should the rescuer be in? (2025 change)","The patient's <b>torso should be at approximately the level of the rescuer's knees</b>. Use a <b>firm surface</b> with the patient <b>supine</b>, when feasible and without delaying compressions."],
+"bls-where":["Should I move the patient to resuscitate?","No — resuscitation should generally be conducted <b>where the person is found</b>, as long as high-quality CPR can be delivered safely and effectively."],
+"bls-switch":["How often should compressors change?","Approximately <b>every 2 minutes</b> (about 5 cycles of 30:2), or sooner if fatigued."],
+"bls-ccf":["What chest compression fraction (CCF) should I achieve?","<b>At least 60%.</b> Pre-shock and post-shock pauses should be as short as possible."],
+"bls-postshock":["After a shock — rhythm check or resume compressions?","<b>Resume chest compressions immediately.</b> Do not pause CPR for a post-shock rhythm check."],
+"bls-recoil":["How important is full chest recoil?","<b>Full chest wall recoil</b> after each compression is essential — do not lean on the chest between compressions."],
+"bls-tidal":["How large should each breath be?","Only enough tidal volume to produce <b>visible chest rise</b>; each breath over <b>1 second</b>. Avoid both hypoventilation and hyperventilation — hyperventilation is <b>harmful</b>."],
+"bls-bvm":["What is the correct bag-mask technique?","Preferably <b>2 rescuers</b>: one uses <b>both hands</b> to open the airway and seal the mask while the second squeezes the bag."],
+"bls-airway":["How do I open the airway?","No suspected neck injury: <b>head tilt–chin lift</b>. Head and neck trauma: <b>jaw thrust without head extension</b>; if the jaw thrust fails to open the airway, use head tilt–chin lift."],
+"bls-cricoid":["Is cricoid pressure recommended during resuscitation?","<b>No</b> — routine use of cricoid pressure in adult cardiac arrest is <b>not recommended</b>."],
+"bls-mechanical":["Are mechanical CPR devices recommended?","<b>Routine use is not recommended.</b> They may be considered only in specific settings where high-quality manual compressions are difficult or dangerous, with strictly limited interruptions during deployment and removal."],
+"bls-fbao-conscious":["Foreign-body airway obstruction in a conscious adult — what do I do?","<b>2025 change:</b> repeated cycles of <b>5 back blows</b> followed by <b>5 abdominal thrusts</b>, until the object is expelled or the person becomes unresponsive. Activate the emergency response system. For <b>mild</b> obstruction: let them cough while observing for signs of severe obstruction."],
+"bls-fbao-unconscious":["What if the choking patient becomes unresponsive?","<b>Start CPR beginning with chest compressions</b> and activate the emergency response system. Remove any <b>visible</b> foreign body when opening the airway to give breaths. <b>Blind finger sweeps must not be performed.</b>"],
+"bls-fbao-special":["Choking in pregnancy or in a patient with obesity?","If you cannot encircle the person's abdomen, or in <b>late pregnancy</b>: repeated cycles of <b>5 back blows + 5 chest thrusts</b> instead of abdominal thrusts."],
+"bls-obesity":["How does CPR differ in patients with obesity?","<b>Use the same techniques</b> as for a non-obese patient. Increased force may be needed to reach adequate depth. A partial backboard (CPR board) during in-hospital arrest provides <b>no benefit</b>."],
+"bls-prone":["The patient arrested in the prone position — what do I do?","Preferably turn the patient <b>supine</b>. If they cannot be safely turned, performing <b>CPR in the prone position</b> may be reasonable."],
+"bls-pads":["Where do I place the defibrillator pads?","<b>Anterolateral</b> or <b>anteroposterior</b> on the exposed chest; paddle or pad diameter <b>greater than 8 cm</b>. For a bra, adjusting its position rather than removing it is acceptable."],
+"bls-cpr-before-shock":["CPR before defibrillation, or shock immediately?","Continue CPR until the defibrillator is ready. For <b>witnessed/monitored VF/pVT</b> with a defibrillator already applied or immediately available: <b>immediate defibrillation</b>. In unmonitored arrest: a brief period of CPR while the defibrillator is obtained is reasonable."],
+"bls-ppe":["Should I use personal protective equipment during CPR?","Using <b>PPE</b> during CPR is reasonable whenever it is immediately available."],
+
+"acls-epi":["What is the epinephrine dose in adult cardiac arrest?","<b>1 mg IV/IO every 3 to 5 minutes</b>."],
+"acls-epi-timing":["When should epinephrine be given?","<b>Non-shockable rhythm (asystole/PEA): as soon as feasible (ASAP)</b>.<br><b>Shockable rhythm (VF/pVT): after initial defibrillation attempts have failed</b>."],
+"acls-amiodarone":["What is the amiodarone dose in adult cardiac arrest?","<b>First dose: 300 mg IV/IO bolus</b><br><b>Second dose: 150 mg</b><br>For VF/pVT unresponsive to defibrillation."],
+"acls-lidocaine":["What is the lidocaine dose in adult cardiac arrest?","<b>First dose: 1 to 1.5 mg/kg IV/IO</b><br><b>Second dose: 0.5 to 0.75 mg/kg</b><br>An alternative to amiodarone for refractory VF/pVT."],
+"acls-energy":["What shock energy should I use in adults?","<b>Biphasic:</b> the manufacturer's recommended dose (typically an initial <b>120 to 200 J</b>); if unknown, use the <b>maximum available</b>.<br><b>Monophasic: 360 J</b>.<br>Subsequent shocks equal or higher."],
+"acls-single-shock":["Single shock or stacked shocks?","A <b>single-shock strategy</b> is preferred over stacked shocks. Resume compressions immediately after the shock."],
+"acls-dsd":["Double sequential defibrillation or vector change for refractory VF?","For VF/pVT persisting after ≥3 consecutive shocks, the usefulness of <b>neither</b> vector change nor double sequential defibrillation <b>has been established</b>."],
+"acls-access":["Should I obtain IV or IO access first?","<b>Attempt IV access first</b> (Class 1, LOE A). If IV is unsuccessful or not feasible: <b>IO</b> (Class 2a, LOE A). Central venous access only if both fail and the operator is trained."],
+"acls-vasopressin":["Should I give vasopressin instead of epinephrine?","<b>No.</b> Vasopressin alone or with epinephrine offers no advantage over epinephrine. <b>High-dose epinephrine is also not recommended.</b>"],
+"acls-no-routine":["Should I give calcium, bicarbonate or magnesium routinely?","<b>No — none are recommended for routine use</b> (calcium, sodium bicarbonate, magnesium). The benefit of steroids is also uncertain."],
+"acls-hs-ts":["What are the reversible causes (Hs and Ts)?","<b>H:</b> Hypovolemia · Hypoxia · Hydrogen ion (acidosis) · Hypo-/Hyperkalemia · Hypothermia<br><b>T:</b> Tension pneumothorax · Tamponade (cardiac) · Toxins · Thrombosis (pulmonary) · Thrombosis (coronary)"],
+"acls-etco2-rosc":["What is ETCO₂ used for during resuscitation?","An <b>abrupt increase in ETCO₂</b> may indicate <b>ROSC</b>. Continuous waveform capnography is a <b>Class 1</b> recommendation for confirming and monitoring tube placement. If ETCO₂ is low or falling, reassess CPR quality."],
+"acls-tor":["When should I terminate resuscitation?","Use the <b>TOR rules</b> (BLS TOR, ALS TOR, Universal TOR). In an <b>intubated</b> patient, failure to achieve <b>ETCO₂ &gt; 10 mmHg after 20 minutes</b> of ALS may be <u>one component</u> of a multimodal decision. In a <b>non-intubated</b> patient, no ETCO₂ value should be used to end efforts (harm)."],
+"acls-airway-timing":["When should I place an advanced airway?","If advanced airway placement would <b>interrupt chest compressions</b>, defer it until the patient fails to respond to initial CPR and defibrillation, or until ROSC. Continuous waveform capnography is the most reliable method of confirming tube placement."],
+"acls-sga-vs-eti":["Supraglottic airway or endotracheal tube?","In OHCA with a <b>low intubation success rate or limited training</b>: an <b>SGA</b> is acceptable. In settings with <b>high success rates</b>: either is acceptable. In hospital, by trained experts: either. Even <b>bag-mask ventilation alone</b> may be considered depending on the situation and skill set."],
+"acls-oxygen-cpr":["What oxygen concentration during CPR?","Using the <b>maximal feasible inspired oxygen concentration</b> during CPR is reasonable."],
+"acls-headup":["Is head-up CPR recommended?","<b>No</b> — it is not recommended except in the setting of clinical trials."],
+"acls-pmvt":["How do I treat polymorphic VT (torsades)?","<b>Immediate unsynchronized shock</b> for sustained polymorphic VT.<br>With a <b>long QT (torsades)</b>: magnesium may be considered.<br>With a <b>normal QT</b>: routine magnesium is not recommended; IV lidocaine/amiodarone and treatment of ischemia may be considered."],
+"acls-svt":["How do I treat regular narrow-complex tachycardia in adults?","1) <b>Vagal manoeuvres</b> (Class 1)<br>2) <b>Adenosine</b> (Class 1)<br>3) <b>Synchronized cardioversion</b> if unstable — or if stable but refractory to vagal manoeuvres and drugs<br>4) IV diltiazem or verapamil, or IV β-blockers, in the stable patient"],
+"acls-wct":["How do I treat wide-complex tachycardia in adults?","<b>Unstable → immediate synchronized cardioversion</b> (Class 1).<br>Stable: IV amiodarone, procainamide or sotalol may be considered; adenosine only for <u>regular monomorphic</u> rhythm.<br><b>Harm: verapamil and diltiazem must not be given.</b> Adenosine must not be given for unstable, irregularly irregular, or polymorphic wide-complex tachycardia."],
+"acls-af-energy":["What cardioversion energy for atrial fibrillation/flutter?","<b>Atrial fibrillation: at least 200 J</b> biphasic, incremented on failure.<br><b>Atrial flutter: an initial 200 J</b> may be reasonable.<br>With haemodynamic instability: <b>immediate cardioversion</b>."],
+"acls-af-drugs":["Which drug for rate control in AF with rapid ventricular response?","<b>Diltiazem:</b> 0.25 mg/kg IV over 2 min; infusion 5–10 mg/h<br><b>Verapamil:</b> 0.075–0.15 mg/kg IV over 2 min<br><b>Metoprolol:</b> 2.5–5 mg over 2 min, up to 3 doses<br><b>Esmolol:</b> 500 mcg/kg over 1 min; infusion 50–300 mcg/kg per min<br><b>Amiodarone:</b> 300 mg IV over 1 h; infusion 10–50 mg/h<br><b>Digoxin:</b> 0.25 mg IV, repeated to a maximum of 1.5 mg over 24 h"],
+"acls-af-danger":["Which drugs are contraindicated in pre-excited AF (WPW)?","<b>Harm —</b> in AF/flutter with <b>pre-excitation</b>: digoxin, non-dihydropyridine calcium channel antagonists, β-blockers and IV amiodarone <b>must not be given</b> (they may increase the ventricular response and cause VF).<br>In <b>decompensated heart failure</b> with LV systolic dysfunction: IV CCBs and β-blockers must not be used."],
+"acls-brady":["How do I treat symptomatic bradycardia in adults?","1) Evaluate and treat reversible causes (Class 1)<br>2) <b>Atropine</b> if haemodynamically compromised (Class 2a)<br>3) If unresponsive: <b>IV adrenergic agonists (epinephrine, dopamine)</b> or <b>transcutaneous pacing</b><br>4) <b>Temporary transvenous pacing</b> in refractory cases (Class 2a)"],
+"acls-pocus":["Is ultrasound useful during resuscitation?","The use of POCUS to diagnose reversible causes, or echocardiography for prognostication, is <b>not well established</b>. If performed, it must not interrupt compressions."],
+};
+
+/* ترجمهٔ انگلیسی — بخش ۲: اطفال و نوزاد */
+const T_EN_2 = {
+"ped-depth":["What is the compression depth in infants and children?","<b>At least one third of the anteroposterior chest diameter</b>:<br>• <b>Infant: about 1.5 inches = 4 cm</b><br>• <b>Child: about 2 inches = 5 cm</b>"],
+"ped-rate":["What is the compression rate in children?","<b>100 to 120 per minute</b> — the same as in adults."],
+"ped-ratio":["What is the compression-to-ventilation ratio in children?","Without an advanced airway:<br>• <b>Single rescuer: 30:2</b><br>• <b>Two rescuers: 15:2</b><br>In the PALS algorithm: 15:2 with 2 rescuers <b>before puberty</b>, and 30:2 with 2 rescuers <b>after puberty onset</b>."],
+"ped-vent-adv":["With an advanced airway, what ventilation rate in children?","<b>20 to 30 breaths per minute (1 breath every 2 to 3 seconds)</b>, accounting for age and clinical characteristics. Hyperventilation compromises haemodynamics."],
+"ped-resp-arrest":["A child has a pulse but inadequate breathing — what do I do?","Give breaths: <b>1 breath every 2 to 3 seconds (20 to 30 breaths per minute)</b>."],
+"ped-brady-cpr":["What do I do for a child with a heart rate below 60?","If the heart rate remains <b>below 60/min</b> with <b>cardiopulmonary compromise</b> despite <b>effective ventilation with oxygen</b> → <b>start CPR</b>.<br>If it persists after correcting hypoxia: <b>epinephrine IV/IO</b>. For bradycardia from increased vagal tone or AV block: <b>atropine</b>."],
+"ped-epi":["What is the epinephrine dose in pediatric cardiac arrest?","<b>0.01 mg/kg IV/IO</b> (equal to <b>0.1 mL/kg of the 0.1 mg/mL concentration</b>). <b>Maximum single dose: 1 mg.</b> Repeat <b>every 3 to 5 minutes</b> until ROSC."],
+"ped-epi-timing":["When should epinephrine be given in children?","<b>Non-shockable rhythm: as early as possible</b>.<br><b>Shockable rhythm: after 2 defibrillation attempts</b> — or sooner if rapid defibrillation is not possible."],
+"ped-amio":["What are the amiodarone and lidocaine doses in pediatric arrest?","<b>Amiodarone: 5 mg/kg IV/IO bolus</b> (max 300 mg). May repeat up to <b>3 doses</b> (max 150 mg for subsequent doses).<br><b>Or lidocaine: 1 mg/kg IV/IO</b>."],
+"ped-energy":["What shock energy in children?","<b>First shock: 2 J/kg</b> (range 2–4 J/kg; 2 J/kg for ease of teaching)<br><b>Second shock: 4 J/kg</b><br><b>Subsequent shocks: ≥4 J/kg</b>, maximum <b>10 J/kg</b> or the adult maximum dose."],
+"ped-cardioversion":["What synchronized cardioversion energy in children?","<b>Start with 0.5 to 1 J/kg</b>; if unsuccessful, increase to <b>2 J/kg</b>. (For both SVT and wide-complex tachycardia with cardiopulmonary compromise.)"],
+"ped-aed":["Can I use an AED on a child under 8?","In children <b>under 8 years</b>: use of a <b>pediatric attenuator</b> is recommended.<br>If neither a manual defibrillator nor an AED with an attenuator is available: <b>a standard AED may be used</b> — defibrillation is the only effective therapy for a shockable rhythm and may be lifesaving."],
+"ped-technique":["What is the compression technique in infants?","<b>2025 change:</b> for infants, use the <b>heel-of-1-hand technique</b> or the <b>2 thumb–encircling hands technique</b>. If the rescuer cannot physically encircle the chest: <b>heel of one hand</b>.<br>For children: either 1 or 2 hands is acceptable."],
+"ped-pulse-check":["Should I check a pulse in an unresponsive child?","<b>Lay rescuer: do not check a pulse</b> — begin CPR immediately.<br><b>Health care professional: up to 10 seconds</b>; begin compressions unless a definite pulse is felt.<br>Rhythm checks by professionals: no more than 10 seconds, about every 2 minutes."],
+"ped-conventional":["Is compression-only CPR adequate in children?","<b>No — conventional CPR (compressions + breaths) is recommended</b> for infants and children (Class 1), because pediatric arrest is predominantly respiratory in origin.<br>Only if a lay rescuer is unable or unwilling to give breaths is <b>compression-only CPR</b> reasonable."],
+"ped-pause":["What is the maximum interruption in pediatric CPR?","Interruptions should be minimised and pauses kept to <b>less than 10 seconds</b>."],
+"ped-fbao":["Foreign-body airway obstruction in an infant or child?","<b>Infant:</b> cycles of <b>5 back blows + 5 chest thrusts</b> — <u>abdominal thrusts are contraindicated in infants</u> (risk of abdominal organ injury).<br><b>Child:</b> cycles of <b>5 back blows + 5 abdominal thrusts</b>.<br>If they become unresponsive: <b>start CPR with compressions — do not check a pulse.</b> Blind finger sweeps are contraindicated."],
+"ped-airway-peds":["In pediatric out-of-hospital arrest — bag-mask or intubation?","In <b>pediatric OHCA: bag-mask ventilation is preferred</b> over advanced airway interventions (Class 2a).<br>In <b>IHCA</b>: either bag-mask ventilation or an advanced airway may be considered."],
+"ped-ett-cuffed":["Should I use a cuffed endotracheal tube in children?","<b>Yes — cuffed tubes are preferred over uncuffed</b> (Class 2a). Pay attention to tube size, position and <b>cuff inflation pressure (usually below 20 to 25 cmH₂O)</b>."],
+"ped-atropine":["What atropine dose as premedication for pediatric intubation?","<b>0.02 mg/kg</b> — <b>with no minimum dose</b>, to prevent bradycardia during emergency intubation."],
+"ped-fluid":["How do I give fluids in pediatric septic shock?","Give fluid in <b>10 mL/kg or 20 mL/kg aliquots</b> with <b>frequent reassessment after every bolus</b> (fluid responsiveness and signs of overload).<br>Isotonic crystalloid or colloid, balanced or unbalanced — all effective.<br>In fluid-refractory shock: <b>epinephrine or norepinephrine</b> as the initial vasoactive infusion."],
+"ped-dbp":["What diastolic blood pressure target during pediatric CPR?","With invasive arterial monitoring in place: target a <b>diastolic blood pressure ≥25 mmHg in infants</b> and <b>≥30 mmHg in children ≥1 year</b>."],
+"ped-ttm":["How is temperature managed after pediatric arrest?","Continuous central temperature monitoring is <b>required</b> (Class 1, LOE A). <b>Avoid central temperature above 37.5 °C.</b><br>In children <b>24 hours to 18 years</b> who remain comatose: a <b>5-day course of TTM</b> — either <b>32–34 °C</b> followed by 36–37.5 °C, or <b>36–37.5 °C</b> alone."],
+"ped-post-bp":["What is the blood pressure target after pediatric arrest?","Maintain systolic and mean arterial pressure <b>above the 10th percentile for age</b>. Continuous invasive arterial monitoring is recommended."],
+"ped-post-o2":["What is the oxygenation target after pediatric arrest?","Target <b>normoxemia</b> appropriate to the underlying condition; wean oxygen to an oxyhaemoglobin saturation of <b>94% to 99%</b>. Limit exposure to hypercapnia and hypocapnia."],
+"ped-weight":["I don't know the child's weight — how do I calculate the dose?","Calculate doses using <b>body weight</b>, not exceeding the adult dose (Class 1).<br>If the weight is unknown: a <b>length-based tape</b> and other cognitive aids may be used."],
+"ped-trauma":["How do I manage traumatic cardiac arrest in a child?","Evaluate and treat reversible causes: <b>haemorrhage, tension pneumothorax, pericardial tamponade</b> (Class 1).<br>For penetrating thoracic trauma with a short transport time: <b>resuscitative thoracotomy</b> may be reasonable."],
+
+"neo-ratio":["What is the compression-to-ventilation ratio in the newborn?","<b>3 compressions to 1 breath (3:1)</b> — about <b>90 compressions and 30 breaths per minute</b>."],
+"neo-compression-start":["When do I start chest compressions in a newborn?","When the heart rate remains <b>below 60/min despite 30 seconds of effective ventilation</b> that inflates the lungs (confirmed by chest movement).<br>During compressions, ventilation <b>through an endotracheal tube</b> is recommended and <b>100% oxygen</b> is reasonable."],
+"neo-technique":["What is the compression technique and site in the newborn?","<b>2 thumb–encircling hands technique</b> (preferred over the 2-finger method).<br><b>Site:</b> the lower third of the sternum, above the xiphoid process.<br><b>Depth:</b> one third of the anteroposterior chest diameter.<br>Change compressor every <b>2 to 5 minutes</b>."],
+"neo-epi":["What is the epinephrine dose in the newborn?","<b>Intravascular (IV/UVC/IO): 0.01 to 0.03 mg/kg</b> — when the heart rate does not reach 60 or more despite optimised ventilation and compressions.<br><b>Endotracheal (ETT): 0.05 to 0.1 mg/kg</b> (a larger dose) while vascular access is being obtained.<br>Repeat <b>every 3 to 5 minutes</b>, preferably intravascularly, if the heart rate remains below 60."],
+"neo-access":["What is the emergency vascular route in the newborn?","An <b>umbilical vein catheter (UVC)</b> is the recommended route (Class 1).<br>If IV access is unsuccessful or not feasible: <b>intraosseous (IO) access</b> can be useful (Class 2a)."],
+"neo-volume":["What is the volume expander dose in the newborn?","<b>Normal saline (0.9% NaCl) or blood, 10 to 20 mL/kg</b> — in a newborn with evidence of hypovolemia who remains bradycardic below 60 despite ventilation, compressions and epinephrine."],
+"neo-vent-timing":["When do I start positive-pressure ventilation in a newborn?","<b>Within 60 seconds of birth</b>, in a newborn who is <b>gasping or apneic</b> or has a <b>persistent heart rate below 100/min</b> despite appropriate initial steps."],
+"neo-pip":["What inflation pressure (PIP) and rate in the newborn?","<b>Initial peak inflation pressure (PIP): 20 to 30 cmH₂O</b>, adjusted to achieve effective ventilation.<br><b>Rate: 30 to 60 inflations per minute</b>.<br><b>Inflation time: 0.5 to 1 second</b>.<br>PEEP is reasonable. <b>Excessive pressure is harmful.</b>"],
+"neo-sustained":["Sustained inflation in the preterm newborn?","<b>Harm —</b> in preterm newborns <b>less than 28 weeks</b>, routine use of <b>sustained inflations (more than 5 seconds)</b> to initiate ventilation is <b>potentially harmful and should not be performed</b>."],
+"neo-oxygen":["What oxygen concentration do I start neonatal resuscitation with?","<b>≥35 weeks (term and late preterm): start with 21% (room air)</b><br><b>32 to 34+6/7 weeks: start with 21% to 30%</b><br><b>Less than 32 weeks: start with 30% to 100%</b><br>Then titrate to the oxygen saturation targets; attach a pulse oximeter as soon as possible."],
+"neo-spo2-targets":["What are the newborn oxygen saturation targets in the first minutes?","<b>Target SpO₂ after birth:</b><br>• <b>2 min: 65%–70%</b><br>• <b>3 min: 70%–75%</b><br>• <b>4 min: 75%–80%</b><br>• <b>5 min: 80%–85%</b><br>• <b>10 min: 85%–95%</b>"],
+"neo-temp":["What should the newborn's temperature be?","Monitor and maintain temperature <b>between 36.5 °C and 37.5 °C</b>.<br><b>Hypothermia (below 36 °C) should be prevented.</b><br><b>Hyperthermia (above 38 °C) should also be prevented.</b>"],
+"neo-cord":["When should the umbilical cord be clamped?","<b>Term (not requiring immediate resuscitation): deferred clamping for at least 60 seconds</b> (Class 2a).<br><b>Preterm below 37 weeks (not requiring immediate resuscitation): deferred clamping for at least 60 seconds</b> — Class 1, LOE A.<br><b>28+0 to 36+6 weeks</b> where deferred clamping is not possible: <b>intact cord milking</b> may be reasonable.<br><b>Harm — below 28+0 weeks: cord milking should not be performed.</b>"],
+"neo-suction":["Is routine suctioning needed in the newborn?","<b>No benefit —</b> routine oral, nasal, oropharyngeal or endotracheal suctioning is <b>not recommended</b>, regardless of whether the fluid is clear or <b>meconium</b> stained.<br>Suction only if <b>ventilation is required and the airway appears obstructed</b>."],
+"neo-hr":["How do I assess the newborn's heart rate?","<b>ECG</b> can be useful for fast and accurate assessment (Class 2a, LOE B-NR).<br><b>Auscultation</b> and <b>pulse oximetry</b> are reasonable alternatives."],
+"neo-cpap":["What is the role of CPAP in the preterm newborn?","In <b>spontaneously breathing</b> preterm infants who require respiratory support immediately after birth: <b>CPAP is preferred over intubation and mechanical ventilation</b> (Class 2a, LOE A)."],
+"neo-hie":["When is therapeutic hypothermia indicated for HIE?","Newborns <b>≥36 weeks</b> with <b>moderate to severe HIE</b> should be offered <b>therapeutic hypothermia</b> under clearly defined protocols — <b>Class 1, LOE A</b>."],
+"neo-glucose":["What should I monitor after neonatal resuscitation?","Newborns who received prolonged ventilation or advanced resuscitation (intubation, compressions, epinephrine) should be closely monitored, including <b>early glucose checks</b> until levels are maintained in the normal range.<br>For unintentional hypothermia (below 36 °C): <b>rewarming is indicated</b>."],
+"neo-stop":["When should I stop resuscitating a newborn?","If there is <b>no heart rate</b> and <b>all steps of resuscitation have been performed</b>, cessation should be discussed with the team and the family. <b>A reasonable time frame is around 20 minutes after birth.</b><br>Non-initiation and discontinuation of life-sustaining treatment are considered <b>ethically equivalent</b>."],
+"neo-lma":["When is a laryngeal mask used in the newborn?","In newborns <b>≥34 weeks</b> where endotracheal tube placement is not possible or unsuccessful, a <b>laryngeal mask</b> is a reasonable alternative during compressions (Class 2b).<br><b>Video laryngoscopy</b> can be useful for newborns requiring intubation (Class 2a, LOE B-R)."],
+};
+
+/* ترجمهٔ انگلیسی — بخش ۳: پس از احیا، شرایط خاص، سیستم */
+const T_EN_3 = {
+"post-o2":["What is the oxygenation target after ROSC in adults?","Use <b>100% oxygen</b> until SpO₂ or PaO₂ can be measured reliably (Class 1).<br>Then titrate FiO₂ to <b>SpO₂ 90% to 98% (PaO₂ 60 to 105 mmHg)</b> — avoiding both hypoxemia and hyperoxemia.<br>Note: pulse oximetry may conceal hypoxemia in patients with darker skin pigmentation."],
+"post-co2":["What is the PaCO₂ target after arrest?","<b>PaCO₂ within the normal physiologic range: generally 35 to 45 mmHg</b> in patients who remain comatose after ROSC — Class 1, LOE B-R."],
+"post-map":["What is the blood pressure target after arrest in adults?","<b>Avoid hypotension; maintain a minimum MAP of at least 65 mmHg</b> — Class 1, LOE B-R."],
+"post-ttm":["How is temperature controlled after arrest in adults?","A <b>deliberate, protocolized</b> strategy of temperature control for <b>all</b> adults unresponsive to verbal commands after ROSC — regardless of arrest location or presenting rhythm (Class 1).<br><b>Target temperature: between 32 °C and 37.5 °C</b> (Class 1, LOE B-R).<br><b>Duration: at least 36 hours</b> (Class 2a).<br>Avoid rewarming faster than <b>0.5 °C per hour</b>.<br><b>No benefit —</b> routine rapid infusion of cold IV fluids for prehospital cooling is not recommended."],
+"post-ecg":["What investigations immediately after ROSC? (ECG, CT, echo)","<b>A 12-lead ECG as soon as feasible for all patients</b> (Class 1).<br>Head-to-pelvis CT may be reasonable to investigate the cause and complications of resuscitation (Class 2b).<br>Echocardiography or point-of-care cardiac ultrasound may also be reasonable (Class 2b)."],
+"post-pci":["When should emergency angiography be performed after arrest?","<b>Class 1 — emergently:</b> all patients with a suspected cardiac cause and <b>persistent ST-segment elevation</b>, <u>regardless of coma</u>.<br><b>Class 2a:</b> selected patients <b>without</b> ST elevation who have <b>cardiogenic shock, recurrent ventricular arrhythmias or evidence of significant ongoing ischemia</b>.<br><b>No benefit:</b> emergency angiography in comatose patients <b>without</b> ST elevation, shock, electrical instability or ischemia is not superior to a delayed or selective strategy."],
+"post-seizure":["How do I manage seizures after arrest?","<b>Prompt EEG</b> to diagnose seizures in patients who do not follow commands after ROSC (Class 1).<br><b>Treat clinically apparent seizures</b> (Class 1).<br>Treating non-convulsive seizures (EEG-only) is reasonable (Class 2a).<br><b>No benefit — routine seizure prophylaxis is not recommended.</b>"],
+"post-glucose":["What is the glucose target after arrest?","It is reasonable to avoid both <b>hypoglycemia (glucose below 70 mg/dL)</b> and <b>hyperglycemia (glucose above 180 mg/dL)</b> (Class 2b)."],
+"post-prognosis":["When can I judge neurological prognosis?","<b>Never on the basis of a single finding</b> — the approach must be <b>multimodal</b> (Class 1).<br>Judgement must be delayed until medication effects and a transiently poor early examination have resolved (Class 1).<br><b>Consolidate assessments at a minimum of 72 hours after normothermia and discontinuation of sedatives</b> (Class 2a)."],
+"post-abx":["Prophylactic antibiotics and steroids after arrest?","The benefit of <b>prophylactic antibiotics</b> is uncertain (Class 2b).<br>Routine use of <b>steroids</b> in patients with shock after ROSC is of uncertain value (Class 2b)."],
+
+"sp-pregnancy":["How does resuscitation differ in a pregnant patient?","<b>Class 1 — critical points:</b><br>• <b>Resuscitative delivery</b> if the <b>fundal height is at or above the umbilicus</b> and ROSC is not achieved.<br>• Preparation begins <b>at the recognition of arrest</b>, with the goal of <b>completing delivery by 5 minutes</b>.<br>• For in-hospital arrest: <b>perform it at the location of the arrest</b> — do not move the patient to the operating room.<br>• <b>Manual left lateral uterine displacement</b> together with compressions.<br>• <b>Prioritise airway management</b>.<br>• IV/IO access in the <b>upper extremities</b> (Class 2a).<br>• If arrest occurred while receiving <b>magnesium sulfate</b>: <b>give calcium</b> (Class 2a).<br>• <b>No benefit — remove fetal monitors</b> and do not perform fetal monitoring."],
+"sp-opioid":["What do I do in opioid overdose? (naloxone)","<b>Respiratory arrest with a definite pulse:</b> provide ventilation <u>and</u> give <b>naloxone</b> (both Class 1).<br><b>Unresponsive and not breathing normally (lay rescuer):</b> <b>CPR with breaths</b> (Class 1).<br><b>Important (Class 1):</b> giving naloxone or awaiting its effect <b>must not</b> delay standard resuscitation or activation of the emergency response system.<br>In cardiac arrest: naloxone may be reasonable provided it does not interfere with high-quality CPR (Class 2b).<br>After a response: observe the patient until the risk of recurrent respiratory depression has passed; repeated doses are beneficial if it recurs."],
+"sp-drowning":["How does resuscitation after drowning differ?","After removal from the water: <b>CPR with breaths and compressions</b> — Class 1, LOE B-NR (breaths are essential here).<br>For a trained rescuer, starting CPR <b>with breaths followed by compressions</b> may be reasonable (Class 2b).<br>If the rescuer is unwilling or unable to give breaths: compression-only is reasonable in adults (Class 2a)."],
+"sp-hypothermia":["How do I resuscitate in severe hypothermia?","<b>Full resuscitative measures immediately</b>, continued concurrently with rewarming (Class 1).<br>At a core temperature <b>below 30 °C</b>:<br>• <b>Defibrillate once</b>; if unsuccessful, defer further shocks until the core temperature is <b>≥30 °C</b> (Class 2b).<br>• <b>Defer epinephrine until the core temperature is ≥30 °C</b> (Class 2b).<br>Rewarming with <b>ECLS</b> is reasonable (Class 2a), at a rate of <b>1.5 to 5 °C per hour</b>.<br>Transport to an ECLS-capable centre if reachable within <b>6 hours</b>.<br><b>No benefit — do not use ETCO₂ to predict outcome in hypothermic arrest.</b>"],
+"sp-hyperkalemia":["What do I give in cardiac arrest from hyperkalemia?","<b>The effectiveness of none is well established</b> (all Class 2b): IV calcium, IV sodium bicarbonate, IV insulin and glucose.<br><b>No benefit — inhaled β2-agonists are not recommended in cardiac arrest.</b><br>(Note: these recommendations concern <u>cardiac arrest</u>, not hyperkalemia without arrest.)"],
+"sp-pe":["How do I treat cardiac arrest from pulmonary embolism?","With <b>confirmed</b> PE as the precipitant: <b>systemic fibrinolysis, surgical embolectomy and percutaneous mechanical embolectomy</b> are all reasonable options (Class 2a).<br>Using <b>ECLS</b> in confirmed or suspected PE is reasonable (Class 2a).<br>In <b>suspected</b> PE: systemic fibrinolysis may be considered (Class 2b)."],
+"sp-last":["What do I do in local anesthetic systemic toxicity (LAST)?","<b>Class 1 — <span dir=ltr>ILE</span> (intravenous lipid emulsion) should be administered.</b><br><b>Class 1 — benzodiazepines</b> for seizures associated with LAST.<br><b>Class 2a —</b> sodium bicarbonate for life-threatening wide-complex tachycardia from local anesthetic toxicity.<br><b>Class 2a —</b> ECLS for refractory cardiogenic shock."],
+"sp-ccb":["What do I do in calcium channel blocker poisoning?","<b>Class 1 — high-dose insulin</b> for hypotension.<br><b>Class 1 — vasopressors</b> for hypotension.<br><b>Class 2a — calcium</b> should be given; and <b>ECLS</b> for cases refractory to pharmacological therapy.<br>The usefulness of glucagon, methylene blue and ILE is uncertain (Class 2b)."],
+"sp-bb":["What do I do in β-blocker poisoning?","<b>Class 1 — high-dose insulin / euglycemia therapy</b> for hypotension refractory to vasopressors.<br><b>Class 1 — vasopressors</b> for hypotension.<br><b>Class 2a — glucagon</b> (bolus then infusion) for symptomatic bradycardia or hypotension; and <b>ECLS</b> for refractory cardiogenic shock.<br><b>Class 2b —</b> hemodialysis for atenolol, nadolol or sotalol poisoning; calcium may also be considered."],
+"sp-ecmo":["What is the role of VA-ECMO in poisoning?","<b>Class 2a</b> — VA-ECMO is reasonable in adults and children with <b>persistent cardiogenic shock or cardiac arrest due to poisoning</b> refractory to pharmacological interventions; also for <b>refractory arrhythmias</b> due to poisoning."],
+"sp-precordial":["Are precordial thump and cough CPR recommended?","These interventions (precordial thump, percussion pacing, cough CPR) have <b>no routine role in resuscitation</b> and the supporting evidence is very limited — they must never replace high-quality CPR and prompt defibrillation."],
+
+"sys-tcpr":["What instructions should the emergency dispatcher give?","<b>Adults: compression-only CPR</b> — Class 1, LOE A.<br><b>Infants and children: conventional CPR with breaths</b> — Class 1.<br>If the patient is unresponsive with abnormal, agonal or absent breathing, the telecommunicator should <b>assume cardiac arrest</b> and instruct the caller to begin CPR. Determine the <b>location</b> first so that EMS can be dispatched simultaneously."],
+"sys-ihca-prevention":["How do I prevent in-hospital cardiac arrest?","<b>Class 2a:</b><br>• <b>Early warning score (EWS) systems</b> to detect clinical deterioration<br>• <b>Rapid response teams (RRT) or medical emergency teams (MET)</b> — particularly on general wards<br>• <b>Safety huddles</b> to improve situational awareness of high-risk patients"],
+"sys-naloxone":["Is public access naloxone recommended?","<b>Class 1 —</b> public policies should allow <b>possession, use and immunity from liability</b> for good-faith administration of naloxone by lay rescuers.<br><b>Class 2a —</b> naloxone distribution programmes are beneficial and reduce opioid overdose mortality."],
+"sys-ecpr":["What is the role of ECPR?","Centres with ECPR programmes should develop and frequently reassess <b>patient selection criteria</b> (Class 2a).<br>A <b>regionalized</b> approach is reasonable.<br>Clinicians performing peripheral ECPR cannulation should be <b>experienced</b> in percutaneous technique.<br>Rapid intra-arrest transport for ECPR may be considered only for a <b>limited, highly selected</b> group of OHCA patients (Class 2b)."],
+"sys-debrief":["Is clinical debriefing needed after resuscitation?","<b>Clinical debriefing</b> after resuscitation events is recommended to improve team performance and quality of care."],
+"sys-chain":["What are the links in the Chain of Survival?","In 2025 the AHA moved to a <b>single Chain of Survival</b>: <b>recognition of cardiac arrest → activation of the emergency response → high-quality CPR → rapid defibrillation → advanced care → post-arrest care → recovery</b>.<br>2030 goals: increase bystander CPR to more than <b>50%</b> and AED application before EMS arrival to more than <b>20%</b>."],
+"sys-2025-changes":["What are the main changes in the 2025 guidelines?","<b>Key 2025 changes:</b><br>• <b>Adult choking:</b> now cycles of <b>5 back blows + 5 abdominal thrusts</b> (previously abdominal thrusts alone)<br>• <b>Rescuer position:</b> patient's torso at the level of the rescuer's knees<br>• <b>Resuscitate in place:</b> do not move the patient<br>• <b>Choking infants:</b> the <b>heel-of-one-hand</b> technique for chest thrusts<br>• <b>Naloxone</b> formally added to the adult BLS algorithms<br>• <b>Mechanical CPR devices:</b> routine use not recommended<br>• New chapters: <b>post–cardiac arrest care</b>, <b>special circumstances</b>, <b>ethics</b><br>• Joint AHA and <b>AAP</b> authorship of the pediatric and neonatal chapters"],
+"sys-cor-loe":["What do Class of Recommendation (COR) and Level of Evidence (LOE) mean?","<b>Class of Recommendation (COR) — strength:</b><br>• <b>1 (Strong):</b> is recommended / should be done<br>• <b>2a (Moderate):</b> is reasonable / can be useful<br>• <b>2b (Weak):</b> may be reasonable / may be considered<br>• <b>3: No Benefit:</b> is not recommended<br>• <b>3: Harm:</b> should not be done (harmful)<br><br><b>Level of Evidence (LOE) — quality:</b><br>• <b>A:</b> high-quality evidence from more than one RCT<br>• <b>B-R:</b> moderate-quality evidence from RCTs<br>• <b>B-NR:</b> moderate-quality non-randomized evidence<br>• <b>C-LD:</b> limited data<br>• <b>C-EO:</b> expert opinion"],
+"sys-family":["Is family presence during resuscitation permitted?","Family presence during resuscitation is <b>recommended</b> where feasible and appropriately supported — particularly in pediatrics, where parents should be offered the opportunity to be present with a team member available to support and explain."],
+};
+
+const T_AR = {
+"bls-depth":["ما هو عمق ضغطات الصدر لدى البالغ؟", "على الأقل 2 بوصة = <b>5 سنتيمتر</b>، مع تجنّب العمق المفرط (أكثر من 2.4 بوصة = <b>6 سنتيمتر</b>)."],
+"bls-rate":["ما هي سرعة ضغطات الصدر لدى البالغ؟", "<b>100 إلى 120 ضغطة في الدقيقة</b> (100–120/min)."],
+"bls-ratio":["ما نسبة الضغطات إلى الأنفاس لدى البالغ؟", "<b>30 ضغطة مقابل 2 نفس (30:2)</b> قبل وضع مجرى هوائي متقدم — للمنقذ العادي وللكوادر الطبية على حد سواء."],
+"bls-adv-airway-vent":["بعد وضع الأنبوب الرغامي، كم يكون عدد الأنفاس؟", "<b>1 نفس كل 6 ثوانٍ (10 أنفاس في الدقيقة)</b> مع ضغطات صدرية مستمرة ودون انقطاع."],
+"bls-respiratory-arrest":["في توقف التنفس مع وجود نبض، كيف أعطي الأنفاس؟", "<b>1 نفس كل 6 ثوانٍ (10 أنفاس في الدقيقة)</b>، كل نفس مع ارتفاع مرئي للصدر. يُفحص النبض كل 2 دقيقة."],
+"bls-pulse-check":["كم يجب أن يستغرق فحص النبض؟", "<b>10 ثوانٍ كحد أقصى</b>. إذا لم يُلمس نبض مؤكد، افترض وجود توقف قلبي وابدأ الضغطات فورًا."],
+"bls-recognition":["كيف أتعرّف على التوقف القلبي؟", "بالغ <b>فاقد للوعي/لا يستجيب</b> مع <b>غياب التنفس أو تنفس غير طبيعي (لهاث احتضاري فقط)</b> = توقف قلبي. المنقذ العادي: يبدأ دون فحص النبض. الكوادر الطبية: فحص النبض خلال 10 ثوانٍ كحد أقصى."],
+"bls-lone-rescuer":["ماذا يفعل المنقذ المنفرد أولًا؟", "أولًا <b>فعّل نظام الطوارئ</b>، ثم ابدأ CPR فورًا <b>بضغطات الصدر</b>. مع وجود هاتف محمول: اتصل وابدأ الضغطات في الوقت نفسه."],
+"bls-hand-position":["أين أضع يدي على الصدر؟", "راحة إحدى اليدين على <b>منتصف الصدر — النصف السفلي إلى الثلث السفلي من عظم القص (sternum)</b> وراحة اليد الأخرى فوقها، مع تشبيك الأصابع."],
+"bls-position-2025":["كيف تكون وضعية جسم المنقذ أثناء الضغطات؟ (تغيير 2025)", "<b>يكون جذع المريض تقريبًا بمستوى ركبة المنقذ</b>. السطح <b>صلب</b> والمريض <b>على الظهر (supine)</b>، شريطة ألّا يؤخّر ذلك بدء الضغطات."],
+"bls-where":["هل أنقل المريض من مكانه لإجراء الإنعاش؟", "لا — يُجرى الإنعاش <b>في المكان الذي وُجد فيه المريض</b>، ما دام إجراء CPR عالي الجودة ممكنًا بأمان وفعالية."],
+"bls-switch":["كل كم يتم تبديل القائم بالضغطات؟", "تقريبًا <b>كل 2 دقيقة</b> (أو نحو 5 دورات 30:2)، أو أبكر عند التعب."],
+"bls-ccf":["كم يجب أن تكون نسبة زمن الضغطات (CCF)؟", "<b>60% كحد أدنى</b>. يجب أن تكون الفواصل قبل الصدمة وبعدها قصيرة قدر الإمكان."],
+"bls-postshock":["بعد الصدمة، أفحص النظم أم أبدأ الضغطات؟", "<b>استأنف الضغطات فورًا</b>؛ لا توقف CPR لفحص النظم بعد الصدمة."],
+"bls-recoil":["ما مدى أهمية الارتداد الكامل للصدر؟", "<b>الارتداد الكامل للصدر</b> بعد كل ضغطة أمر لازم — لا تتّكئ على الصدر بين الضغطات."],
+"bls-tidal":["ما حجم كل نفس؟", "بالقدر الذي <b>يُرى فيه ارتفاع الصدر</b> فقط؛ كل نفس خلال <b>1 ثانية</b>. تجنّب نقص التهوية وفرط التهوية (hyperventilation) — فرط التهوية <b>ضار</b>."],
+"bls-bvm":["ما التقنية الصحيحة للتهوية بالكيس والقناع (bag-mask)؟", "يُفضّل <b>منقذان اثنان</b>: أحدهما يفتح مجرى الهواء ويُحكم إغلاق القناع <b>بكلتا يديه</b>، والآخر يضغط الكيس."],
+"bls-airway":["كيف أفتح مجرى الهواء؟", "دون شك بإصابة الرقبة: <b>head tilt–chin lift</b>. مع رضح الرأس والرقبة: <b>jaw thrust دون بسط الرأس</b>؛ إذا لم يكن jaw thrust فعّالًا، استخدم head tilt–chin lift."],
+"bls-cricoid":["هل يُوصى بالضغط على الغضروف الحلقي أثناء الإنعاش؟", "<b>لا</b> — الاستخدام الروتيني للضغط على الغضروف الحلقي في التوقف القلبي لدى البالغين <b>غير موصى به</b>."],
+"bls-mechanical":["هل يُوصى بجهاز الضغط الصدري الآلي؟", "الاستخدام <b>الروتيني غير موصى به</b>. يمكن النظر فيه فقط في ظروف خاصة (حين يكون الضغط اليدوي عالي الجودة صعبًا أو خطرًا)، مع أقل انقطاع ممكن أثناء التركيب والإزالة."],
+"bls-fbao-conscious":["ماذا أفعل في الاختناق بجسم غريب (بالغ واعٍ)؟", "<b>تغيير 2025:</b> دورات من <b>5 ضربات بين لوحي الكتف (back blows)</b> ثم <b>5 ضغطات بطنية (abdominal thrusts)</b>، تُكرَّر حتى خروج الجسم أو فقدان المريض للوعي. فعّل الطوارئ. في الانسداد <b>الخفيف</b>: دعه يسعل فقط مع المراقبة."],
+"bls-fbao-unconscious":["ماذا لو فقد المريض المصاب بانسداد مجرى الهواء وعيه؟", "<b>ابدأ CPR بضغطات الصدر</b> وفعّل الطوارئ. عند فتح مجرى الهواء لإعطاء النفس، أخرج الجسم الغريب <b>المرئي</b>. <b>يُمنع المسح الأعمى بالإصبع (blind finger sweep).</b>"],
+"bls-fbao-special":["ما الفرق في الاختناق لدى الحامل أو المريض البدين؟", "إذا تعذّر عليك الإحاطة ببطن المريض، أو في <b>الحمل المتأخر</b>: دورات من <b>5 ضربات ظهرية + 5 ضغطات صدرية (chest thrusts)</b> بدلًا من الضغطات البطنية."],
+"bls-obesity":["ما الفرق في CPR لدى المريض البدين؟", "<b>نفس التقنية القياسية</b>. قد يلزم بذل قوة أكبر لبلوغ العمق الكافي. أما لوح CPR (partial backboard) في IHCA <b>فلا فائدة منه</b>."],
+"bls-prone":["مريض في وضعية الانبطاح (prone) أصيب بتوقف قلبي، ماذا أفعل؟", "يُفضّل قلب المريض <b>على الظهر (supine)</b>. إذا تعذّر قلبه بأمان، يمكن النظر في إجراء <b>CPR في وضعية الانبطاح</b>."],
+"bls-pads":["أين ألصق لبادات مزيل الرجفان؟", "<b>anterolateral</b> أو <b>anteroposterior</b> على صدر عارٍ؛ قطر اللبادة/المجداف <b>أكبر من 8 سنتيمتر</b>. أما حمالة الصدر فيكفي إزاحتها بدل نزعها."],
+"bls-cpr-before-shock":["قبل الصدمة، أعطي CPR أم صدمة فورية؟", "يستمر CPR حتى جهوزية الجهاز. في التوقف <b>المشاهَد/المراقَب من نوع VF/pVT</b> مع توفر مزيل الرجفان في اللحظة نفسها: <b>صدمة فورية</b>. في التوقف غير المراقَب: من المعقول إجراء فترة قصيرة من CPR حتى جهوزية الجهاز."],
+"bls-ppe":["هل تُستخدم معدات الوقاية الشخصية أثناء CPR؟", "من المعقول استخدام <b>PPE</b> أثناء CPR كلما كانت متوفرة فورًا."],
+"acls-epi":["ما جرعة الأدرينالين (الإبينفرين) في التوقف القلبي لدى البالغ؟", "<b>1 ملغم IV/IO كل 3 إلى 5 دقائق</b>."],
+"acls-epi-timing":["متى أعطي الأدرينالين؟", "<b>النظم غير القابل للصدم (Asystole/PEA): في أسرع وقت ممكن (ASAP)</b>.<br><b>النظم القابل للصدم (VF/pVT): بعد فشل محاولات إزالة الرجفان الأولية</b>."],
+"acls-amiodarone":["ما جرعة الأميودارون في التوقف القلبي لدى البالغ؟", "<b>الجرعة الأولى: 300 ملغم IV/IO دفعة واحدة (بولوس)</b><br><b>الجرعة الثانية: 150 ملغم</b><br>لـ VF/pVT المقاوم لإزالة الرجفان."],
+"acls-lidocaine":["ما جرعة الليدوكائين في التوقف القلبي لدى البالغ؟", "<b>الجرعة الأولى: 1 إلى 1.5 mg/kg IV/IO</b><br><b>الجرعة الثانية: 0.5 إلى 0.75 mg/kg</b><br>بديل الأميودارون لـ VF/pVT المقاوم."],
+"acls-energy":["كم تكون طاقة الصدمة لدى البالغ؟", "<b>ثنائي الطور (بايفازيك):</b> حسب توصية الشركة المصنّعة للجهاز (عادةً جرعة أولية <b>120 إلى 200 جول</b>)؛ وإذا كانت غير معلومة، <b>أقصى طاقة متاحة</b>.<br><b>أحادي الطور (مونوفازيك): 360 جول</b>.<br>الصدمات التالية مساوية أو أعلى."],
+"acls-single-shock":["أعطي صدمة مفردة أم صدمات متتالية (stacked)؟", "<b>استراتيجية الصدمة المفردة</b> مفضّلة على الصدمات المتتالية (stacked). تُستأنف الضغطات فور إعطاء الصدمة."],
+"acls-dsd":["إزالة الرجفان المزدوجة (DSD) أو تغيير المتجه في VF المقاوم؟", "في VF/pVT المستمر بعد ≥3 صدمات متتالية، <b>لم تثبت فائدة أي منهما</b> (لا تغيير المتجه، ولا إزالة الرجفان المزدوجة المتتابعة)."],
+"acls-access":["هل أبدأ بـ IV أم IO؟", "<b>ابدأ بمحاولة IV</b> (الفئة 1، المستوى A). إذا فشل IV أو تعذّر: <b>IO</b> (الفئة 2a، المستوى A). أما الوصول الوريدي المركزي فيُستخدم فقط إذا فشل كلاهما وكان المنفّذ مدرَّبًا."],
+"acls-vasopressin":["هل أعطي الفازوبريسين بدلًا من الأدرينالين؟", "<b>لا.</b> الفازوبريسين (وحده أو مع الأدرينالين) لا يتفوّق بشيء على الأدرينالين. <b>كما لا يُوصى بالأدرينالين بجرعة عالية.</b>"],
+"acls-no-routine":["هل أعطي الكالسيوم والبيكربونات والمغنيسيوم بشكل روتيني؟", "<b>لا — لا يُوصى بأي منها بشكل روتيني</b> (الكالسيوم، بيكربونات الصوديوم، المغنيسيوم). كما أن فائدة الستيرويد غير مؤكدة."],
+"acls-hs-ts":["ما الأسباب القابلة للعكس للتوقف القلبي (H و T)؟", "<b>H:</b> Hypovolemia (نقص الحجم) · Hypoxia (نقص الأكسجين) · Hydrogen ion / حماض · Hypo-/Hyperkalemia (اضطراب البوتاسيوم) · Hypothermia (انخفاض حرارة الجسم)<br><b>T:</b> Tension pneumothorax · Tamponade قلبي · Toxins (سموم) · Thrombosis رئوي (PE) · Thrombosis تاجي (MI)", "خمسة أسباب تبدأ بحرف الحاء: نقص الحجم، نقص الأكسجين، الحماض، اضطراب البوتاسيوم سواء بالنقص أو بالزيادة، وانخفاض حرارة الجسم. وخمسة أسباب تبدأ بحرف التاء: استرواح الصدر الضاغط، اندحاس القلب، التسممات، الانصمام الرئوي، وانسداد الشرايين التاجية أو احتشاء عضلة القلب."],
+"acls-etco2-rosc":["ما فائدة ETCO2 في الإنعاش؟", "<b>الارتفاع المفاجئ في ETCO2</b> قد يكون علامة على <b>ROSC</b>. والكابنوغرافيا الموجية لتأكيد موضع الأنبوب الرغامي ومراقبته <b>توصية من الفئة 1</b>. وإذا كان ETCO2 منخفضًا أو في تناقص، فراجع جودة CPR."],
+"acls-tor":["متى أُنهي الإنعاش؟", "استخدم <b>قواعد TOR</b> (BLS TOR، ALS TOR، Universal TOR). في المريض <b>المُنبَّب</b>، فإن عدم بلوغ <b>ETCO2 &gt; 10 mmHg بعد 20 دقيقة</b> من ALS يمكن أن يكون <u>أحد مكونات</u> قرار متعدد الجوانب. أما في المريض <b>غير المُنبَّب</b>، فلا يجوز أن يكون أي رقم لـ ETCO2 أساسًا للإنهاء (ضار).", "استخدم القواعد المعيارية لإنهاء الإنعاش. في المريض المُنبَّب، عدم بلوغ ثاني أكسيد الكربون في نهاية الزفير أكثر من 10 مليمتر زئبق بعد 20 دقيقة من الإنعاش المتقدم يمكن أن يكون أحد مكونات قرار متعدد الجوانب. أما في المريض بدون أنبوب رغامي، فلا يجوز أن يكون أي رقم لثاني أكسيد الكربون في نهاية الزفير أساسًا لإنهاء الإنعاش؛ فهذا ضار."],
+"acls-airway-timing":["متى أقوم بالتنبيب؟", "إذا كان وضع مجرى هوائي متقدم سيؤدي إلى <b>قطع الضغطات</b>، فأجّله إلى <b>ما بعد فشل CPR وإزالة الرجفان الأولية أو ما بعد ROSC</b>. والكابنوغرافيا الموجية هي أوثق وسيلة لتأكيد موضع الأنبوب."],
+"acls-sga-vs-eti":["هل أضع SGA أم أنبوبًا رغاميًا؟", "في OHCA مع <b>معدل نجاح منخفض للتنبيب أو تدريب قليل</b>: <b>SGA</b> مقبول. في المراكز ذات <b>معدل النجاح المرتفع</b>: كلاهما مقبول. وداخل المستشفى وبيد أخصائي مدرَّب: كلاهما. حتى <b>التهوية بالكيس والقناع وحدها</b> يمكن النظر فيها بحسب الظروف والمهارة."],
+"acls-oxygen-cpr":["ما تركيز الأكسجين الذي أعطيه أثناء CPR؟", "من المعقول إعطاء <b>أقصى تركيز أكسجين متاح</b> أثناء CPR."]
+};
+
+
+const T_EN = Object.assign({}, T_EN_1, T_EN_2, T_EN_3);
+const T_TR = {};
+const TRANS = {ar:T_AR, tr:T_TR, en:T_EN};
+/* ===== زبان‌ها ===== */
+const LANGS = {
+  fa: {name:"فارسی",   dir:"rtl", speech:"fa-IR", digits:"fa"},
+  ar: {name:"العربية", dir:"rtl", speech:"ar-SA", digits:"lat"},
+  tr: {name:"Türkçe",  dir:"ltr", speech:"tr-TR", digits:"lat"},
+  en: {name:"English", dir:"ltr", speech:"en-US", digits:"lat"},
+};
+
+/* رشته‌های رابط کاربری */
+const UI = {
+  fa:{title:"دستیار احیا ۲۰۲۵", sub:"گایدلاین AHA 2025 · پاسخ فوری با صدا یا تایپ",
+    adult:"بزرگسال", adultSub:"Adult", peds:"اطفال", pedsSub:"شیرخوار و کودک", neo:"نوزاد", neoSub:"Newborn",
+    ph:"سؤال خود را بپرسید — مثلاً: دوز آدرنالین چقدر است؟", quick:"دسترسی سریع", all:"همه",
+    found:n=>`${n} پاسخ یافت شد`, none:"پاسخی یافت نشد", items:n=>`${n} مورد`,
+    emptyT:"پاسخی برای این عبارت پیدا نشد",
+    emptyS:"عبارت کوتاه‌تر یا کلیدواژهٔ اصلی را امتحان کنید — مثلاً «عمق ماساژ»، «دوز آدرنالین» یا «انرژی شوک».",
+    listening:"در حال شنیدن… سؤالتان را بگویید", speakLbl:"خواندن پاسخ با صدا",
+    autoOn:"خواندن خودکار پاسخ روشن شد", autoOff:"خواندن خودکار پاسخ خاموش شد",
+    openTab:"باز کردن در تب جدید ↗", langLbl:"زبان پاسخ‌ها",
+    legend:[["کلاس ۱","توصیه می‌شود / باید انجام شود"],["کلاس 2a","معقول است / احتمالاً مفید"],
+            ["کلاس 2b","ممکن است معقول باشد"],["کلاس ۳","توصیه نمی‌شود یا مضر است"],
+            ["LOE A/B","شواهد از کارآزمایی یا مطالعات"],["LOE C","داده محدود یا نظر تخصصی"]],
+    note1:"<b>منبع:</b> کل محتوا مستقیماً از <b>2025 AHA Guidelines for CPR and ECC</b>، بخش‌های ۱ تا ۱۲ استخراج شده است.",
+    note2:"<b>آفلاین:</b> پاسخ‌ها داخل همین صفحه‌اند و بدون اینترنت کار می‌کنند. پرسش صوتی — و اگر صدای فارسی روی دستگاه نباشد، خواندن پاسخ — به اینترنت نیاز دارد.",
+    note3:"<b>توجه:</b> مرجع سریع کنار بالین است و جایگزین قضاوت بالینی یا متن کامل گایدلاین نیست.",
+    cats:{bls:"احیای پایه بزرگسال",acls:"احیای پیشرفته بزرگسال",peds:"احیای اطفال",neonate:"احیای نوزاد",
+          post:"مراقبت پس از احیا",special:"شرایط خاص",system:"سیستم، آموزش و اخلاق"},
+    short:{bls:"پایه بزرگسال",acls:"پیشرفته بزرگسال",peds:"اطفال",neonate:"نوزاد",post:"پس از احیا",special:"شرایط خاص",system:"سیستم و آموزش"},
+    mic:{nosr:"این مرورگر از پرسش صوتی پشتیبانی نمی‌کند. Chrome یا Edge را امتحان کنید.",
+         framed:"برای پرسش صوتی، صفحه باید در تب مستقل مرورگر باز شود — داخل این قاب، مرورگر اجازهٔ میکروفون نمی‌دهد.",
+         insecure:"پرسش صوتی فقط روی نشانی امن (https) کار می‌کند.",
+         denied:"اجازهٔ میکروفون داده نشد — دسترسی میکروفون را برای این صفحه فعال کنید.",
+         nomic:"میکروفونی پیدا نشد.", nospeech:"صدایی شنیده نشد — دوباره روی میکروفون بزنید.",
+         net:"تشخیص گفتار به اینترنت نیاز دارد — لطفاً سؤال را تایپ کنید.",
+         fail:"دسترسی به میکروفون ممکن نشد — لطفاً سؤال را تایپ کنید.",
+         novoice:"صدای فارسی روی این دستگاه نصب نیست و صدای آنلاین هم در دسترس نبود — مرورگر Edge را امتحان کنید یا از تنظیمات گفتارِ دستگاه، صدای فارسی را نصب کنید.",
+         notts:"این مرورگر از پخش صوتی پشتیبانی نمی‌کند."}},
+
+  ar:{title:"مساعد الإنعاش 2025", sub:"إرشادات AHA 2025 · إجابة فورية بالصوت أو الكتابة",
+    adult:"البالغون", adultSub:"Adult", peds:"الأطفال", pedsSub:"الرضّع والأطفال", neo:"حديثو الولادة", neoSub:"Newborn",
+    ph:"اطرح سؤالك — مثلاً: ما جرعة الأدرينالين؟", quick:"وصول سريع", all:"الكل",
+    found:n=>`${n} إجابة`, none:"لا توجد إجابة", items:n=>`${n} بند`,
+    emptyT:"لم يتم العثور على إجابة",
+    emptyS:"جرّب عبارة أقصر أو الكلمة المفتاحية — مثل «عمق الضغطات» أو «جرعة الأدرينالين».",
+    listening:"جارٍ الاستماع… تفضّل بسؤالك", speakLbl:"قراءة الإجابة صوتياً",
+    autoOn:"تم تفعيل القراءة التلقائية", autoOff:"تم إيقاف القراءة التلقائية",
+    openTab:"افتح في تبويب جديد ↗", langLbl:"لغة الإجابات",
+    legend:[["الفئة 1","موصى به / يجب تنفيذه"],["الفئة 2a","معقول / غالباً مفيد"],
+            ["الفئة 2b","قد يكون معقولاً"],["الفئة 3","غير موصى به أو ضار"],
+            ["LOE A/B","أدلة من تجارب أو دراسات"],["LOE C","بيانات محدودة أو رأي خبراء"]],
+    note1:"<b>المصدر:</b> كل المحتوى مستخرج مباشرة من <b>2025 AHA Guidelines for CPR and ECC</b>، الأجزاء 1 إلى 12.",
+    note2:"<b>دون إنترنت:</b> الإجابات مخزّنة داخل الصفحة. السؤال الصوتي — وقراءة الإجابة إن لم يكن صوت اللغة مثبّتاً — يحتاج إلى إنترنت.",
+    note3:"<b>تنبيه:</b> مرجع سريع بجانب السرير ولا يغني عن الحكم السريري أو النص الكامل للإرشادات.",
+    cats:{bls:"الإنعاش الأساسي للبالغين",acls:"الإنعاش المتقدم للبالغين",peds:"إنعاش الأطفال",neonate:"إنعاش حديثي الولادة",
+          post:"الرعاية بعد الإنعاش",special:"الظروف الخاصة",system:"الأنظمة والتعليم والأخلاقيات"},
+    short:{bls:"أساسي بالغين",acls:"متقدم بالغين",peds:"الأطفال",neonate:"حديثو الولادة",post:"بعد الإنعاش",special:"ظروف خاصة",system:"أنظمة وتعليم"},
+    mic:{nosr:"هذا المتصفح لا يدعم السؤال الصوتي. جرّب Chrome أو Edge.",
+         framed:"للسؤال الصوتي يجب فتح الصفحة في تبويب مستقل — داخل هذا الإطار لا يسمح المتصفح بالميكروفون.",
+         insecure:"السؤال الصوتي يعمل فقط على عنوان آمن (https).",
+         denied:"لم يُسمح بالوصول إلى الميكروفون — فعّل إذن الميكروفون لهذه الصفحة.",
+         nomic:"لم يتم العثور على ميكروفون.", nospeech:"لم يُسمع صوت — اضغط على الميكروفون مجدداً.",
+         net:"التعرّف على الكلام يحتاج إلى إنترنت — يرجى كتابة السؤال.",
+         fail:"تعذّر الوصول إلى الميكروفون — يرجى كتابة السؤال.",
+         novoice:"لا يوجد صوت لهذه اللغة على الجهاز ولا صوت عبر الإنترنت — جرّب متصفح Edge أو ثبّت صوت اللغة من إعدادات النطق.",
+         notts:"هذا المتصفح لا يدعم التشغيل الصوتي."}},
+
+  tr:{title:"Resüsitasyon Asistanı 2025", sub:"AHA 2025 Kılavuzu · sesle veya yazarak anında yanıt",
+    adult:"Erişkin", adultSub:"Ergenlik ve üstü", peds:"Çocuk", pedsSub:"Bebek ve çocuk", neo:"Yenidoğan", neoSub:"Doğumda",
+    ph:"Sorunuzu sorun — örn: Adrenalin dozu nedir?", quick:"Hızlı erişim", all:"Tümü",
+    found:n=>`${n} yanıt bulundu`, none:"Yanıt bulunamadı", items:n=>`${n} kayıt`,
+    emptyT:"Bu ifade için yanıt bulunamadı",
+    emptyS:"Daha kısa bir ifade veya anahtar kelime deneyin — örn. «bası derinliği», «adrenalin dozu».",
+    listening:"Dinleniyor… sorunuzu söyleyin", speakLbl:"Yanıtı sesli oku",
+    autoOn:"Otomatik okuma açıldı", autoOff:"Otomatik okuma kapatıldı",
+    openTab:"Yeni sekmede aç ↗", langLbl:"Yanıt dili",
+    legend:[["Sınıf 1","Önerilir / yapılmalıdır"],["Sınıf 2a","Makul / muhtemelen yararlı"],
+            ["Sınıf 2b","Makul olabilir"],["Sınıf 3","Önerilmez veya zararlı"],
+            ["LOE A/B","Çalışma veya araştırma kanıtı"],["LOE C","Sınırlı veri veya uzman görüşü"]],
+    note1:"<b>Kaynak:</b> Tüm içerik doğrudan <b>2025 AHA Guidelines for CPR and ECC</b>, Bölüm 1–12'den alınmıştır.",
+    note2:"<b>Çevrimdışı:</b> Yanıtlar sayfanın içindedir. Sesli soru — ve cihazda dil sesi yoksa yanıtın okunması — internet gerektirir.",
+    note3:"<b>Uyarı:</b> Hasta başı hızlı başvuru kaynağıdır; klinik muhakemenin veya kılavuzun tam metninin yerini tutmaz.",
+    cats:{bls:"Erişkin temel yaşam desteği",acls:"Erişkin ileri yaşam desteği",peds:"Çocuk resüsitasyonu",neonate:"Yenidoğan resüsitasyonu",
+          post:"Arrest sonrası bakım",special:"Özel durumlar",system:"Sistem, eğitim ve etik"},
+    short:{bls:"Erişkin TYD",acls:"Erişkin İYD",peds:"Çocuk",neonate:"Yenidoğan",post:"Arrest sonrası",special:"Özel durumlar",system:"Sistem ve eğitim"},
+    mic:{nosr:"Bu tarayıcı sesli soruyu desteklemiyor. Chrome veya Edge deneyin.",
+         framed:"Sesli soru için sayfa ayrı bir sekmede açılmalı — bu çerçeve içinde tarayıcı mikrofona izin vermiyor.",
+         insecure:"Sesli soru yalnızca güvenli (https) adreste çalışır.",
+         denied:"Mikrofon izni verilmedi — bu sayfa için mikrofon erişimini etkinleştirin.",
+         nomic:"Mikrofon bulunamadı.", nospeech:"Ses duyulmadı — mikrofona tekrar dokunun.",
+         net:"Konuşma tanıma internet gerektirir — lütfen sorunuzu yazın.",
+         fail:"Mikrofona erişilemedi — lütfen sorunuzu yazın.",
+         novoice:"Bu dilin sesi cihazda yüklü değil ve çevrimiçi ses de kullanılamadı — Edge tarayıcısını deneyin ya da cihazın konuşma ayarlarından sesi yükleyin.",
+         notts:"Bu tarayıcı sesli oynatmayı desteklemiyor."}},
+
+  en:{title:"Resuscitation Assistant 2025", sub:"AHA 2025 Guidelines · instant answers by voice or typing",
+    adult:"Adult", adultSub:"Puberty and older", peds:"Pediatric", pedsSub:"Infant to puberty", neo:"Newborn", neoSub:"At birth",
+    ph:"Ask your question — e.g. What is the epinephrine dose?", quick:"Quick access", all:"All",
+    found:n=>`${n} answers found`, none:"No answer found", items:n=>`${n} entries`,
+    emptyT:"No answer found for this phrase",
+    emptyS:"Try a shorter phrase or the key term — e.g. “compression depth”, “epinephrine dose”, “shock energy”.",
+    listening:"Listening… say your question", speakLbl:"Read answer aloud",
+    autoOn:"Auto-read turned on", autoOff:"Auto-read turned off",
+    openTab:"Open in a new tab ↗", langLbl:"Answer language",
+    legend:[["Class 1","Recommended / should be done"],["Class 2a","Reasonable / probably helpful"],
+            ["Class 2b","May be reasonable"],["Class 3","Not recommended or harmful"],
+            ["LOE A/B","Evidence from trials or studies"],["LOE C","Limited data or expert opinion"]],
+    note1:"<b>Source:</b> All content is taken directly from the <b>2025 AHA Guidelines for CPR and ECC</b>, Parts 1–12.",
+    note2:"<b>Offline:</b> Answers are stored in this page and work without internet. Voice input — and reading the answer aloud when no device voice is installed — needs a connection.",
+    note3:"<b>Note:</b> A bedside quick reference — not a substitute for clinical judgement or the full guideline text.",
+    cats:{bls:"Adult Basic Life Support",acls:"Adult Advanced Life Support",peds:"Pediatric resuscitation",neonate:"Neonatal resuscitation",
+          post:"Post–cardiac arrest care",special:"Special circumstances",system:"Systems, education and ethics"},
+    short:{bls:"Adult BLS",acls:"Adult ALS",peds:"Pediatric",neonate:"Newborn",post:"Post-arrest",special:"Special",system:"Systems"},
+    mic:{nosr:"This browser does not support voice input. Try Chrome or Edge.",
+         framed:"Voice input needs the page open in its own browser tab — inside this frame the browser blocks the microphone.",
+         insecure:"Voice input only works on a secure (https) address.",
+         denied:"Microphone permission denied — enable microphone access for this page.",
+         nomic:"No microphone found.", nospeech:"Nothing heard — tap the microphone again.",
+         net:"Speech recognition needs internet — please type your question instead.",
+         fail:"Could not access the microphone — please type your question.",
+         novoice:"No voice for this language is installed and no online voice was available — try Edge, or install the language voice in your device speech settings.",
+         notts:"This browser does not support speech playback."}},
+};
+
+/* نوار اعداد حیاتی — به تفکیک زبان و گروه سنی */
+const VITALS = {
+ fa:{
+  adult:[{k:"عمق ماساژ",v:"۵ cm",u:"حداکثر ۶"},{k:"سرعت",v:"۱۰۰–۱۲۰",u:"در دقیقه"},{k:"نسبت",v:"۳۰ : ۲",u:"بدون راه هوایی"},
+        {k:"آدرنالین",v:"۱ mg",u:"هر ۳ تا ۵ دقیقه"},{k:"شوک اول",v:"۱۲۰–۲۰۰ J",u:"بای‌فازیک"},{k:"آمیودارون",v:"۳۰۰ mg",u:"دوز دوم ۱۵۰"}],
+  peds:[{k:"عمق ماساژ",v:"⅓ AP",u:"شیرخوار ۴ · کودک ۵ سانتی‌متر"},{k:"سرعت",v:"۱۰۰–۱۲۰",u:"در دقیقه"},{k:"نسبت",v:"۱۵ : ۲",u:"دو امدادگر · تک‌نفره ۳۰:۲"},
+        {k:"آدرنالین",v:"۰٫۰۱ mg/kg",u:"حداکثر ۱ میلی‌گرم"},{k:"شوک",v:"۲ → ۴ J/kg",u:"حداکثر ۱۰"},{k:"آمیودارون",v:"۵ mg/kg",u:"حداکثر ۳۰۰ میلی‌گرم"}],
+  neonate:[{k:"نسبت",v:"۳ : ۱",u:"۹۰ ماساژ · ۳۰ تنفس"},{k:"شروع ماساژ",v:"HR < ۶۰",u:"پس از ۳۰ ثانیه تهویه"},{k:"شروع تهویه",v:"زیر ۶۰ ثانیه",fa:1,u:"آپنه یا ضربان زیر ۱۰۰"},
+        {k:"آدرنالین",v:"۰٫۰۱–۰٫۰۳ mg/kg",u:"وریدی · تراشه ۰٫۰۵ تا ۰٫۱"},{k:"فشار تهویه",v:"۲۰–۳۰ cmH₂O",u:"۳۰ تا ۶۰ بار در دقیقه"},{k:"دمای هدف",v:"۳۶٫۵–۳۷٫۵ °C",u:"از هیپوترمی پرهیز شود"}]},
+ ar:{
+  adult:[{k:"عمق الضغط",v:"5 cm",u:"بحد أقصى 6"},{k:"السرعة",v:"100–120",u:"في الدقيقة"},{k:"النسبة",v:"30 : 2",u:"بدون مجرى هوائي"},
+        {k:"الأدرينالين",v:"1 mg",u:"كل 3 إلى 5 دقائق"},{k:"الصدمة الأولى",v:"120–200 J",u:"ثنائي الطور"},{k:"الأميودارون",v:"300 mg",u:"الجرعة الثانية 150"}],
+  peds:[{k:"عمق الضغط",v:"⅓ AP",u:"الرضيع 4 · الطفل 5 سم"},{k:"السرعة",v:"100–120",u:"في الدقيقة"},{k:"النسبة",v:"15 : 2",u:"منقذان · منقذ واحد 30:2"},
+        {k:"الأدرينالين",v:"0.01 mg/kg",u:"بحد أقصى 1 ملغم"},{k:"الصدمة",v:"2 → 4 J/kg",u:"بحد أقصى 10"},{k:"الأميودارون",v:"5 mg/kg",u:"بحد أقصى 300 ملغم"}],
+  neonate:[{k:"النسبة",v:"3 : 1",u:"90 ضغطة · 30 نفَس"},{k:"بدء الضغط",v:"HR < 60",u:"بعد 30 ثانية تهوية"},{k:"بدء التهوية",v:"خلال 60 ثانية",fa:1,u:"انقطاع نفس أو نبض تحت 100"},
+        {k:"الأدرينالين",v:"0.01–0.03 mg/kg",u:"وريدي · رغامي 0.05 إلى 0.1"},{k:"ضغط التهوية",v:"20–30 cmH₂O",u:"30 إلى 60 في الدقيقة"},{k:"الحرارة المستهدفة",v:"36.5–37.5 °C",u:"تجنّب انخفاض الحرارة"}]},
+ tr:{
+  adult:[{k:"Bası derinliği",v:"5 cm",u:"en fazla 6"},{k:"Hız",v:"100–120",u:"dakikada"},{k:"Oran",v:"30 : 2",u:"ileri hava yolu yokken"},
+        {k:"Adrenalin",v:"1 mg",u:"her 3–5 dakikada"},{k:"İlk şok",v:"120–200 J",u:"bifazik"},{k:"Amiodaron",v:"300 mg",u:"ikinci doz 150"}],
+  peds:[{k:"Bası derinliği",v:"⅓ AP",u:"bebek 4 · çocuk 5 cm"},{k:"Hız",v:"100–120",u:"dakikada"},{k:"Oran",v:"15 : 2",u:"iki kurtarıcı · tek kişi 30:2"},
+        {k:"Adrenalin",v:"0.01 mg/kg",u:"en fazla 1 mg"},{k:"Şok",v:"2 → 4 J/kg",u:"en fazla 10"},{k:"Amiodaron",v:"5 mg/kg",u:"en fazla 300 mg"}],
+  neonate:[{k:"Oran",v:"3 : 1",u:"90 bası · 30 soluk"},{k:"Basıya başla",v:"HR < 60",u:"30 sn ventilasyondan sonra"},{k:"Ventilasyona başla",v:"60 sn içinde",fa:1,u:"apne veya nabız 100 altı"},
+        {k:"Adrenalin",v:"0.01–0.03 mg/kg",u:"damar içi · trakeal 0.05–0.1"},{k:"Ventilasyon basıncı",v:"20–30 cmH₂O",u:"dakikada 30–60"},{k:"Hedef ısı",v:"36.5–37.5 °C",u:"hipotermiden kaçının"}]},
+ en:{
+  adult:[{k:"Depth",v:"5 cm",u:"max 6"},{k:"Rate",v:"100–120",u:"per minute"},{k:"Ratio",v:"30 : 2",u:"no advanced airway"},
+        {k:"Epinephrine",v:"1 mg",u:"every 3–5 min"},{k:"First shock",v:"120–200 J",u:"biphasic"},{k:"Amiodarone",v:"300 mg",u:"second dose 150"}],
+  peds:[{k:"Depth",v:"⅓ AP",u:"infant 4 · child 5 cm"},{k:"Rate",v:"100–120",u:"per minute"},{k:"Ratio",v:"15 : 2",u:"2 rescuers · single 30:2"},
+        {k:"Epinephrine",v:"0.01 mg/kg",u:"max 1 mg"},{k:"Shock",v:"2 → 4 J/kg",u:"max 10"},{k:"Amiodarone",v:"5 mg/kg",u:"max 300 mg"}],
+  neonate:[{k:"Ratio",v:"3 : 1",u:"90 compressions · 30 breaths"},{k:"Start compressions",v:"HR < 60",u:"after 30 s of ventilation"},{k:"Start ventilation",v:"within 60 s",fa:1,u:"apnea or HR under 100"},
+        {k:"Epinephrine",v:"0.01–0.03 mg/kg",u:"IV · ETT 0.05–0.1"},{k:"Inflation pressure",v:"20–30 cmH₂O",u:"30–60 per minute"},{k:"Target temp",v:"36.5–37.5 °C",u:"avoid hypothermia"}]},
+};
+
+
+const KB = [].concat(KB_BLS, KB_ACLS, KB_PEDS, KB_NEO, KB_POST, KB_SPECIAL, KB_SYS);
+
+const CAT_PT = {bls:"adult",acls:"adult",peds:"peds",neonate:"neonate",post:"adult",special:"adult",system:"adult"};
+const CAT_ORDER = ["bls","acls","peds","neonate","post","special","system"];
+/* متن‌های وابسته به زبان از UI خوانده می‌شوند تا با تعویض زبان همه‌چیز عوض شود */
+function L(){ return UI[state.lang]; }
+function catLabel(c){ return L().cats[c]; }
+function catShort(c){ return L().short[c]; }
+/* پرسش و پاسخ به زبان فعال؛ اگر ترجمه نبود، فارسی نمایش داده می‌شود */
+function tq(e){ const t=e.tr && e.tr[state.lang]; return t? t[0] : e.q; }
+function ta(e){ const t=e.tr && e.tr[state.lang]; return t? t[1] : e.a; }
+function tsp(e){ const t=e.tr && e.tr[state.lang]; return t? (t[2]||t[1]) : (e.sp||e.a); }
+
+/* ===== PERSIAN TEXT NORMALIZATION ===== */
+const FA_DIGITS = {"۰":"0","۱":"1","۲":"2","۳":"3","۴":"4","۵":"5","۶":"6","۷":"7","۸":"8","۹":"9",
+                   "٠":"0","١":"1","٢":"2","٣":"3","٤":"4","٥":"5","٦":"6","٧":"7","٨":"8","٩":"9"};
+function norm(s){
+  return (s||"").toString().toLowerCase()
+    .replace(/[۰-۹٠-٩]/g, d => FA_DIGITS[d])
+    .replace(/‌/g," ")                    // نیم‌فاصله → فاصله (باید پیش از حذف نویسه‌های نامرئی باشد)
+    .replace(/[​-‏‪-‮⁦-⁩]/g,"")   // نویسه‌های نامرئی
+    .replace(/[ً-ْٰـ]/g,"")                 // اعراب و کشیده
+    .replace(/[يى]/g,"ی").replace(/[ك]/g,"ک")
+    .replace(/[ۀةه]/g,"ه").replace(/[أإآا]/g,"ا").replace(/[ؤئء]/g,"")
+    .replace(/[^\p{L}\p{N}]+/gu," ")
+    .trim();
+}
+/* ریشه‌یاب سبک فارسی: پسوندهای رایج را حذف می‌کند تا «دمای»=«دما» و «نوزادان»=«نوزاد» شود */
+const SUFFIX = ["هایی","های","ها","ترین","تر","مان","تان","شان","ات","اش","ام","ان","ی"];
+function stem(w){
+  if(w.length<4) return w;
+  for(const s of SUFFIX) if(w.endsWith(s) && w.length-s.length>=3) return w.slice(0,-s.length);
+  return w;
+}
+/* عبارت‌های چندکلمه‌ای که پس از حذف نیم‌فاصله به دو توکن می‌شکنند */
+const PHRASES = [[" اپی نفرین "," ادرنالین "],[" تاکی کاردی "," تاکیکاردی "],[" برادی کاردی "," برادیکاردی "]];
+/* هم‌معنی‌ها — توکن اصلی حفظ می‌شود و معادل‌ها به آن افزوده می‌شوند (بدون از دست رفتن معنا).
+   نکته: \b در جاوااسکریپت بین حروف فارسی عمل نمی‌کند، پس تطبیق باید توکن‌به‌توکن باشد. */
+const SYN = {
+  "اپینفرین":["ادرنالین"], "epinephrine":["ادرنالین"], "adrenaline":["ادرنالین"], "adrenalin":["ادرنالین"],
+  "فشردن":["ماساژ"], "کمپرشن":["ماساژ"], "compression":["ماساژ"], "compressions":["ماساژ"], "ماساز":["ماساژ"],
+  "ونتیلاسیون":["تنفس","تهویه"], "ventilation":["تنفس","تهویه"], "تهویه":["تنفس"], "نفس":["تنفس"],
+  "دفیبریلاسیون":["شوک"], "defibrillation":["شوک"], "الکتروشوک":["شوک"], "joule":["ژول"],
+  "بچه":["کودک","اطفال"], "کودک":["اطفال"], "اطفال":["کودک"], "pediatric":["کودک","اطفال"], "child":["کودک"],
+  "شیرخواره":["شیرخوار"], "infant":["شیرخوار"],
+  "neonate":["نوزاد"], "neonatal":["نوزاد"], "newborn":["نوزاد"], "nrp":["نوزاد"],
+  "بالغ":["بزرگسال"], "adult":["بزرگسال"],
+  "مقدار":["دوز"], "dose":["دوز"],
+  "خفه":["خفگی"], "choking":["خفگی"], "fbao":["خفگی"],
+  "حامله":["باردار"], "بارداری":["باردار"], "pregnancy":["باردار"], "pregnant":["باردار"],
+  "غرق":["غریق"], "drowning":["غریق"],
+  "پروگنوز":["پیش","اگه"], "prognosis":["پیش","اگه"],
+  "انتوباسیون":["لوله"], "intubation":["لوله"], "لوله‌گذاری":["لوله"],
+  "دما":["حرارت"], "temperature":["دما"],
+};
+/* رشته را به توکن‌های نرمال‌شده، هم‌معنی‌افزوده و ریشه‌یابی‌شده تبدیل می‌کند */
+function tokens(s){
+  let t = " " + norm(s) + " ";
+  for(const [from,to] of PHRASES) t = t.split(from).join(to);
+  const out = [];
+  for(const w of t.trim().split(/\s+/)){
+    if(!w) continue;
+    out.push(stem(w));
+    const syn = SYN[w];
+    if(syn) for(const x of syn) out.push(stem(x));
+  }
+  return [...new Set(out)];
+}
+function expand(s){ return tokens(s).join(" "); }
+
+/* ===== تبدیل متن پاسخ به متن قابل خواندن با صدا =====
+   موتور گفتار «mg/kg» یا «VF» را نامفهوم می‌خواند، پس پیش از خواندن، واحدها و
+   اختصارهای بالینی به معادل فارسی گفتاری تبدیل می‌شوند. ترتیب قواعد مهم است:
+   عبارت‌های بلندتر باید پیش از کوتاه‌ترها جایگزین شوند. */
+/* ===== تبدیل متن پاسخ به متن قابل خواندن با صدا =====
+   موتور گفتار «mg/kg» یا «VF» را نامفهوم می‌خواند، پس واحدها و اختصارهای بالینی
+   به معادل فارسی گفتاری تبدیل می‌شوند. ترتیب مراحل حیاتی است:
+   واحدها باید پیش از قاعدهٔ پرانتزها اجرا شوند، وگرنه قاعدهٔ پرانتز
+   عبارتی مثل «mg/kg (دوز بالاتر)» را با «دوز بالاتر» جایگزین می‌کند و واحدِ دوز حذف می‌شود. */
+
+/* ۱) عبارت‌های انگلیسی که در متن فارسی به‌صورت آزاد آمده‌اند (چندکلمه‌ای‌ها اول) */
+const SPEAK_TERMS = [
+  [/head\s*tilt\s*[–—-]\s*chin\s*lift/gi, "سر عقب، چانه بالا"],
+  [/jaw\s*thrust/gi, "جلو کشیدن فک"],
+  [/abdominal\s*thrusts?/gi, "فشار شکمی"],
+  [/chest\s*thrusts?/gi, "فشار قفسه سینه"],
+  [/back\s*blows?/gi, "ضربه بین دو کتف"],
+  [/blind\s*finger\s*sweep/gi, "جاروب کور با انگشت"],
+  [/ST[-\s]?(?:segment[-\s]*)?elevation/gi, "بالا رفتن قطعه اس تی"],
+  [/(\d+)\s*th\s*percentile/gi, "صدک $1"],
+  [/non-?dihydropyridine/gi, "غیر دی‌هیدروپیریدینی"],
+  [/sustained\s*inflation/gi, "تهویه پایدار"],
+  [/cough\s*CPR/gi, "سی‌پی‌آر سرفه‌ای"],
+  [/safety\s*huddles/gi, "جلسات کوتاه ایمنی"],
+  [/partial\s*backboard|CPR\s*board/gi, "تختهٔ زیر بیمار"],
+  [/Universal\s*TOR/gi, "قاعدهٔ جامع خاتمه احیا"],
+  [/anteroposterior/gi, "قدامی خلفی"], [/anterolateral/gi, "قدامی جانبی"],
+  [/compression-?only/gi, "فقط با ماساژ"], [/bag-?mask/gi, "آمبوبگ"],
+  [/high-?dose\s*insulin/gi, "انسولین با دوز بالا"],
+  [/length-?based\s*tape/gi, "نوار قد"], [/cord\s*milking/gi, "دوشیدن بند ناف"],
+  [/head-?to-?pelvis/gi, "سر تا لگن"], [/auscultation/gi, "سمع"],
+  [/resuscitative\s*delivery/gi, "زایمان احیایی"], [/supine/gi, "به پشت"],
+  [/hyperventilation/gi, "بیش‌تهویه‌ای"], [/sternum/gi, "جناغ"],
+  [/stacked/gi, "پشت سر هم"], [/multimodal/gi, "چندوجهی"],
+  [/regionalized/gi, "منطقه‌ای"], [/Recovery/g, "بهبودی"],
+  [/heel\s*of\s*(one|1)\s*hand/gi, "کف یک دست"],
+  [/pediatric\s*attenuator/gi, "تضعیف‌کنندهٔ اطفال"],
+  [/\binflations?\b/gi, "تنفس"],   // آخر فهرست: نباید پیش از «sustained inflation» اجرا شود
+];
+
+
+/* واحدها و نمادها به زبان فعال. برای هر زبان فقط جدول واژه‌ها فرق می‌کند. */
+const U = {
+ fa:{mgkg:"میلی‌گرم بر کیلوگرم",mlkg:"میلی‌لیتر بر کیلوگرم",mcgkg:"میکروگرم بر کیلوگرم",mgml:"میلی‌گرم بر میلی‌لیتر",
+     mgdl:"میلی‌گرم بر دسی‌لیتر",mgh:"میلی‌گرم در ساعت",jkg:"ژول بر کیلوگرم",mmhg:"میلی‌متر جیوه",cmh2o:"سانتی‌متر آب",
+     degc:"درجه سانتی‌گراد",mg:"میلی‌گرم",ml:"میلی‌لیتر",cm:"سانتی‌متر",j:"ژول",permin:" در دقیقه",pct:" درصد",
+     ge:" مساوی یا بیشتر از ",le:" مساوی یا کمتر از ",lt:" کمتر از ",gt:" بیشتر از ",then:" سپس ",to:" تا ",ratio:" به "},
+ ar:{mgkg:"ملغم لكل كيلوغرام",mlkg:"مليلتر لكل كيلوغرام",mcgkg:"ميكروغرام لكل كيلوغرام",mgml:"ملغم لكل مليلتر",
+     mgdl:"ملغم لكل ديسيلتر",mgh:"ملغم في الساعة",jkg:"جول لكل كيلوغرام",mmhg:"مليمتر زئبقي",cmh2o:"سنتيمتر ماء",
+     degc:"درجة مئوية",mg:"ملغم",ml:"مليلتر",cm:"سنتيمتر",j:"جول",permin:" في الدقيقة",pct:" بالمئة",
+     ge:" أكبر من أو يساوي ",le:" أصغر من أو يساوي ",lt:" أقل من ",gt:" أكثر من ",then:" ثم ",to:" إلى ",ratio:" إلى "},
+ tr:{mgkg:"miligram bölü kilogram",mlkg:"mililitre bölü kilogram",mcgkg:"mikrogram bölü kilogram",mgml:"miligram bölü mililitre",
+     mgdl:"miligram bölü desilitre",mgh:"saatte miligram",jkg:"joule bölü kilogram",mmhg:"milimetre cıva",cmh2o:"santimetre su",
+     degc:"santigrat derece",mg:"miligram",ml:"mililitre",cm:"santimetre",j:"joule",permin:" dakikada",pct:" yüzde",
+     ge:" büyük veya eşit ",le:" küçük veya eşit ",lt:" küçüktür ",gt:" büyüktür ",then:" sonra ",to:" ila ",ratio:" bölü "},
+ en:{mgkg:"milligrams per kilogram",mlkg:"millilitres per kilogram",mcgkg:"micrograms per kilogram",mgml:"milligrams per millilitre",
+     mgdl:"milligrams per decilitre",mgh:"milligrams per hour",jkg:"joules per kilogram",mmhg:"millimetres of mercury",cmh2o:"centimetres of water",
+     degc:"degrees Celsius",mg:"milligrams",ml:"millilitres",cm:"centimetres",j:"joules",permin:" per minute",pct:" percent",
+     ge:" greater than or equal to ",le:" less than or equal to ",lt:" less than ",gt:" greater than ",then:" then ",to:" to ",ratio:" to "},
+};
+function unitRules(lg){ const u=U[lg]||U.fa; return [
+  [/mcg\/kg(\s*per\s*min)?/gi,u.mcgkg],[/mg\/kg/gi,u.mgkg],[/mL\/kg/gi,u.mlkg],[/mg\/dL/gi,u.mgdl],
+  [/mg\/mL/gi,u.mgml],[/mg\/h/gi,u.mgh],[/J\/kg/gi,u.jkg],[/mmHg/gi,u.mmhg],[/cmH[\u20822]O/gi,u.cmh2o],
+  [/°\s*C/g,u.degc],[/\bmg\b/gi,u.mg],[/\bmL\b/gi,u.ml],[/\bcm\b/gi,u.cm],[/(\d)\s*J\b/g,"$1 "+u.j],
+  [/\/min\b/gi,u.permin],[/[%\u066A]/g,u.pct]]; }
+function symbolRules(lg){ const u=U[lg]||U.fa; return [
+  [/\u2265/g,u.ge],[/\u2264/g,u.le],[/</g,u.lt],[/>/g,u.gt],[/\u2192/g,u.then],
+  [/(\d)\s*[\u2013\u2014-]\s*(\d)/g,"$1"+u.to+"$2"],[/(\d)\s*:\s*(\d)/g,"$1"+u.ratio+"$2"],[/[\u2022\u00B7]/g," "]]; }
+
+/* ۲) واحدها — ترکیبی‌ها پیش از ساده‌ها */
+const SPEAK_UNITS = [
+  [/mcg\/kg(\s*per\s*min)?/gi, "میکروگرم بر کیلوگرم"],
+  [/mg\/kg/gi, "میلی‌گرم بر کیلوگرم"], [/mL\/kg/gi, "میلی‌لیتر بر کیلوگرم"],
+  [/mg\/dL/gi, "میلی‌گرم بر دسی‌لیتر"], [/mg\/mL/gi, "میلی‌گرم بر میلی‌لیتر"],
+  [/mg\/h/gi, "میلی‌گرم در ساعت"], [/J\/kg/gi, "ژول بر کیلوگرم"],
+  [/mmHg/gi, "میلی‌متر جیوه"], [/cmH[₂2]O/gi, "سانتی‌متر آب"],
+  [/°\s*C/g, "درجه سانتی‌گراد"], [/\bmg\b/gi, "میلی‌گرم"], [/\bmL\b/gi, "میلی‌لیتر"],
+  [/\bcm\b/gi, "سانتی‌متر"], [/(\d)\s*J\b/g, "$1 ژول"],
+  [/\/min\b/gi, " در دقیقه"], [/[%٪]/g, " درصد"], [/(\d)\s*th\b/gi, "$1اُم"],
+];
+
+/* ۳) اختصارهای بالینی و نشانه‌های کلاس توصیه */
+const SPEAK_ACRONYMS = [
+  [/3:\s*Harm/gi, "کلاس سه، مضر"], [/3:\s*No\s*Benefit/gi, "کلاس سه، بدون فایده"],
+  [/کلاس\s*2a/g, "کلاس دو آ"], [/کلاس\s*2b/g, "کلاس دو ب"],
+  [/\bCOR\b/g, "کلاس توصیه"], [/\bLOE\b/g, "سطح شواهد"],
+  [/ETCO[₂2]/gi, "کربن‌دی‌اکسید بازدمی"], [/SpO[₂2]/gi, "اشباع اکسیژن"],
+  [/PaCO[₂2]/gi, "فشار دی‌اکسید کربن شریانی"], [/PaO[₂2]/gi, "فشار اکسیژن شریانی"],
+  [/FiO[₂2]/gi, "کسر اکسیژن دمی"], [/O[₂2]\b/g, "اکسیژن"],
+  [/\bIV\s*\/\s*IO\b/gi, "وریدی یا داخل استخوانی"],
+  [/\bIV\b/g, "وریدی"], [/\bIO\b/g, "داخل استخوانی"], [/\bETT\b/g, "لوله تراشه"],
+  [/\bUVC\b/g, "کاتتر ورید نافی"], [/\bROSC\b/g, "بازگشت گردش خون خودبه‌خودی"],
+  [/\bpVT\b/g, "تاکی‌کاردی بطنی بدون نبض"], [/\bVF\b/g, "فیبریلاسیون بطنی"],
+  [/\bVT\b/g, "تاکی‌کاردی بطنی"], [/\bSVT\b/g, "اس وی تی"], [/\bPEA\b/g, "فعالیت الکتریکی بدون نبض"],
+  [/\bAsystole\b/gi, "آسیستول"], [/\bAED\b/g, "ای ای دی"],
+  [/\bECG\b/g, "نوار قلب"], [/\bEEG\b/g, "نوار مغز"], [/\bMAP\b/g, "فشار متوسط شریانی"],
+  [/\bTTM\b/g, "کنترل دما"], [/\bCCF\b/g, "کسر زمان ماساژ"], [/\bPIP\b/g, "فشار اوج دمی"],
+  [/\bPEEP\b/g, "پیپ"], [/\bCPAP\b/g, "سی‌پپ"], [/\bFBAO\b/g, "انسداد راه هوایی با جسم خارجی"],
+  [/\bSGA\b/g, "راه هوایی فوق حنجره‌ای"], [/\bETI\b/g, "لوله‌گذاری تراشه"],
+  [/\bHIE\b/g, "انسفالوپاتی هیپوکسیک ایسکمیک"], [/\bLMA\b/g, "ماسک لارنژیال"],
+  [/VA-?ECMO|ECMO|ECLS|ECPR/g, "اکمو"], [/\bILE\b/g, "امولسیون لیپید"],
+  [/\bLAST\b/g, "مسمومیت با بی‌حس‌کننده موضعی"], [/\bCCB\b/g, "مسدودکننده کانال کلسیم"],
+  [/\bPCI\b/g, "آنژیوپلاستی"], [/\bPE\b/g, "آمبولی ریه"], [/\bLUD\b/g, "جابه‌جایی رحم به چپ"],
+  [/\bOHCA\b/g, "ایست قلبی خارج بیمارستانی"], [/\bIHCA\b/g, "ایست قلبی داخل بیمارستانی"],
+  [/\bTOR\b/g, "قواعد خاتمه احیا"], [/\bPPE\b/g, "وسایل حفاظت فردی"],
+  [/\bPOCUS\b/g, "سونوگرافی کنار بالین"], [/\bPOC\b/g, "کنار بالین"],
+  [/\bT-?CPR\b/gi, "احیای با راهنمایی تلفنی"], [/\bCPR\b/g, "سی‌پی‌آر"],
+  [/\bAF\b/g, "فیبریلاسیون دهلیزی"], [/\bRRT\b/g, "تیم پاسخ سریع"],
+  [/\bMET\b/g, "تیم اورژانس پزشکی"], [/\bEWS\b/g, "سیستم هشدار زودهنگام"],
+  [/\bNaCl\b/g, "کلرید سدیم"], [/\bASAP\b/g, "در اسرع وقت"],
+  [/\bPALS\b/g, "پالس"], [/\bBLS\b/g, "احیای پایه"], [/\bALS\b/g, "احیای پیشرفته"],
+  [/\bNRP\b/g, "ان آر پی"], [/\bAHA\b/g, "انجمن قلب آمریکا"], [/\bAAP\b/g, "آکادمی اطفال آمریکا"],
+  [/\bQRS\b/g, "کیو آر اس"], [/\bQT\b/g, "کیو تی"], [/\bST\b/g, "اس تی"],
+  [/\bAV\b/g, "دهلیزی بطنی"], [/\bLV\b/g, "بطن چپ"], [/\bMI\b/g, "سکته قلبی"],
+  [/\bCT\b/g, "سی تی اسکن"], [/\bRCT\b/g, "کارآزمایی بالینی"],
+  [/\bB-NR\b/g, "بی ان آر"], [/\bB-R\b/g, "بی آر"],
+  [/\bC-LD\b/g, "سی ال دی"], [/\bC-EO\b/g, "سی ای او"],
+  [/سطح\s*A\b/g, "سطح آ"], [/سطح\s*B\b/g, "سطح بی"], [/سطح\s*C\b/g, "سطح سی"],
+];
+
+/* ۴) نمادها، بازه‌ها و نسبت‌ها */
+const SPEAK_SYMBOLS = [
+  [/≥/g, " مساوی یا بیشتر از "], [/≤/g, " مساوی یا کمتر از "],
+  [/</g, " کمتر از "], [/>/g, " بیشتر از "], [/→/g, " سپس "],
+  [/(\d)\s*[–—-]\s*(\d)/g, "$1 تا $2"],   // بازه‌ها: ۱۰۰–۱۲۰ ← «۱۰۰ تا ۱۲۰»
+  [/(\d)\s*:\s*(\d)/g, "$1 به $2"],        // نسبت‌ها: ۳۰:۲ ← «۳۰ به ۲»
+  [/[•·]/g, " "],
+];
+
+/* پرانتزهایی که فقط معادل انگلیسی‌اند: روی صفحه مفیدند، در گفتار فقط نویز.
+   این قاعده باید زودتر از همه اجرا شود — پیش از آنکه واحدها و عبارت‌ها فارسی شوند —
+   وگرنه «(back blows)» به فارسی ترجمه می‌شود و کنار ترجمهٔ متن اصلی تکرار می‌گردد.
+   عمداً قاعده‌ای برای «Latin (فارسی)» نداریم: چنین قاعده‌ای در «IV/IO (معادل …)»
+   مسیر تجویز دارو را حذف می‌کرد. */
+const RE_PURE_PAREN = /\s*\([\sA-Za-z0-9.,:'’\-/]+\)/g;
+
+function speechText(html, lg){
+  lg = lg || "fa";
+  let t = (html||"")
+    .replace(/<br\s*\/?>/gi, "، ")
+    .replace(/<[^>]+>/g, "")
+    // نهادهای HTML پیش از قواعد نمادها باز شوند، وگرنه «&gt;» به‌صورت «gt» خوانده می‌شود
+    .replace(/&nbsp;/g," ").replace(/&lt;/g,"<").replace(/&gt;/g,">")
+    .replace(/&ge;/g,"≥").replace(/&le;/g,"≤").replace(/&amp;/g," و ");
+
+  t = t.replace(RE_PURE_PAREN, "");
+  if(lg==="fa"){ for(const [re,to] of SPEAK_TERMS) t = t.replace(re,to); }
+  for(const [re,to] of unitRules(lg))  t = t.replace(re,to);
+  if(lg==="fa") for(const [re,to] of SPEAK_ACRONYMS) t = t.replace(re,to);
+  else t = t.replace(/3:\s*Harm/gi,"Class 3 harm").replace(/3:\s*No\s*Benefit/gi,"Class 3 no benefit");
+  for(const [re,to] of symbolRules(lg)) t = t.replace(re,to);
+
+  return t.replace(/[۰-۹٠-٩]/g, d=>FA_DIGITS[d]).replace(/٫/g,".")
+          .replace(/\s*،\s*،/g,"،").replace(/\s{2,}/g," ").trim();
+}
+
+
+/* واژه‌های پرتکرار و کم‌اطلاع در این حوزه — وزن پایین می‌گیرند تا واژهٔ کلیدی برنده شود */
+const LOW = new Set(["قفسه","سینه","بیمار","چقدر","چند","است","باشد","باید","کنم","کنیم","کرد","چطور",
+  "چه","برای","هست","بگو","بگوی","شود","میشود","انجام","مورد","درباره","حین","موقع","وقت","یک","به","از",
+  "در","با","را","که","این","ایا","ایست","قلب","دار","دارد","کدام","زمان","روش","نحوه","حالت","چیست",
+  "احیا","احیای","cpr","توصیه","استفاده","بدهم","بدم","بده","کن","دهم","شروع","چیه","میشه"]);
+/* پرسش‌های حیاتی که در ابهام باید برنده شوند */
+const CRITICAL = {"sp-pregnancy":1.6,"sp-opioid":1.3,"acls-epi":1.35,"ped-epi":1.35,"neo-epi":1.35,
+  "bls-depth":1.25,"bls-rate":1.25,"bls-ratio":1.25,"acls-energy":1.25,"ped-energy":1.25,
+  "neo-ratio":1.25,"neo-compression-start":1.25,"ped-brady-cpr":1.2,"acls-amiodarone":1.2};
+
+/* ===== SEARCH INDEX ===== */
+/* ترجمه‌ها به هر مدخل چسبانده می‌شوند؛ نمایه شامل همهٔ زبان‌هاست تا جستجو
+   با هر زبانی مدخل درست را پیدا کند، حتی وقتی پاسخ به زبان دیگری نمایش داده می‌شود. */
+KB.forEach(e=>{
+  e.tr = {};
+  for(const lg of ["ar","tr","en"]) if(TRANS[lg] && TRANS[lg][e.id]) e.tr[lg] = TRANS[lg][e.id];
+  const all = [e.q, e.alt||""].concat(Object.values(e.tr).map(t=>t[0]));
+  e._q   = expand(all.join(" "));
+  e._alt = expand((e.alt||"") + " " + Object.values(e.tr).map(t=>t[0]).join(" "));
+  const bodies = [(e.a||"")].concat(Object.values(e.tr).map(t=>t[1]));
+  e._a   = expand(bodies.join(" ").replace(/<[^>]+>/g," "));
+});
+
+/* امتیاز از دو بخش می‌آید: «سؤال + کلیدواژه» که وزن اصلی را دارد، و «متن پاسخ» که فقط
+   نقش تفکیک‌کننده دارد و سقف‌دار است — وگرنه پاسخ‌های بلند به هر جستجویی می‌چسبند. */
+function score(entry, tokens, phrase){
+  let sQ=0, sA=0;
+  if(phrase.length>2){
+    if(entry._q.includes(phrase))   sQ+=140;
+    if(entry._alt.includes(phrase)) sQ+=70;
+  }
+  for(const t of tokens){
+    if(t.length<2) continue;
+    const w = LOW.has(t) ? 0.2 : (t.length>=4 ? 1.5 : 1);  // واژه‌های بلندتر و پراطلاع‌تر مهم‌ترند
+    const word = new RegExp("(^| )"+t+"( |$)");
+    if(word.test(entry._q))        sQ+=28*w;
+    else if(entry._q.includes(t))  sQ+=17*w;
+    if(word.test(entry._alt))      sQ+=13*w;
+    else if(entry._alt.includes(t))sQ+=8*w;
+    if(entry._a.includes(t))       sA+=4*w;
+  }
+  if(!sQ) return 0;                                        // بدون تطابق در سؤال/کلیدواژه، نتیجه نیست
+  return sQ * (CRITICAL[entry.id] || 1) + Math.min(sA, 12);
+}
+
+function search(query, cat, pt){
+  const phrase = expand(query);
+  const tokens = phrase.split(" ").filter(t=>t.length>1);
+  let pool = KB.filter(e => cat==="all" || e.cat===cat);
+  if(!tokens.length){
+    // حالت مرور: مرتب بر اساس گروه سنی انتخاب‌شده
+    const pri = cat==="all" ? (e=>CAT_PT[e.cat]===pt?0:1) : (()=>0);
+    return pool.slice().sort((a,b)=>pri(a)-pri(b)).map(e=>({e,s:0}));
+  }
+  const hits=[];
+  for(const e of pool){
+    let s = score(e, tokens, phrase);
+    if(s<=0) continue;
+    if(CAT_PT[e.cat]===pt) s*=1.35;                       // اولویت با گروه سنی انتخاب‌شده
+    hits.push({e,s});
+  }
+  return hits.sort((a,b)=>b.s-a.s);
+}
+
+/* ===== RENDER ===== */
+const $ = id => document.getElementById(id);
+let state = {pt:"adult", cat:"all", q:"", lang:"fa", open:new Set()};
+
+function corClass(cor){
+  const c=(cor||"").trim();
+  if(c.startsWith("3")) return "cor-3";
+  if(c.startsWith("2")) return "cor-2";
+  if(c.startsWith("1")) return "cor-1";
+  return "";
+}
+
+function renderReadout(){
+  document.body.dataset.pt = state.pt;
+  $("readout").innerHTML = VITALS[state.lang][state.pt].map(v=>
+    `<div class="vt"><div class="vt-k">${v.k}</div>`+
+    `<div class="vt-v${v.fa?"":" mono"}">${v.v}</div>`+
+    `<div class="vt-u">${v.u}</div></div>`
+  ).join("");
+}
+
+function renderChips(){
+  const counts={}; KB.forEach(e=>counts[e.cat]=(counts[e.cat]||0)+1);
+  $("chips").innerHTML =
+    `<button class="chip" data-cat="all" aria-pressed="${state.cat==="all"}">${L().all} (${KB.length})</button>`+
+    CAT_ORDER.map(c=>`<button class="chip" data-cat="${c}" aria-pressed="${state.cat===c}">${catShort(c)} (${counts[c]||0})</button>`).join("");
+}
+
+function renderResults(){
+  const hits = search(state.q, state.cat, state.pt);
+  const browsing = !expand(state.q).split(" ").filter(t=>t.length>1).length;
+  const list = browsing && state.cat==="all" ? hits.slice(0,10) : hits;
+
+  $("sect").textContent = browsing
+    ? (state.cat==="all" ? L().quick : catLabel(state.cat) + " — " + L().items(hits.length))
+    : (hits.length ? L().found(hits.length) : L().none);
+
+  if(!list.length){
+    $("results").innerHTML =
+      `<div class="empty"><strong>${L().emptyT}</strong><span>${L().emptyS}</span></div>`;
+    return;
+  }
+
+  // اولین نتیجهٔ جستجو همیشه باز است تا حین احیا فوراً خوانده شود
+  $("results").innerHTML = list.map(({e},i)=>{
+    const open = state.open.has(e.id) || (!browsing && i===0);
+    const harm = /3:\s*harm/i.test(e.cor||"") || /Harm/.test(e.cor||"");
+    return `<div class="card${harm?" harm":""}" data-cat="${e.cat}" data-id="${e.id}"${open?" open":""}>
+      <button class="card-top" aria-expanded="${open}">
+        <span class="card-q"><span class="card-cat">${catShort(e.cat)}</span>${tq(e)}</span>
+        <span class="speak-btn" role="button" tabindex="0" aria-label="${L().speakLbl}">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.4L12 5.4v13.2L7.4 14.5H4z"/><path d="M15.6 9.4a3.6 3.6 0 010 5.2"/><path d="M18.2 6.8a7.3 7.3 0 010 10.4"/></svg>
+        </span>
+        <span class="caret" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 9.5l6 6 6-6"/></svg></span>
+      </button>
+      <div class="card-body">
+        <div class="answer">${ta(e)}</div>
+        <div class="meta">
+          ${e.cor && e.cor!=="—" ? `<span class="badge ${corClass(e.cor)}"><em>COR</em> ${e.cor}</span>`:""}
+          ${e.loe && e.loe!=="—" ? `<span class="badge"><em>LOE</em> ${e.loe}</span>`:""}
+          <span class="src">${e.src}</span>
+        </div>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+function renderAll(){ renderReadout(); renderChips(); renderResults(); }
+
+/* ===== EVENTS ===== */
+document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{
+  state.pt = t.dataset.pt;
+  document.querySelectorAll(".tab").forEach(x=>x.setAttribute("aria-pressed", String(x===t)));
+  renderReadout(); renderResults();
+}));
+
+$("chips").addEventListener("click", ev=>{
+  const c = ev.target.closest(".chip"); if(!c) return;
+  state.cat = c.dataset.cat; state.open.clear();
+  renderChips(); renderResults();
+});
+
+$("results").addEventListener("click", ev=>{
+  const btn = ev.target.closest(".card-top"); if(!btn) return;
+  const card = btn.closest(".card"), id = card.dataset.id;
+  const nowOpen = !card.hasAttribute("open");
+  card.toggleAttribute("open", nowOpen);
+  btn.setAttribute("aria-expanded", String(nowOpen));
+  if(nowOpen) state.open.add(id); else state.open.delete(id);
+});
+
+let typeTimer;
+$("q").addEventListener("input", ()=>{
+  state.q = $("q").value;
+  document.body.classList.toggle("has-q", !!state.q);
+  clearTimeout(typeTimer);
+  typeTimer = setTimeout(()=>{ state.open.clear(); autoLang(state.q); renderResults(); }, 110);
+});
+$("clear").addEventListener("click", ()=>{
+  $("q").value=""; state.q=""; state.open.clear();
+  document.body.classList.remove("has-q");
+  renderResults(); $("q").focus();
+});
+
+/* ===== THEME ===== */
+const SUN = '<circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4"/>';
+const MOON = '<path d="M20 14.2A8.2 8.2 0 019.8 4 8.4 8.4 0 1020 14.2z"/>';
+function applyTheme(t){
+  if(t) document.documentElement.setAttribute("data-theme", t);
+  else document.documentElement.removeAttribute("data-theme");
+  const dark = t==="dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches);
+  $("theme-icon").innerHTML = dark ? SUN : MOON;
+}
+let stored=null;
+try{ stored = localStorage.getItem("cpr-theme"); }catch(e){}
+applyTheme(stored);
+$("theme").addEventListener("click", ()=>{
+  const dark = document.documentElement.getAttribute("data-theme")==="dark"
+    || (!document.documentElement.hasAttribute("data-theme") && matchMedia("(prefers-color-scheme: dark)").matches);
+  const next = dark ? "light" : "dark";
+  applyTheme(next);
+  try{ localStorage.setItem("cpr-theme", next); }catch(e){}
+});
+
+/* ===== محیط: آیا پرسش صوتی در این زمینه اصلاً ممکن است؟ =====
+   نکتهٔ کلیدی: داخل یک قاب (iframe) که مجوز میکروفون نگرفته باشد،
+   navigator.mediaDevices اصلاً تعریف نشده است — در حالی که شیء SpeechRecognition
+   همچنان دیده می‌شود. بدون این بررسی، برنامه «در حال شنیدن» نشان می‌دهد و
+   هرگز صدایی نمی‌گیرد. پس پیش از هر چیز، خودِ محیط را تشخیص می‌دهیم. */
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+const EMBEDDED = (()=>{ try{ return window.self !== window.top; }catch(e){ return true; } })();
+const HAS_MEDIA = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+
+function micEnvironment(){
+  if(!SR)         return {ok:false, code:"nosr"};
+  if(!HAS_MEDIA)  return {ok:false, code: EMBEDDED ? "framed" : "insecure"};
+  if(!window.isSecureContext && location.protocol!=="file:") return {ok:false, code:"insecure"};
+  return {ok:true};
+}
+/* پیام‌ها از جدول زبان فعال خوانده می‌شوند */
+function M(k){ return UI[state.lang].mic[k]; }
+
+const mic = $("mic"), listenTxt = $("listening-txt"), banner = $("mic-banner");
+const micFab = $("mic-fab");
+let rec = null, listening = false;
+
+/* دکمهٔ شناور بازتابِ دکمهٔ اصلی است: یک وضعیت، دو نمایش */
+function micState(v){ mic.dataset.state = v; if(micFab) micFab.dataset.state = v; }
+if(micFab){
+  micFab.addEventListener("click", ()=>mic.click());
+  addEventListener("scroll", ()=>{
+    micFab.classList.toggle("show", (window.scrollY || 0) > 220);
+  }, {passive:true});
+}
+
+function showBanner(code){
+  $("mic-banner-txt").textContent = M(code) || M("nosr");
+  banner.hidden = false;
+  // فقط وقتی صفحه در قاب است، دکمهٔ «باز کردن در تب جدید» معنا دارد
+  const a = $("open-tab");
+  if(code==="framed" && /^https?:$/.test(location.protocol)){ a.href = location.href; a.hidden = false; }
+  else a.hidden = true;
+}
+function flash(msg, ms){
+  listenTxt.textContent = msg;
+  document.body.classList.add("listening");
+  clearTimeout(flash._t);
+  flash._t = setTimeout(()=>document.body.classList.remove("listening"), ms||4500);
+}
+
+const micEnv = micEnvironment();
+const env = micEnv;
+if(!env.ok){
+  micState("off");
+  mic.setAttribute("aria-label", M(env.code));
+  showBanner(env.code);
+  mic.addEventListener("click", ()=>flash(M(env.code), 6000));
+}else{
+  mic.addEventListener("click", async ()=>{
+    if(listening){ try{ rec.stop(); }catch(e){} return; }
+    stopSpeaking();                       // اگر در حال خواندن پاسخ است، اول ساکت شود
+    // اجازهٔ میکروفون را صریح می‌گیریم تا خطای واقعی معلوم شود
+    try{
+      const s = await navigator.mediaDevices.getUserMedia({audio:true});
+      s.getTracks().forEach(t=>t.stop());
+    }catch(e){
+      const m = e && e.name === "NotAllowedError" ? M("denied")
+              : e && e.name === "NotFoundError"     ? M("nomic")
+              : M("fail");
+      flash(m, 7000); return;
+    }
+    startRecognition();
+  });
+}
+
+function startRecognition(){
+  rec = new SR();
+  rec.lang = LANGS[state.lang].speech;
+  rec.interimResults = true;
+  rec.continuous = false;
+  rec.maxAlternatives = 3;
+  let heard = "";
+
+  rec.onstart = ()=>{
+    listening = true; micState("on");
+    document.body.classList.add("listening");
+    listenTxt.textContent = UI[state.lang].listening;
+  };
+  rec.onresult = ev=>{
+    let txt = "";
+    for(let i = ev.resultIndex; i < ev.results.length; i++) txt += ev.results[i][0].transcript;
+    txt = txt.trim(); if(!txt) return;
+    heard = txt;
+    $("q").value = txt; state.q = txt;
+    document.body.classList.add("has-q");
+    listenTxt.textContent = "«" + txt + "»";
+    state.open.clear(); autoLang(txt); renderResults();
+  };
+  rec.onerror = ev=>{
+    const m = {"not-allowed":M("denied"),"service-not-allowed":M("fail"),"no-speech":M("nospeech"),
+               "audio-capture":M("nomic"),"network":M("net"),"aborted":""}[ev.error];
+    listening = false; micState("");
+    if(m) flash(m, 6000); else document.body.classList.remove("listening");
+  };
+  rec.onend = ()=>{
+    listening = false; micState("");
+    // پس از شنیدن سؤال، پاسخ برتر بلافاصله خوانده می‌شود (حالت بدون نگاه به صفحه)
+    if(heard && autoSpeak) speakTop();
+    setTimeout(()=>{ if(!listening) document.body.classList.remove("listening"); }, 1600);
+  };
+  try{ rec.start(); }
+  catch(e){ flash(M("fail"), 4500); }
+}
+
+/* ===== پخش صوتی پاسخ =====
+   سه لایه، به‌ترتیب امتحان می‌شوند:
+     ۱) صدای بومیِ همان زبان که روی دستگاه نصب است (بهترین حالت، بدون اینترنت)؛
+     ۲) اگر نبود، صدای آنلاینِ همان زبان؛
+     ۳) اگر هیچ‌کدام نشد، خواندن با موتور پیش‌فرض به‌همراه هشدار.
+   لایهٔ دوم برای فارسی حیاتی است: بسیاری از ویندوزها و اندرویدها هیچ صدای فارسی
+   نصب‌شده ندارند و بدون آن، پاسخ فارسی اصلاً خوانده نمی‌شد. */
+const synth = window.speechSynthesis;
+let autoSpeak = true;
+try{ const v = localStorage.getItem("cpr-autospeak"); if(v !== null) autoSpeak = v === "1"; }catch(e){}
+
+/* فهرست صداها روی هر سه سکو با تأخیر پر می‌شود؛ یک‌بار خواندن کافی نیست:
+   روی اندروید و کروم دسکتاپ، getVoices() در نخستین فراخوانی آرایهٔ خالی می‌دهد. */
+let VOICES = [];
+function loadVoices(){ if(synth){ try{ VOICES = synth.getVoices() || []; }catch(e){ VOICES = []; } } }
+loadVoices();
+if(synth && "onvoiceschanged" in synth) synth.onvoiceschanged = loadVoices;
+(function pollVoices(n){
+  if(!synth || VOICES.length || n > 24) return;
+  setTimeout(()=>{ loadVoices(); pollVoices(n+1); }, 250);
+})(0);
+
+/* هم برچسب زبان و هم نامِ صدا بررسی می‌شود: بعضی موتورها برچسب را «fa_IR»،
+   بعضی «per» می‌دهند و بعضی اصلاً درست نمی‌دهند و فقط از نام صدا می‌شود فهمید. */
+const VOICE_TAG  = {fa:/^(fa|per|fas)([-_]|$)/i, ar:/^ar([-_]|$)/i, tr:/^tr([-_]|$)/i, en:/^en([-_]|$)/i};
+const VOICE_NAME = {fa:/(persian|farsi|iran|dari|فارسی)/i, ar:/(arabic|عرب)/i, tr:/(turkish|türk|turk)/i, en:/english/i};
+
+function pickVoice(code){
+  code = code || state.lang;
+  if(!synth) return null;
+  if(!VOICES.length) loadVoices();
+  let list = VOICES.filter(v => VOICE_TAG[code].test(v.lang || ""));
+  if(!list.length) list = VOICES.filter(v => VOICE_NAME[code].test(v.name || ""));
+  if(!list.length) return null;
+  // صداهای «طبیعی/Neural» تلفظ فارسی به‌مراتب روشن‌تری دارند؛ اول آن‌ها
+  const rank = v => (/natural|neural|premium|enhanced/i.test(v.name||"") ? 0 : 1)
+                  + (v.localService ? 0 : .4) + (v.default ? -.2 : 0);
+  return list.slice().sort((a,b)=>rank(a)-rank(b))[0];
+}
+
+/* موتورهای گفتار متن بلند را نیمه‌کاره رها می‌کنند (کروم حدود ۱۵ ثانیه، صدای
+   آنلاین حدود ۲۰۰ نویسه). متن از روی نقطه‌گذاری به تکه‌های کوتاه شکسته می‌شود. */
+function chunkText(t, max){
+  max = max || 170;
+  const parts = String(t||"").replace(/\s+/g," ").trim().split(/([.!?؟،؛:])/);
+  const sents = [];
+  for(let i=0;i<parts.length;i+=2){
+    const one = ((parts[i]||"") + (parts[i+1]||"")).trim();
+    if(one) sents.push(one);
+  }
+  const out = []; let buf = "";
+  for(let sent of sents){
+    while(sent.length > max){                       // جملهٔ بلندِ بی‌نقطه: از نزدیک‌ترین فاصله
+      let cut = sent.lastIndexOf(" ", max); if(cut < 40) cut = max;
+      out.push(sent.slice(0,cut).trim()); sent = sent.slice(cut).trim();
+    }
+    if(buf && (buf + " " + sent).length > max){ out.push(buf); buf = sent; }
+    else buf = buf ? buf + " " + sent : sent;
+  }
+  if(buf) out.push(buf);
+  return out.filter(Boolean);
+}
+
+let speakToken = 0;          // هر درخواست تازه، درخواست پیشین را باطل می‌کند
+let ttsAudio = null;         // پخش‌کنندهٔ لایهٔ دوم (صدای آنلاین)
+let voiceWarned = false;
+
+function stopSpeaking(){
+  speakToken++;
+  if(synth) try{ synth.cancel(); }catch(e){}
+  if(ttsAudio){ try{ ttsAudio.onended = ttsAudio.onerror = null; ttsAudio.pause(); }catch(e){} }
+  document.querySelectorAll(".card.speaking").forEach(c=>c.classList.remove("speaking"));
+}
+
+/* iOS و بخشی از اندرویدها پخش صدا را فقط پس از نخستین لمس کاربر اجازه می‌دهند.
+   با نخستین تماس، هر دو موتور (گفتار و صوت) یک‌بار بی‌صدا باز می‌شوند. */
+const SILENT_WAV = "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAgD4AAAB9AAACABAAZGF0YQAAAAA=";
+let audioUnlocked = false;
+function unlockAudio(){
+  if(audioUnlocked) return; audioUnlocked = true;
+  try{ if(synth){ const u = new SpeechSynthesisUtterance(" "); u.volume = 0; synth.speak(u); } }catch(e){}
+  try{
+    ttsAudio = ttsAudio || new Audio();
+    ttsAudio.src = SILENT_WAV;
+    const p = ttsAudio.play(); if(p && p.catch) p.catch(()=>{});
+  }catch(e){}
+}
+["pointerdown","touchend","keydown"].forEach(ev =>
+  document.addEventListener(ev, unlockAudio, {once:true, passive:true}));
+
+/* لایهٔ دوم: وقتی صدای بومی نیست، متن به سرویس گفتارِ آنلاین سپرده می‌شود.
+   نتیجه به done() گزارش می‌شود تا در صورت شکست، لایهٔ سوم اجرا شود. */
+function onlineTTS(chunks, lang, token, done){
+  if(!chunks.length || navigator.onLine === false){ done(false); return; }
+  try{ ttsAudio = ttsAudio || new Audio(); }catch(e){ done(false); return; }
+  const a = ttsAudio;
+  let i = 0, played = false;
+  a.onended = a.onerror = null;
+  const next = ()=>{
+    if(token !== speakToken) return;
+    if(i >= chunks.length){ done(true); return; }
+    const txt = chunks[i++];
+    a.src = "https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&ttsspeed=0.92&tl="
+          + encodeURIComponent(lang) + "&q=" + encodeURIComponent(txt);
+    a.onended = ()=>{ played = true; next(); };
+    a.onerror = ()=>{ if(token === speakToken) done(played); };
+    const p = a.play();
+    if(p && p.catch) p.catch(()=>{ if(token === speakToken) done(played); });
+  };
+  next();
+}
+
+/* لایهٔ یک و سه: خواندن با موتور خودِ مرورگر، تکه‌به‌تکه */
+function nativeSpeak(chunks, voice, langTag, token, card){
+  if(!synth){ if(card) card.classList.remove("speaking"); return; }
+  let i = 0;
+  const finish = ()=>{ if(card && token === speakToken) card.classList.remove("speaking"); };
+  const next = ()=>{
+    if(token !== speakToken) return;
+    if(i >= chunks.length){ finish(); return; }
+    const u = new SpeechSynthesisUtterance(chunks[i++]);
+    u.lang = voice ? voice.lang : langTag;
+    if(voice) u.voice = voice;
+    u.rate = .95; u.pitch = 1; u.volume = 1;
+    u.onend = next;
+    u.onerror = next;
+    try{ synth.speak(u); }catch(e){ finish(); }
+  };
+  setTimeout(next, 60);   // کروم اگر بی‌درنگ پس از cancel() صدا بزنی، ساکت می‌ماند
+}
+
+function speak(entry, card){
+  stopSpeaking();
+  const token = speakToken;
+  const lg = state.lang, tag = LANGS[lg].speech;
+  // اول خودِ سؤال خوانده می‌شود تا کاربر مطمئن شود پاسخِ درست را می‌شنود
+  // entry.sp: متن گفتاری دست‌نویس، برای پاسخ‌هایی که تبدیل خودکارشان خوب خوانده نمی‌شود
+  const text = speechText(tq(entry), lg) + ". " + speechText(tsp(entry), lg);
+  if(card) card.classList.add("speaking");
+  const finish = ()=>{ if(card && token === speakToken) card.classList.remove("speaking"); };
+
+  const voice = pickVoice(lg);
+  if(voice && synth){ nativeSpeak(chunkText(text), voice, tag, token, card); return; }
+
+  onlineTTS(chunkText(text, 190), lg, token, ok=>{
+    if(token !== speakToken) return;
+    if(ok){ finish(); return; }
+    if(!synth){ finish(); flash(M("notts"), 5000); return; }
+    if(!voiceWarned){ voiceWarned = true; flash(M("novoice"), 7000); }
+    nativeSpeak(chunkText(text), null, tag, token, card);   // آخرین تلاش
+  });
+}
+
+function speakTop(){
+  const card = document.querySelector(".card");
+  if(!card) return;
+  const entry = KB.find(e=>e.id === card.dataset.id);
+  if(entry) speak(entry, card);
+}
+
+/* دکمهٔ بلندگو روی هر کارت */
+$("results").addEventListener("click", ev=>{
+  const btn = ev.target.closest(".speak-btn"); if(!btn) return;
+  ev.stopPropagation();
+  const card = btn.closest(".card");
+  if(card.classList.contains("speaking")){ stopSpeaking(); return; }
+  const entry = KB.find(e=>e.id === card.dataset.id);
+  if(entry){ card.setAttribute("open",""); card.querySelector(".card-top").setAttribute("aria-expanded","true"); state.open.add(entry.id); speak(entry, card); }
+}, true);
+
+/* کلید خواندن خودکار */
+const autoBtn = $("autospeak");
+function paintAuto(){
+  autoBtn.setAttribute("aria-pressed", String(autoSpeak));
+  autoBtn.setAttribute("aria-label", autoSpeak ? "خواندن خودکار پاسخ: روشن" : "خواندن خودکار پاسخ: خاموش");
+}
+paintAuto();
+autoBtn.addEventListener("click", ()=>{
+  autoSpeak = !autoSpeak;
+  if(!autoSpeak) stopSpeaking();
+  try{ localStorage.setItem("cpr-autospeak", autoSpeak ? "1" : "0"); }catch(e){}
+  paintAuto();
+  flash(autoSpeak ? UI[state.lang].autoOn : UI[state.lang].autoOff, 2200);
+});
+
+/* با Enter روی سؤال تایپ‌شده هم پاسخ خوانده شود */
+$("q").addEventListener("keydown", ev=>{
+  if(ev.key === "Enter"){
+    ev.preventDefault();
+    $("q").blur();
+    renderResults();
+    if(autoSpeak) speakTop();
+  }
+});
+
+
+/* ===== زبان ===== */
+/* «به هر زبانی بپرسی، به همان زبان می‌شنوی»: زبان پرسش از روی خطِ نوشتار تشخیص
+   داده می‌شود، نه واژه‌ها. حرف‌های پ چ ژ گ ک ی تنها در فارسی‌اند و آن را از عربی
+   جدا می‌کنند. متن لاتین عمداً زبان را عوض نمی‌کند — یک واژهٔ انگلیسی مانند
+   «epinephrine» داخل جملهٔ فارسی نباید کل رابط را انگلیسی کند. */
+const RE_FA_ONLY = /[\u067E\u0686\u0698\u06AF\u06A9\u06CC\u200C]/;              // پ چ ژ گ ک ی و نیم‌فاصله
+const RE_AR_ONLY = /[\u064A\u0643\u0629\u0649\u0623\u0625\u0624\u0626]/;   // ي ك ة ى أ إ ؤ ئ
+const RE_TR_ONLY = /[çğışöüÇĞİŞÖÜ]/;
+function detectLang(t){
+  if(!t) return null;
+  /* فقط نشانهٔ قطعیِ هر خط پذیرفته می‌شود. عبارتی که هیچ حرف اختصاصی ندارد —
+     مثل «دوز آدرنالین» که همهٔ حرف‌هایش میان فارسی و عربی مشترک است — بی‌پاسخ
+     می‌ماند تا زبان انتخاب‌شدهٔ کاربر بی‌جهت عوض نشود. */
+  if(RE_FA_ONLY.test(t)) return "fa";
+  if(RE_AR_ONLY.test(t)) return "ar";
+  if(RE_TR_ONLY.test(t)) return "tr";
+  return null;
+}
+function autoLang(t){
+  const d = detectLang(t);
+  if(!d || d === state.lang || !COMPLETE.includes(d)) return false;
+  stopSpeaking();
+  state.lang = d;
+  try{ localStorage.setItem("cpr-lang", d); }catch(e){}
+  $("lang").value = d;
+  applyLang();
+  return true;
+}
+
+function applyLang(){
+  const L0 = UI[state.lang], cfg = LANGS[state.lang];
+  document.documentElement.setAttribute("dir", cfg.dir);
+  document.documentElement.setAttribute("lang", state.lang);
+  document.body.style.direction = cfg.dir;
+  document.title = L0.title;
+  $("brand-h1").textContent = L0.title;
+  $("brand-p").textContent  = L0.sub;
+  $("q").placeholder = L0.ph;
+  $("lang").setAttribute("aria-label", L0.langLbl);
+  const tabTxt = {adult:[L0.adult,L0.adultSub], peds:[L0.peds,L0.pedsSub], neonate:[L0.neo,L0.neoSub]};
+  document.querySelectorAll(".tab").forEach(t=>{
+    const [a,b] = tabTxt[t.dataset.pt];
+    t.querySelector("strong").textContent = a;
+    t.querySelector("span").textContent = b;
+  });
+  $("open-tab").textContent = L0.openTab;
+  $("legend").innerHTML = L0.legend.map(([k,v])=>`<div><b>${k}</b><span>${v}</span></div>`).join("");
+  $("note").innerHTML = L0.note1 + "<br>" + L0.note2 + "<br>" + L0.note3;
+  if(!listening) $("listening-txt").textContent = L0.listening;
+  if(micEnv && !micEnv.ok) $("mic-banner-txt").textContent = L0.mic[micEnv.code] || L0.mic.nosr;
+  renderAll();
+}
+/* فقط زبان‌هایی عرضه می‌شوند که همهٔ ۱۳۰ پاسخ را دارند — یک زبان نیمه‌ترجمه
+   حین احیا خطرناک است، چون کاربر نمی‌داند کدام پاسخ به زبان دیگری برگشته. */
+const COMPLETE = Object.keys(LANGS).filter(k => k==="fa" || KB.every(e=>e.tr && e.tr[k]));
+$("lang").innerHTML = COMPLETE.map(k=>`<option value="${k}">${LANGS[k].name}</option>`).join("");
+if(!COMPLETE.includes(state.lang)) state.lang = "fa";
+try{ const sl = localStorage.getItem("cpr-lang"); if(sl && COMPLETE.includes(sl)) state.lang = sl; }catch(e){}
+$("lang").value = state.lang;
+$("lang").addEventListener("change", ()=>{
+  stopSpeaking();
+  state.lang = $("lang").value;
+  try{ localStorage.setItem("cpr-lang", state.lang); }catch(e){}
+  state.open.clear();
+  applyLang();
+});
+
+applyLang();
+</script>
+</body>
+</html>
