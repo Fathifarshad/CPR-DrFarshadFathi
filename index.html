@@ -1352,6 +1352,8 @@ const UI = {
     found:n=>`${n} پاسخ یافت شد`, none:"پاسخی یافت نشد", items:n=>`${n} مورد`,
     emptyT:"پاسخی برای این عبارت پیدا نشد",
     emptyS:"عبارت کوتاه‌تر یا کلیدواژهٔ اصلی را امتحان کنید — مثلاً «عمق ماساژ»، «دوز آدرنالین» یا «انرژی شوک».",
+    noneSpoken:"سؤالتان را نگرفتم. دوباره روی میکروفون بزنید و کوتاه‌تر بپرسید، مثلاً: دوز آدرنالین.",
+    micTitle:"پرسش صوتی — به فارسی بپرسید",
     listening:"در حال شنیدن… سؤالتان را بگویید", speakLbl:"خواندن پاسخ با صدا",
     autoOn:"خواندن خودکار پاسخ روشن شد", autoOff:"خواندن خودکار پاسخ خاموش شد",
     openTab:"باز کردن در تب جدید ↗", langLbl:"زبان پاسخ‌ها",
@@ -1380,6 +1382,8 @@ const UI = {
     found:n=>`${n} إجابة`, none:"لا توجد إجابة", items:n=>`${n} بند`,
     emptyT:"لم يتم العثور على إجابة",
     emptyS:"جرّب عبارة أقصر أو الكلمة المفتاحية — مثل «عمق الضغطات» أو «جرعة الأدرينالين».",
+    noneSpoken:"لم أفهم سؤالك. اضغط الميكروفون مرة أخرى واسأل بعبارة أقصر، مثل: جرعة الأدرينالين.",
+    micTitle:"سؤال صوتي — اسأل بالعربية",
     listening:"جارٍ الاستماع… تفضّل بسؤالك", speakLbl:"قراءة الإجابة صوتياً",
     autoOn:"تم تفعيل القراءة التلقائية", autoOff:"تم إيقاف القراءة التلقائية",
     openTab:"افتح في تبويب جديد ↗", langLbl:"لغة الإجابات",
@@ -1408,6 +1412,8 @@ const UI = {
     found:n=>`${n} yanıt bulundu`, none:"Yanıt bulunamadı", items:n=>`${n} kayıt`,
     emptyT:"Bu ifade için yanıt bulunamadı",
     emptyS:"Daha kısa bir ifade veya anahtar kelime deneyin — örn. «bası derinliği», «adrenalin dozu».",
+    noneSpoken:"Sorunuzu anlayamadım. Mikrofona tekrar dokunun ve daha kısa sorun, örneğin: adrenalin dozu.",
+    micTitle:"Sesli soru — Türkçe sorun",
     listening:"Dinleniyor… sorunuzu söyleyin", speakLbl:"Yanıtı sesli oku",
     autoOn:"Otomatik okuma açıldı", autoOff:"Otomatik okuma kapatıldı",
     openTab:"Yeni sekmede aç ↗", langLbl:"Yanıt dili",
@@ -1436,6 +1442,8 @@ const UI = {
     found:n=>`${n} answers found`, none:"No answer found", items:n=>`${n} entries`,
     emptyT:"No answer found for this phrase",
     emptyS:"Try a shorter phrase or the key term — e.g. “compression depth”, “epinephrine dose”, “shock energy”.",
+    noneSpoken:"I did not catch your question. Tap the microphone again and ask something shorter, for example: epinephrine dose.",
+    micTitle:"Voice question — ask in English",
     listening:"Listening… say your question", speakLbl:"Read answer aloud",
     autoOn:"Auto-read turned on", autoOff:"Auto-read turned off",
     openTab:"Open in a new tab ↗", langLbl:"Answer language",
@@ -2006,11 +2014,12 @@ function startRecognition(){
                "audio-capture":M("nomic"),"network":M("net"),"aborted":""}[ev.error];
     listening = false; micState("");
     if(m) flash(m, 6000); else document.body.classList.remove("listening");
+    if(ev.error === "no-speech") speakPlain(M("nospeech"));
   };
   rec.onend = ()=>{
     listening = false; micState("");
     // پس از شنیدن سؤال، پاسخ برتر بلافاصله خوانده می‌شود (حالت بدون نگاه به صفحه)
-    if(heard && autoSpeak) speakTop();
+    if(heard) answerAloud();
     setTimeout(()=>{ if(!listening) document.body.classList.remove("listening"); }, 1600);
   };
   try{ rec.start(); }
@@ -2148,13 +2157,11 @@ function nativeSpeak(chunks, voice, langTag, token, card){
   setTimeout(next, 60);   // کروم اگر بی‌درنگ پس از cancel() صدا بزنی، ساکت می‌ماند
 }
 
-function speak(entry, card){
+/* هستهٔ پخش: هر متنی — پاسخ گایدلاین یا یک پیام کوتاه — از همین زنجیره می‌گذرد */
+function speakChain(text, card){
   stopSpeaking();
   const token = speakToken;
   const lg = state.lang, tag = LANGS[lg].speech;
-  // اول خودِ سؤال خوانده می‌شود تا کاربر مطمئن شود پاسخِ درست را می‌شنود
-  // entry.sp: متن گفتاری دست‌نویس، برای پاسخ‌هایی که تبدیل خودکارشان خوب خوانده نمی‌شود
-  const text = speechText(tq(entry), lg) + ". " + speechText(tsp(entry), lg);
   if(card) card.classList.add("speaking");
   const finish = ()=>{ if(card && token === speakToken) card.classList.remove("speaking"); };
 
@@ -2168,6 +2175,26 @@ function speak(entry, card){
     if(!voiceWarned){ voiceWarned = true; flash(M("novoice"), 7000); }
     nativeSpeak(chunkText(text), null, tag, token, card);   // آخرین تلاش
   });
+}
+
+function speak(entry, card){
+  const lg = state.lang;
+  // اول خودِ سؤال خوانده می‌شود تا کاربر مطمئن شود پاسخِ درست را می‌شنود
+  // entry.sp: متن گفتاری دست‌نویس، برای پاسخ‌هایی که تبدیل خودکارشان خوب خوانده نمی‌شود
+  speakChain(speechText(tq(entry), lg) + ". " + speechText(tsp(entry), lg), card);
+}
+
+/* پیام‌های خودِ برنامه (نه پاسخ‌ها) هم به زبان جاری خوانده می‌شوند */
+function speakPlain(text){ if(text) speakChain(speechText(text, state.lang), null); }
+
+/* حلقهٔ «با صدا بپرس، با صدا بشنو»:
+   پرسشی که با میکروفون آمده همیشه پاسخ صوتی می‌گیرد — چه کلید «خواندن خودکار»
+   روشن باشد چه خاموش. آن کلید از این پس فقط پرسش‌های تایپ‌شده را اداره می‌کند:
+   کسی که وسط احیا با صدا می‌پرسد، دستش بند است و به صفحه نگاه نمی‌کند.
+   اگر هیچ پاسخی پیدا نشد، سکوت بدترین حالت است؛ پس همان را هم با صدا می‌گوییم. */
+function answerAloud(){
+  if(document.querySelector(".card")) speakTop();
+  else speakPlain(L().noneSpoken);
 }
 
 function speakTop(){
@@ -2251,6 +2278,9 @@ function applyLang(){
   $("brand-h1").textContent = L0.title;
   $("brand-p").textContent  = L0.sub;
   $("q").placeholder = L0.ph;
+  // برچسب میکروفون می‌گوید به چه زبانی گوش می‌دهد؛ همان زبانی که پاسخ را با آن می‌خواند
+  if(micEnv && micEnv.ok){ $("mic").title = L0.micTitle; $("mic").setAttribute("aria-label", L0.micTitle);
+    const fab = $("mic-fab"); if(fab){ fab.title = L0.micTitle; fab.setAttribute("aria-label", L0.micTitle); } }
   $("lang").setAttribute("aria-label", L0.langLbl);
   const tabTxt = {adult:[L0.adult,L0.adultSub], peds:[L0.peds,L0.pedsSub], neonate:[L0.neo,L0.neoSub]};
   document.querySelectorAll(".tab").forEach(t=>{
