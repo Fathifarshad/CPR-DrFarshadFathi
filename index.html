@@ -7,6 +7,7 @@
 <meta name="theme-color" content="#F7F6F3" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#131519" media="(prefers-color-scheme: dark)">
 <meta name="description" content="دستیار احیا ۲۰۲۵ — پاسخ فوری به پرسش‌های احیای قلبی‌ریوی بر پایهٔ گایدلاین AHA 2025، با پرسش صوتی و خواندن پاسخ به فارسی.">
+<meta name="author" content="Dr. Farshad Fathi — Emergency Medicine Specialist, Clinical Informatics Fellowship">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="دستیار احیا">
@@ -323,6 +324,21 @@ main{padding:16px 0 64px}
 .empty strong{display:block; font-size:1.02rem; margin-bottom:5px}
 .empty span{font-size:.87rem; color:var(--ink-3)}
 
+/* ===== CREDIT / تهیه‌کننده ===== */
+.credit{
+  display:flex; align-items:center; gap:13px; padding:11px 13px; margin:0 0 18px;
+  background:var(--surface); border:1px solid var(--line); border-radius:15px; box-shadow:var(--shadow);
+}
+.credit .logo{
+  flex:none; width:54px; height:54px; border-radius:50%; display:block;
+  box-shadow:0 2px 9px -2px rgba(0,0,0,.5);
+}
+.credit-txt{min-width:0}
+.credit-by{font-size:.68rem; font-weight:600; color:var(--ink-3); letter-spacing:.02em; line-height:1.5}
+.credit-name{margin:1px 0 0; font-size:1rem; font-weight:800; color:var(--ink); line-height:1.35}
+.credit-role{margin:1px 0 0; font-size:.77rem; color:var(--ink-2); line-height:1.55}
+@media(max-width:420px){ .credit-name{font-size:.93rem} .credit-role{font-size:.72rem} .credit .logo{width:46px; height:46px} }
+
 /* ===== FOOTER ===== */
 footer{border-top:1px solid var(--line); padding:22px 0 40px; margin-top:34px}
 .legend{
@@ -445,6 +461,41 @@ main{padding-bottom:calc(64px + env(safe-area-inset-bottom,0px))}
 
 <footer>
   <div class="wrap">
+    <div class="credit">
+      <svg class="logo" viewBox="0 0 200 200" role="img" aria-labelledby="logo-t">
+        <title id="logo-t">لوگوی دکتر فرشاد فتحی</title>
+        <defs>
+          <linearGradient id="fn-gold" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#F6DFA6"/><stop offset=".38" stop-color="#D8A94A"/>
+            <stop offset=".62" stop-color="#B9822A"/><stop offset="1" stop-color="#F2D293"/>
+          </linearGradient>
+          <radialGradient id="fn-bg" cx=".38" cy=".3" r=".85">
+            <stop offset="0" stop-color="#2A2A2E"/><stop offset="1" stop-color="#08080A"/>
+          </radialGradient>
+        </defs>
+        <circle cx="100" cy="100" r="100" fill="url(#fn-bg)"/>
+        <g fill="none" stroke="url(#fn-gold)" stroke-linecap="round" stroke-linejoin="round">
+          <ellipse cx="100" cy="98" rx="72" ry="84" stroke-width="3.2"/>
+          <ellipse cx="100" cy="98" rx="66" ry="78" stroke-width="1.3"/>
+        </g>
+        <text x="136" y="130" text-anchor="middle" font-family="Georgia,'Times New Roman',serif"
+              font-size="84" letter-spacing="-3" fill="url(#fn-gold)">FN</text>
+        <g fill="none" stroke="url(#fn-gold)" stroke-linecap="round" stroke-linejoin="round" transform="translate(-16,-4)">
+          <path d="M78 52C52 66 40 96 45 124c5 26 27 38 49 32" stroke-width="2.6"/>
+          <path d="M74 58C56 74 49 99 54 122" stroke-width="1.1"/>
+          <path d="M78 52c13 4 17 17 13 27l-3 6c6 7 10 14 10 17 0 3-7 3-9 3-2 3 0 5-2 7-2 2 1 4-1 6-4 5-10 7-15 6" stroke-width="2.8"/>
+          <path d="M76 76c2.5-2 6-2 8.5 0" stroke-width="1.6"/>
+        </g>
+        <text x="100" y="166" text-anchor="middle" font-family="Georgia,'Times New Roman',serif"
+              font-size="15" letter-spacing="5" fill="url(#fn-gold)">NEVA</text>
+      </svg>
+      <div class="credit-txt">
+        <div class="credit-by" id="credit-by">تهیه و تدوین</div>
+        <p class="credit-name" id="credit-name">دکتر فرشاد فتحی</p>
+        <p class="credit-role" id="credit-role">متخصص طب اورژانس · فلوشیپ انفورماتیک بالینی</p>
+      </div>
+    </div>
+
     <div class="legend" id="legend">
       <div><b>کلاس ۱</b><span>توصیه می‌شود / باید انجام شود</span></div>
       <div><b>کلاس 2a</b><span>معقول است / احتمالاً مفید</span></div>
@@ -1369,6 +1420,8 @@ const UI = {
     listening:"در حال شنیدن… سؤالتان را بگویید", speakLbl:"خواندن پاسخ با صدا",
     autoOn:"خواندن خودکار پاسخ روشن شد", autoOff:"خواندن خودکار پاسخ خاموش شد",
     openTab:"باز کردن در تب جدید ↗", langLbl:"زبان پاسخ‌ها",
+    cBy:"تهیه و تدوین", cName:"دکتر فرشاد فتحی",
+    cRole:"متخصص طب اورژانس · فلوشیپ انفورماتیک بالینی",
     legend:[["کلاس ۱","توصیه می‌شود / باید انجام شود"],["کلاس 2a","معقول است / احتمالاً مفید"],
             ["کلاس 2b","ممکن است معقول باشد"],["کلاس ۳","توصیه نمی‌شود یا مضر است"],
             ["LOE A/B","شواهد از کارآزمایی یا مطالعات"],["LOE C","داده محدود یا نظر تخصصی"]],
@@ -1406,6 +1459,8 @@ const UI = {
     listening:"جارٍ الاستماع… تفضّل بسؤالك", speakLbl:"قراءة الإجابة صوتياً",
     autoOn:"تم تفعيل القراءة التلقائية", autoOff:"تم إيقاف القراءة التلقائية",
     openTab:"افتح في تبويب جديد ↗", langLbl:"لغة الإجابات",
+    cBy:"إعداد وتأليف", cName:"د. فرشاد فتحي",
+    cRole:"أخصائي طب الطوارئ · زمالة المعلوماتية السريرية",
     legend:[["الفئة 1","موصى به / يجب تنفيذه"],["الفئة 2a","معقول / غالباً مفيد"],
             ["الفئة 2b","قد يكون معقولاً"],["الفئة 3","غير موصى به أو ضار"],
             ["LOE A/B","أدلة من تجارب أو دراسات"],["LOE C","بيانات محدودة أو رأي خبراء"]],
@@ -1443,6 +1498,8 @@ const UI = {
     listening:"Dinleniyor… sorunuzu söyleyin", speakLbl:"Yanıtı sesli oku",
     autoOn:"Otomatik okuma açıldı", autoOff:"Otomatik okuma kapatıldı",
     openTab:"Yeni sekmede aç ↗", langLbl:"Yanıt dili",
+    cBy:"Hazırlayan", cName:"Dr. Farshad Fathi",
+    cRole:"Acil Tıp Uzmanı · Klinik Bilişim Doktora Sonrası (Fellowship)",
     legend:[["Sınıf 1","Önerilir / yapılmalıdır"],["Sınıf 2a","Makul / muhtemelen yararlı"],
             ["Sınıf 2b","Makul olabilir"],["Sınıf 3","Önerilmez veya zararlı"],
             ["LOE A/B","Çalışma veya araştırma kanıtı"],["LOE C","Sınırlı veri veya uzman görüşü"]],
@@ -1480,6 +1537,8 @@ const UI = {
     listening:"Listening… say your question", speakLbl:"Read answer aloud",
     autoOn:"Auto-read turned on", autoOff:"Auto-read turned off",
     openTab:"Open in a new tab ↗", langLbl:"Answer language",
+    cBy:"Created by", cName:"Dr. Farshad Fathi",
+    cRole:"Emergency Medicine Specialist · Clinical Informatics Fellowship",
     legend:[["Class 1","Recommended / should be done"],["Class 2a","Reasonable / probably helpful"],
             ["Class 2b","May be reasonable"],["Class 3","Not recommended or harmful"],
             ["LOE A/B","Evidence from trials or studies"],["LOE C","Limited data or expert opinion"]],
@@ -2484,6 +2543,9 @@ function applyLang(){
   });
   $("open-tab").textContent = L0.openTab;
   $("legend").innerHTML = L0.legend.map(([k,v])=>`<div><b>${k}</b><span>${v}</span></div>`).join("");
+  $("credit-by").textContent   = L0.cBy;
+  $("credit-name").textContent = L0.cName;
+  $("credit-role").textContent = L0.cRole;
   $("note").innerHTML = L0.note1 + "<br>" + L0.note2 + "<br>" + L0.note3;
   paintVoiceNote();
   if(!listening) $("listening-txt").textContent = L0.listening;
