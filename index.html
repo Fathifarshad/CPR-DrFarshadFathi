@@ -333,6 +333,10 @@ footer{border-top:1px solid var(--line); padding:22px 0 40px; margin-top:34px}
 .legend b{flex:none; font-family:"IBM Plex Mono",monospace; font-size:.75rem; min-width:58px}
 .note{font-size:.79rem; color:var(--ink-3); line-height:1.8}
 .note strong{color:var(--ink-2)}
+/* خط وضعیت صدا: کاربر باید بتواند ببیند پاسخ را قرار است با چه صدایی بشنود */
+.vnote{margin-top:9px; padding-top:9px; border-top:1px dashed var(--line)}
+.vnote.warn{color:var(--alarm)}
+.vnote.warn strong{color:var(--alarm)}
 
 @media (max-width:560px){
   .brand h1{font-size:1rem}
@@ -457,6 +461,7 @@ main{padding-bottom:calc(64px + env(safe-area-inset-bottom,0px))}
       <br>
       <strong>توجه:</strong> این ابزار مرجع سریع کنار بالین است و جایگزین قضاوت بالینی، پروتکل مرکز درمانی شما یا متن کامل گایدلاین نیست.
     </p>
+    <p class="note vnote" id="voice-note"></p>
   </div>
 </footer>
 
@@ -1354,6 +1359,10 @@ const UI = {
     emptyS:"عبارت کوتاه‌تر یا کلیدواژهٔ اصلی را امتحان کنید — مثلاً «عمق ماساژ»، «دوز آدرنالین» یا «انرژی شوک».",
     noneSpoken:"سؤالتان را نگرفتم. دوباره روی میکروفون بزنید و کوتاه‌تر بپرسید، مثلاً: دوز آدرنالین.",
     micTitle:"پرسش صوتی — به فارسی بپرسید",
+    vOk:n=>`<b>صدای پاسخ:</b> ${n} — پاسخ‌ها به فارسی خوانده می‌شوند.`,
+    vNone:"<b>صدای فارسی روی این دستگاه نصب نیست.</b> پاسخ با صدای آنلاین خوانده می‌شود؛ اگر شنیده نشد، با مرورگر Microsoft Edge باز کنید یا از تنظیمات گفتارِ دستگاه صدای فارسی را نصب کنید.",
+    vFail:"<b>خواندن پاسخ به فارسی ممکن نشد.</b> نه صدای فارسی روی دستگاه هست و نه صدای آنلاین در دسترس بود. مرورگر Microsoft Edge صدای فارسی آماده دارد؛ در اندروید: تنظیمات ← متن به گفتار ← نصب زبان فارسی، و در آیفون: Settings ← Accessibility ← Spoken Content ← Voices ← Persian.",
+    ver:"نسخهٔ ۳ — زبان پاسخ همیشه با زبان پرسش یکی است",
     listening:"در حال شنیدن… سؤالتان را بگویید", speakLbl:"خواندن پاسخ با صدا",
     autoOn:"خواندن خودکار پاسخ روشن شد", autoOff:"خواندن خودکار پاسخ خاموش شد",
     openTab:"باز کردن در تب جدید ↗", langLbl:"زبان پاسخ‌ها",
@@ -1384,6 +1393,10 @@ const UI = {
     emptyS:"جرّب عبارة أقصر أو الكلمة المفتاحية — مثل «عمق الضغطات» أو «جرعة الأدرينالين».",
     noneSpoken:"لم أفهم سؤالك. اضغط الميكروفون مرة أخرى واسأل بعبارة أقصر، مثل: جرعة الأدرينالين.",
     micTitle:"سؤال صوتي — اسأل بالعربية",
+    vOk:n=>`<b>صوت الإجابة:</b> ${n}`,
+    vNone:"<b>لا يوجد صوت لهذه اللغة على الجهاز.</b> ستُقرأ الإجابة بصوت عبر الإنترنت؛ إن لم يعمل، استخدم متصفح Microsoft Edge أو ثبّت صوت اللغة من إعدادات النطق.",
+    vFail:"<b>تعذّرت قراءة الإجابة صوتياً.</b> لا صوت على الجهاز ولا صوت عبر الإنترنت. جرّب متصفح Microsoft Edge أو ثبّت صوت اللغة من إعدادات النطق.",
+    ver:"الإصدار ٣",
     listening:"جارٍ الاستماع… تفضّل بسؤالك", speakLbl:"قراءة الإجابة صوتياً",
     autoOn:"تم تفعيل القراءة التلقائية", autoOff:"تم إيقاف القراءة التلقائية",
     openTab:"افتح في تبويب جديد ↗", langLbl:"لغة الإجابات",
@@ -1414,6 +1427,10 @@ const UI = {
     emptyS:"Daha kısa bir ifade veya anahtar kelime deneyin — örn. «bası derinliği», «adrenalin dozu».",
     noneSpoken:"Sorunuzu anlayamadım. Mikrofona tekrar dokunun ve daha kısa sorun, örneğin: adrenalin dozu.",
     micTitle:"Sesli soru — Türkçe sorun",
+    vOk:n=>`<b>Yanıt sesi:</b> ${n}`,
+    vNone:"<b>Bu dilin sesi cihazda yüklü değil.</b> Yanıt çevrimiçi sesle okunacak; çalışmazsa Microsoft Edge kullanın ya da konuşma ayarlarından sesi yükleyin.",
+    vFail:"<b>Yanıt sesli okunamadı.</b> Ne cihazda ses var ne de çevrimiçi ses kullanılabildi. Microsoft Edge deneyin veya konuşma ayarlarından sesi yükleyin.",
+    ver:"Sürüm 3",
     listening:"Dinleniyor… sorunuzu söyleyin", speakLbl:"Yanıtı sesli oku",
     autoOn:"Otomatik okuma açıldı", autoOff:"Otomatik okuma kapatıldı",
     openTab:"Yeni sekmede aç ↗", langLbl:"Yanıt dili",
@@ -1444,6 +1461,10 @@ const UI = {
     emptyS:"Try a shorter phrase or the key term — e.g. “compression depth”, “epinephrine dose”, “shock energy”.",
     noneSpoken:"I did not catch your question. Tap the microphone again and ask something shorter, for example: epinephrine dose.",
     micTitle:"Voice question — ask in English",
+    vOk:n=>`<b>Answer voice:</b> ${n}`,
+    vNone:"<b>No voice for this language is installed on this device.</b> Answers will be read by an online voice; if that fails, open the page in Microsoft Edge or install the language voice in your device speech settings.",
+    vFail:"<b>The answer could not be read aloud.</b> There is no device voice and no online voice was reachable. Try Microsoft Edge, or install the language voice in your device speech settings.",
+    ver:"Version 3",
     listening:"Listening… say your question", speakLbl:"Read answer aloud",
     autoOn:"Auto-read turned on", autoOff:"Auto-read turned off",
     openTab:"Open in a new tab ↗", langLbl:"Answer language",
@@ -2040,7 +2061,12 @@ try{ const v = localStorage.getItem("cpr-autospeak"); if(v !== null) autoSpeak =
 /* فهرست صداها روی هر سه سکو با تأخیر پر می‌شود؛ یک‌بار خواندن کافی نیست:
    روی اندروید و کروم دسکتاپ، getVoices() در نخستین فراخوانی آرایهٔ خالی می‌دهد. */
 let VOICES = [];
-function loadVoices(){ if(synth){ try{ VOICES = synth.getVoices() || []; }catch(e){ VOICES = []; } } }
+let voiceFailed = false;   // پیش از loadVoices() تعریف می‌شود چون همان‌جا خوانده می‌شود
+function loadVoices(){
+  if(!synth) return;
+  try{ VOICES = synth.getVoices() || []; }catch(e){ VOICES = []; }
+  if(VOICES.length){ voiceFailed = false; try{ paintVoiceNote(); }catch(e){} }
+}
 loadVoices();
 if(synth && "onvoiceschanged" in synth) synth.onvoiceschanged = loadVoices;
 (function pollVoices(n){
@@ -2157,6 +2183,17 @@ function nativeSpeak(chunks, voice, langTag, token, card){
   setTimeout(next, 60);   // کروم اگر بی‌درنگ پس از cancel() صدا بزنی، ساکت می‌ماند
 }
 
+/* خط وضعیت صدا در پاورقی: پیش از آنکه کاربر وسط احیا بفهمد صدایی نمی‌آید،
+   همین‌جا می‌بیند پاسخ را قرار است با چه صدایی بشنود. */
+function paintVoiceNote(){
+  const el = $("voice-note"); if(!el) return;
+  const L0 = UI[state.lang], v = pickVoice(state.lang);
+  if(voiceFailed && !v){ el.innerHTML = L0.vFail; el.classList.add("warn"); }
+  else if(v){ el.innerHTML = L0.vOk(v.name); el.classList.remove("warn"); }
+  else { el.innerHTML = L0.vNone; el.classList.add("warn"); }
+  el.innerHTML += ' <span class="mono">· ' + L0.ver + '</span>';
+}
+
 /* هستهٔ پخش: هر متنی — پاسخ گایدلاین یا یک پیام کوتاه — از همین زنجیره می‌گذرد */
 function speakChain(text, card){
   stopSpeaking();
@@ -2172,8 +2209,15 @@ function speakChain(text, card){
     if(token !== speakToken) return;
     if(ok){ finish(); return; }
     if(!synth){ finish(); flash(M("notts"), 5000); return; }
-    if(!voiceWarned){ voiceWarned = true; flash(M("novoice"), 7000); }
-    nativeSpeak(chunkText(text), null, tag, token, card);   // آخرین تلاش
+    /* لایهٔ سوم فقط وقتی معنا دارد که موتور پیش‌فرض همان خط را بشناسد.
+       خواندن متن فارسی با موتور انگلیسی «پاسخ» نیست، نویز است — و کاربر آن را
+       «انگلیسی جواب می‌دهد» می‌فهمد. در آن حالت به‌جای نویز، راهنما می‌دهیم. */
+    const def = VOICES.find(v=>v.default) || VOICES[0];
+    const defOk = !VOICES.length || (def && VOICE_TAG[lg].test(def.lang || ""));
+    if(defOk){ nativeSpeak(chunkText(text), null, tag, token, card); return; }
+    finish();
+    voiceFailed = true; paintVoiceNote();
+    if(!voiceWarned){ voiceWarned = true; flash(M("novoice"), 8000); }
   });
 }
 
@@ -2247,23 +2291,27 @@ $("q").addEventListener("keydown", ev=>{
    «epinephrine» داخل جملهٔ فارسی نباید کل رابط را انگلیسی کند. */
 const RE_FA_ONLY = /[\u067E\u0686\u0698\u06AF\u06A9\u06CC\u200C]/;              // پ چ ژ گ ک ی و نیم‌فاصله
 const RE_AR_ONLY = /[\u064A\u0643\u0629\u0649\u0623\u0625\u0624\u0626]/;   // ي ك ة ى أ إ ؤ ئ
+const RE_ARABIC  = /[\u0600-\u06FF]/;                                    // هر متنی به خط عربی
 const RE_TR_ONLY = /[çğışöüÇĞİŞÖÜ]/;
 function detectLang(t){
   if(!t) return null;
-  /* فقط نشانهٔ قطعیِ هر خط پذیرفته می‌شود. عبارتی که هیچ حرف اختصاصی ندارد —
-     مثل «دوز آدرنالین» که همهٔ حرف‌هایش میان فارسی و عربی مشترک است — بی‌پاسخ
-     می‌ماند تا زبان انتخاب‌شدهٔ کاربر بی‌جهت عوض نشود. */
   if(RE_FA_ONLY.test(t)) return "fa";
   if(RE_AR_ONLY.test(t)) return "ar";
   if(RE_TR_ONLY.test(t)) return "tr";
+  /* متنی به خط عربی که هیچ حرف اختصاصی ندارد («دوز آدرنالین») فارسی فرض می‌شود:
+     پرسشی که با این خط نوشته شده هرگز نباید پاسخ انگلیسی بگیرد. */
+  if(RE_ARABIC.test(t))  return "fa";
   return null;
 }
 function autoLang(t){
-  const d = detectLang(t);
+  let d = detectLang(t);
+  if(!d) return false;
+  // زبانی که ترجمهٔ کاملش را نداریم عرضه نمی‌شود؛ خط عربی در آن صورت به فارسی می‌رود
+  if(!COMPLETE.includes(d)) d = (d === "ar" ? "fa" : null);
   if(!d || d === state.lang || !COMPLETE.includes(d)) return false;
   stopSpeaking();
   state.lang = d;
-  try{ localStorage.setItem("cpr-lang", d); }catch(e){}
+  try{ localStorage.setItem("cpr-lang2", d); }catch(e){}
   $("lang").value = d;
   applyLang();
   return true;
@@ -2291,6 +2339,7 @@ function applyLang(){
   $("open-tab").textContent = L0.openTab;
   $("legend").innerHTML = L0.legend.map(([k,v])=>`<div><b>${k}</b><span>${v}</span></div>`).join("");
   $("note").innerHTML = L0.note1 + "<br>" + L0.note2 + "<br>" + L0.note3;
+  paintVoiceNote();
   if(!listening) $("listening-txt").textContent = L0.listening;
   if(micEnv && !micEnv.ok) $("mic-banner-txt").textContent = L0.mic[micEnv.code] || L0.mic.nosr;
   renderAll();
@@ -2300,12 +2349,12 @@ function applyLang(){
 const COMPLETE = Object.keys(LANGS).filter(k => k==="fa" || KB.every(e=>e.tr && e.tr[k]));
 $("lang").innerHTML = COMPLETE.map(k=>`<option value="${k}">${LANGS[k].name}</option>`).join("");
 if(!COMPLETE.includes(state.lang)) state.lang = "fa";
-try{ const sl = localStorage.getItem("cpr-lang"); if(sl && COMPLETE.includes(sl)) state.lang = sl; }catch(e){}
+try{ const sl = localStorage.getItem("cpr-lang2"); if(sl && COMPLETE.includes(sl)) state.lang = sl; }catch(e){}
 $("lang").value = state.lang;
 $("lang").addEventListener("change", ()=>{
   stopSpeaking();
   state.lang = $("lang").value;
-  try{ localStorage.setItem("cpr-lang", state.lang); }catch(e){}
+  try{ localStorage.setItem("cpr-lang2", state.lang); }catch(e){}
   state.open.clear();
   applyLang();
 });
