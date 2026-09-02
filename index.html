@@ -1359,10 +1359,13 @@ const UI = {
     emptyS:"عبارت کوتاه‌تر یا کلیدواژهٔ اصلی را امتحان کنید — مثلاً «عمق ماساژ»، «دوز آدرنالین» یا «انرژی شوک».",
     noneSpoken:"سؤالتان را نگرفتم. دوباره روی میکروفون بزنید و کوتاه‌تر بپرسید، مثلاً: دوز آدرنالین.",
     micTitle:"پرسش صوتی — به فارسی بپرسید",
-    vOk:n=>`<b>صدای پاسخ:</b> ${n} — پاسخ‌ها به فارسی خوانده می‌شوند.`,
-    vNone:"<b>صدای فارسی روی این دستگاه نصب نیست.</b> پاسخ با صدای آنلاین خوانده می‌شود؛ اگر شنیده نشد، با مرورگر Microsoft Edge باز کنید یا از تنظیمات گفتارِ دستگاه صدای فارسی را نصب کنید.",
-    vFail:"<b>خواندن پاسخ به فارسی ممکن نشد.</b> نه صدای فارسی روی دستگاه هست و نه صدای آنلاین در دسترس بود. مرورگر Microsoft Edge صدای فارسی آماده دارد؛ در اندروید: تنظیمات ← متن به گفتار ← نصب زبان فارسی، و در آیفون: Settings ← Accessibility ← Spoken Content ← Voices ← Persian.",
-    ver:"نسخهٔ ۳ — زبان پاسخ همیشه با زبان پرسش یکی است",
+    vOk:n=>`<b>صدای پاسخ:</b> ${n}`,
+    vEngine:"<b>صدای پاسخ:</b> موتور گفتار فارسیِ همراهِ همین صفحه (آفلاین). ویندوز، اندروید و مرورگرها صدای فارسی ندارند، پس این موتور داخل صفحه قرار داده شده است؛ صدایش ماشینی است اما پاسخ را کامل می‌خواند.",
+    vLoading:p=>`<b>در حال آماده‌سازی صدای فارسی…</b> ${p}٪ — این دانلود فقط بار اول انجام می‌شود و بعد از آن آفلاین کار می‌کند.`,
+    vLoadingShort:p=>`در حال آماده‌سازی صدای فارسی… ${p}٪`,
+    vNone:"<b>صدای فارسی روی این دستگاه نصب نیست.</b> بار اول که پاسخی خوانده شود، موتور گفتار فارسی (حدود ۹ مگابایت) یک‌بار دانلود و در مرورگر ذخیره می‌شود؛ پس از آن بدون اینترنت کار می‌کند.",
+    vFail:"<b>خواندن پاسخ به فارسی ممکن نشد.</b> موتور گفتار دانلود نشد — اتصال اینترنت را بررسی کنید و یک‌بار دیگر روی بلندگو بزنید.",
+    ver:"نسخهٔ ۴ — با موتور گفتار فارسی همراه",
     listening:"در حال شنیدن… سؤالتان را بگویید", speakLbl:"خواندن پاسخ با صدا",
     autoOn:"خواندن خودکار پاسخ روشن شد", autoOff:"خواندن خودکار پاسخ خاموش شد",
     openTab:"باز کردن در تب جدید ↗", langLbl:"زبان پاسخ‌ها",
@@ -1394,9 +1397,12 @@ const UI = {
     noneSpoken:"لم أفهم سؤالك. اضغط الميكروفون مرة أخرى واسأل بعبارة أقصر، مثل: جرعة الأدرينالين.",
     micTitle:"سؤال صوتي — اسأل بالعربية",
     vOk:n=>`<b>صوت الإجابة:</b> ${n}`,
+    vEngine:"<b>صوت الإجابة:</b> محرك النطق المضمّن في الصفحة (يعمل دون إنترنت).",
+    vLoading:p=>`<b>جارٍ تجهيز الصوت…</b> ${p}٪`,
+    vLoadingShort:p=>`جارٍ تجهيز الصوت… ${p}٪`,
     vNone:"<b>لا يوجد صوت لهذه اللغة على الجهاز.</b> ستُقرأ الإجابة بصوت عبر الإنترنت؛ إن لم يعمل، استخدم متصفح Microsoft Edge أو ثبّت صوت اللغة من إعدادات النطق.",
     vFail:"<b>تعذّرت قراءة الإجابة صوتياً.</b> لا صوت على الجهاز ولا صوت عبر الإنترنت. جرّب متصفح Microsoft Edge أو ثبّت صوت اللغة من إعدادات النطق.",
-    ver:"الإصدار ٣",
+    ver:"الإصدار ٤",
     listening:"جارٍ الاستماع… تفضّل بسؤالك", speakLbl:"قراءة الإجابة صوتياً",
     autoOn:"تم تفعيل القراءة التلقائية", autoOff:"تم إيقاف القراءة التلقائية",
     openTab:"افتح في تبويب جديد ↗", langLbl:"لغة الإجابات",
@@ -1428,9 +1434,12 @@ const UI = {
     noneSpoken:"Sorunuzu anlayamadım. Mikrofona tekrar dokunun ve daha kısa sorun, örneğin: adrenalin dozu.",
     micTitle:"Sesli soru — Türkçe sorun",
     vOk:n=>`<b>Yanıt sesi:</b> ${n}`,
+    vEngine:"<b>Yanıt sesi:</b> sayfaya gömülü konuşma motoru (çevrimdışı çalışır).",
+    vLoading:p=>`<b>Ses hazırlanıyor…</b> %${p}`,
+    vLoadingShort:p=>`Ses hazırlanıyor… %${p}`,
     vNone:"<b>Bu dilin sesi cihazda yüklü değil.</b> Yanıt çevrimiçi sesle okunacak; çalışmazsa Microsoft Edge kullanın ya da konuşma ayarlarından sesi yükleyin.",
     vFail:"<b>Yanıt sesli okunamadı.</b> Ne cihazda ses var ne de çevrimiçi ses kullanılabildi. Microsoft Edge deneyin veya konuşma ayarlarından sesi yükleyin.",
-    ver:"Sürüm 3",
+    ver:"Sürüm 4",
     listening:"Dinleniyor… sorunuzu söyleyin", speakLbl:"Yanıtı sesli oku",
     autoOn:"Otomatik okuma açıldı", autoOff:"Otomatik okuma kapatıldı",
     openTab:"Yeni sekmede aç ↗", langLbl:"Yanıt dili",
@@ -1462,9 +1471,12 @@ const UI = {
     noneSpoken:"I did not catch your question. Tap the microphone again and ask something shorter, for example: epinephrine dose.",
     micTitle:"Voice question — ask in English",
     vOk:n=>`<b>Answer voice:</b> ${n}`,
+    vEngine:"<b>Answer voice:</b> the speech engine bundled with this page (works offline).",
+    vLoading:p=>`<b>Preparing the voice…</b> ${p}%`,
+    vLoadingShort:p=>`Preparing the voice… ${p}%`,
     vNone:"<b>No voice for this language is installed on this device.</b> Answers will be read by an online voice; if that fails, open the page in Microsoft Edge or install the language voice in your device speech settings.",
     vFail:"<b>The answer could not be read aloud.</b> There is no device voice and no online voice was reachable. Try Microsoft Edge, or install the language voice in your device speech settings.",
-    ver:"Version 3",
+    ver:"Version 4",
     listening:"Listening… say your question", speakLbl:"Read answer aloud",
     autoOn:"Auto-read turned on", autoOff:"Auto-read turned off",
     openTab:"Open in a new tab ↗", langLbl:"Answer language",
@@ -2061,6 +2073,7 @@ try{ const v = localStorage.getItem("cpr-autospeak"); if(v !== null) autoSpeak =
 /* فهرست صداها روی هر سه سکو با تأخیر پر می‌شود؛ یک‌بار خواندن کافی نیست:
    روی اندروید و کروم دسکتاپ، getVoices() در نخستین فراخوانی آرایهٔ خالی می‌دهد. */
 let VOICES = [];
+let engineUsed = false, enginePct = 0;
 let voiceFailed = false;   // پیش از loadVoices() تعریف می‌شود چون همان‌جا خوانده می‌شود
 function loadVoices(){
   if(!synth) return;
@@ -2183,13 +2196,122 @@ function nativeSpeak(chunks, voice, langTag, token, card){
   setTimeout(next, 60);   // کروم اگر بی‌درنگ پس از cancel() صدا بزنی، ساکت می‌ماند
 }
 
+/* ===== موتور گفتار فارسیِ همراهِ صفحه (eSpeak-NG روی WebAssembly) =====
+   چرا اصلاً چنین چیزی لازم شد: آزمایش روی خودِ دستگاه نشان داد ویندوز هیچ صدای
+   فارسی ندارد (فقط David و Zira انگلیسی)، فهرست ۲۶ صدای Edge هم فارسی ندارد، و
+   سرویس گفتار گوگل ترنسلیت برای tl=fa اصلاً پاسخ نمی‌دهد (خطای ۴۰۰) چون گوگل
+   خروجی صوتی فارسی ندارد. یعنی هیچ راهی در خودِ مرورگر برای فارسی گفتن نبود.
+   پس موتور گفتار کنار همین صفحه گذاشته شد: یک‌بار دانلود می‌شود، در حافظهٔ
+   مرورگر (Cache Storage) می‌ماند و از آن پس آفلاین فارسی می‌خواند. صدایش
+   ماشینی است، اما پاسخِ شنیده‌شده از پاسخِ نشنیده بی‌نهایت بهتر است. */
+const ENGINE_JS = "./tts/espeak-ng.js", ENGINE_WASM = "tts/espeak-ng.wasm";
+const ENGINE_VOICE = {fa:"fa", ar:"ar", tr:"tr", en:"en-us"};
+let enginePromise = null;
+
+/* موتور در IndexedDB نگه داشته می‌شود، نه در حافظهٔ موقت مرورگر: آزمایش نشان داد
+   Cache.put روی همهٔ مرورگرها برای فایل بزرگ قابل اتکا نیست، و کش HTTP گیت‌هاب هم
+   فقط ده دقیقه اعتبار دارد — یعنی دانلود دوباره. IndexedDB می‌ماند. */
+function idbOpen(){
+  return new Promise((res, rej)=>{
+    const r = indexedDB.open("cpr-tts", 1);
+    r.onupgradeneeded = ()=>{ try{ r.result.createObjectStore("blobs"); }catch(e){} };
+    r.onsuccess = ()=>res(r.result);
+    r.onerror   = ()=>rej(r.error);
+  });
+}
+async function idbGet(k){
+  const db = await idbOpen();
+  return new Promise(res=>{
+    const g = db.transaction("blobs", "readonly").objectStore("blobs").get(k);
+    g.onsuccess = ()=>res(g.result || null);
+    g.onerror   = ()=>res(null);
+  });
+}
+async function idbPut(k, v){
+  const db = await idbOpen();
+  return new Promise(res=>{
+    const t = db.transaction("blobs", "readwrite");
+    t.objectStore("blobs").put(v, k);
+    t.oncomplete = ()=>res(true);
+    t.onerror    = ()=>res(false);
+  });
+}
+
+async function engineBinary(onProgress){
+  try{
+    const hit = await idbGet("espeak");
+    if(hit && hit.byteLength > 1000000){ if(onProgress) onProgress(100); return hit; }
+  }catch(e){}
+  const net = await fetch(ENGINE_WASM);
+  if(!net.ok) throw new Error("HTTP " + net.status);
+  const total = +(net.headers.get("content-length") || 0);
+  let buf;
+  if(total && net.body && net.body.getReader){
+    const reader = net.body.getReader(); const parts = []; let got = 0;
+    for(;;){
+      const r = await reader.read();
+      if(r.done) break;
+      parts.push(r.value); got += r.value.length;
+      if(onProgress) onProgress(Math.min(99, Math.round(got * 100 / total)));
+    }
+    const u8 = new Uint8Array(got); let at = 0;
+    for(const p of parts){ u8.set(p, at); at += p.length; }
+    buf = u8.buffer;
+  }else{
+    buf = await net.arrayBuffer();
+  }
+  idbPut("espeak", buf).catch(()=>{});
+  return buf;
+}
+
+function loadEngine(onProgress){
+  if(enginePromise) return enginePromise;
+  enginePromise = (async ()=>{
+    const [mod, bin] = await Promise.all([import(ENGINE_JS), engineBinary(onProgress)]);
+    const wasm = await WebAssembly.compile(bin);           // یک‌بار کامپایل، بارها استفاده
+    try{ localStorage.setItem("cpr-tts", "1"); }catch(e){}
+    return {factory: mod.default, wasm};
+  })();
+  enginePromise.catch(()=>{ enginePromise = null; });
+  return enginePromise;
+}
+
+async function engineWav(text, lg, onProgress){
+  const e = await loadEngine(onProgress);
+  const inst = await e.factory({
+    instantiateWasm(imports, cb){
+      WebAssembly.instantiate(e.wasm, imports).then(i=>cb(i, e.wasm));
+      return {};
+    },
+    arguments: ["-v", ENGINE_VOICE[lg] || "fa", "-s", "150", "-w", "out.wav", text],
+    print(){}, printErr(){},
+  });
+  return inst.FS.readFile("out.wav");
+}
+
+/* اگر پیش‌تر دانلود شده، همان اول از حافظه برداشته می‌شود تا پاسخ اول هم فوری باشد */
+try{ if(localStorage.getItem("cpr-tts") === "1") setTimeout(()=>loadEngine(), 1200); }catch(e){}
+
+function playBytes(bytes, token, card, done){
+  try{ ttsAudio = ttsAudio || new Audio(); }catch(e){ done(false); return; }
+  const a = ttsAudio, url = URL.createObjectURL(new Blob([bytes], {type:"audio/wav"}));
+  const clean = ok=>{ try{ URL.revokeObjectURL(url); }catch(e){} done(ok); };
+  a.onended = ()=>clean(true);
+  a.onerror = ()=>clean(false);
+  a.src = url;
+  const p = a.play();
+  if(p && p.catch) p.catch(()=>clean(false));
+}
+
 /* خط وضعیت صدا در پاورقی: پیش از آنکه کاربر وسط احیا بفهمد صدایی نمی‌آید،
    همین‌جا می‌بیند پاسخ را قرار است با چه صدایی بشنود. */
 function paintVoiceNote(){
   const el = $("voice-note"); if(!el) return;
   const L0 = UI[state.lang], v = pickVoice(state.lang);
-  if(voiceFailed && !v){ el.innerHTML = L0.vFail; el.classList.add("warn"); }
-  else if(v){ el.innerHTML = L0.vOk(v.name); el.classList.remove("warn"); }
+  if(v){ el.innerHTML = L0.vOk(v.name); el.classList.remove("warn"); }
+  else if(voiceFailed){ el.innerHTML = L0.vFail; el.classList.add("warn"); }
+  else if(engineUsed && enginePct >= 100){ el.innerHTML = L0.vEngine; el.classList.remove("warn"); }
+  else if(engineUsed){ el.innerHTML = L0.vLoading(enginePct); el.classList.add("warn"); }
   else { el.innerHTML = L0.vNone; el.classList.add("warn"); }
   el.innerHTML += ' <span class="mono">· ' + L0.ver + '</span>';
 }
@@ -2201,23 +2323,44 @@ function speakChain(text, card){
   const lg = state.lang, tag = LANGS[lg].speech;
   if(card) card.classList.add("speaking");
   const finish = ()=>{ if(card && token === speakToken) card.classList.remove("speaking"); };
+  const alive = ()=> token === speakToken;
 
+  // ۱) صدای بومیِ همان زبان روی دستگاه — بهترین کیفیت (انگلیسی همیشه اینجاست)
   const voice = pickVoice(lg);
   if(voice && synth){ nativeSpeak(chunkText(text), voice, tag, token, card); return; }
 
+  // ۲) موتور همراهِ صفحه — تنها راهی که فارسی را روی هر دستگاهی می‌گوید
+  engineUsed = true; paintVoiceNote();
+  engineWav(text, lg, p=>{ if(alive()){ enginePct = p; paintVoiceNote(); flash(L().vLoadingShort(p), 60000); } })
+    .then(wav=>{
+      if(!alive()) return;
+      enginePct = 100; paintVoiceNote();
+      document.body.classList.remove("listening");
+      playBytes(wav, token, card, ok=>{
+        if(!alive()) return;
+        finish();
+        if(!ok) legacyVoice(text, lg, tag, token, card);
+      });
+    })
+    .catch(()=>{
+      if(!alive()) return;
+      engineUsed = false;
+      legacyVoice(text, lg, tag, token, card);
+    });
+}
+
+/* ۳) و ۴): صدای آنلاین، و در آخر موتور پیش‌فرض مرورگر.
+   موتور پیش‌فرض متن فارسی را با لهجهٔ انگلیسی می‌خواند و آرمانی نیست، ولی
+   آخرین سنگر است: سکوت وسط احیا بدترین حالت ممکن است. */
+function legacyVoice(text, lg, tag, token, card){
+  const finish = ()=>{ if(card && token === speakToken) card.classList.remove("speaking"); };
   onlineTTS(chunkText(text, 190), lg, token, ok=>{
     if(token !== speakToken) return;
     if(ok){ finish(); return; }
-    if(!synth){ finish(); flash(M("notts"), 5000); return; }
-    /* لایهٔ سوم فقط وقتی معنا دارد که موتور پیش‌فرض همان خط را بشناسد.
-       خواندن متن فارسی با موتور انگلیسی «پاسخ» نیست، نویز است — و کاربر آن را
-       «انگلیسی جواب می‌دهد» می‌فهمد. در آن حالت به‌جای نویز، راهنما می‌دهیم. */
-    const def = VOICES.find(v=>v.default) || VOICES[0];
-    const defOk = !VOICES.length || (def && VOICE_TAG[lg].test(def.lang || ""));
-    if(defOk){ nativeSpeak(chunkText(text), null, tag, token, card); return; }
-    finish();
+    if(!synth){ finish(); voiceFailed = true; paintVoiceNote(); flash(M("notts"), 5000); return; }
     voiceFailed = true; paintVoiceNote();
-    if(!voiceWarned){ voiceWarned = true; flash(M("novoice"), 8000); }
+    if(!voiceWarned){ voiceWarned = true; flash(M("novoice"), 7000); }
+    nativeSpeak(chunkText(text), null, tag, token, card);
   });
 }
 
