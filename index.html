@@ -1410,7 +1410,10 @@ const UI = {
     vLoadingShort:p=>`در حال آماده‌سازی صدای فارسی… ${p}٪`,
     vNone:"<b>صدای فارسی روی این دستگاه نصب نیست.</b> بار اول که پاسخی خوانده شود، موتور گفتار فارسی (حدود ۹ مگابایت) یک‌بار دانلود و در مرورگر ذخیره می‌شود؛ پس از آن بدون اینترنت کار می‌کند.",
     vFail:"<b>خواندن پاسخ به فارسی ممکن نشد.</b> موتور گفتار دانلود نشد — اتصال اینترنت را بررسی کنید و یک‌بار دیگر روی بلندگو بزنید.",
-    ver:"نسخهٔ ۴ — با موتور گفتار فارسی همراه",
+    vHuman:"<b>صدای پاسخ:</b> صدای طبیعی فارسی — روی همین دستگاه و بدون اینترنت.",
+    vHumanLoading:p=>`<b>در حال دریافت صدای طبیعی فارسی…</b> ${p}٪ — حدود ۷۶ مگابایت، فقط همین یک بار؛ پس از آن آفلاین کار می‌کند.`,
+    vHumanShort:p=>`در حال دریافت صدای طبیعی فارسی… ${p}٪`,
+    ver:"نسخهٔ ۵ — صدای طبیعی فارسی",
     listening:"در حال شنیدن… سؤالتان را بگویید", speakLbl:"خواندن پاسخ با صدا",
     autoOn:"خواندن خودکار پاسخ روشن شد", autoOff:"خواندن خودکار پاسخ خاموش شد",
     openTab:"باز کردن در تب جدید ↗", langLbl:"زبان پاسخ‌ها",
@@ -1448,6 +1451,9 @@ const UI = {
     vLoadingShort:p=>`جارٍ تجهيز الصوت… ${p}٪`,
     vNone:"<b>لا يوجد صوت لهذه اللغة على الجهاز.</b> ستُقرأ الإجابة بصوت عبر الإنترنت؛ إن لم يعمل، استخدم متصفح Microsoft Edge أو ثبّت صوت اللغة من إعدادات النطق.",
     vFail:"<b>تعذّرت قراءة الإجابة صوتياً.</b> لا صوت على الجهاز ولا صوت عبر الإنترنت. جرّب متصفح Microsoft Edge أو ثبّت صوت اللغة من إعدادات النطق.",
+    vHuman:"<b>صوت الإجابة:</b> صوت فارسي طبيعي — على هذا الجهاز ودون إنترنت.",
+    vHumanLoading:p=>`<b>جارٍ تنزيل الصوت الطبيعي…</b> ${p}٪ — نحو ٧٦ ميغابايت، مرة واحدة فقط.`,
+    vHumanShort:p=>`جارٍ تنزيل الصوت الطبيعي… ${p}٪`,
     ver:"الإصدار ٤",
     listening:"جارٍ الاستماع… تفضّل بسؤالك", speakLbl:"قراءة الإجابة صوتياً",
     autoOn:"تم تفعيل القراءة التلقائية", autoOff:"تم إيقاف القراءة التلقائية",
@@ -1486,6 +1492,9 @@ const UI = {
     vLoadingShort:p=>`Ses hazırlanıyor… %${p}`,
     vNone:"<b>Bu dilin sesi cihazda yüklü değil.</b> Yanıt çevrimiçi sesle okunacak; çalışmazsa Microsoft Edge kullanın ya da konuşma ayarlarından sesi yükleyin.",
     vFail:"<b>Yanıt sesli okunamadı.</b> Ne cihazda ses var ne de çevrimiçi ses kullanılabildi. Microsoft Edge deneyin veya konuşma ayarlarından sesi yükleyin.",
+    vHuman:"<b>Yanıt sesi:</b> doğal Farsça ses — bu cihazda, internetsiz.",
+    vHumanLoading:p=>`<b>Doğal ses indiriliyor…</b> %${p} — yaklaşık 76 MB, yalnızca ilk seferde.`,
+    vHumanShort:p=>`Doğal ses indiriliyor… %${p}`,
     ver:"Sürüm 4",
     listening:"Dinleniyor… sorunuzu söyleyin", speakLbl:"Yanıtı sesli oku",
     autoOn:"Otomatik okuma açıldı", autoOff:"Otomatik okuma kapatıldı",
@@ -1524,6 +1533,9 @@ const UI = {
     vLoadingShort:p=>`Preparing the voice… ${p}%`,
     vNone:"<b>No voice for this language is installed on this device.</b> Answers will be read by an online voice; if that fails, open the page in Microsoft Edge or install the language voice in your device speech settings.",
     vFail:"<b>The answer could not be read aloud.</b> There is no device voice and no online voice was reachable. Try Microsoft Edge, or install the language voice in your device speech settings.",
+    vHuman:"<b>Answer voice:</b> natural Persian voice — on this device, no internet needed.",
+    vHumanLoading:p=>`<b>Downloading the natural voice…</b> ${p}% — about 76 MB, one time only.`,
+    vHumanShort:p=>`Downloading the natural voice… ${p}%`,
     ver:"Version 4",
     listening:"Listening… say your question", speakLbl:"Read answer aloud",
     autoOn:"Auto-read turned on", autoOff:"Auto-read turned off",
@@ -2355,12 +2367,165 @@ function playBytes(bytes, token, card, done){
   if(p && p.catch) p.catch(()=>clean(false));
 }
 
+
+/* ===== صدای انسانیِ فارسی (Piper / VITS روی ONNX Runtime) =====
+   چرا این هم اضافه شد: eSpeak سنتزگر فرمانتی است — گویشش ماشینی و پژواک‌دار
+   شنیده می‌شود و با هیچ تنظیمی انسانی نمی‌شود. Piper یک مدل عصبی است و صدایش
+   طبیعی است. بهایش حجم است: حدود ۷۶ مگابایت که فقط بار اول دانلود می‌شود، در
+   IndexedDB می‌ماند و از آن پس کاملاً آفلاین کار می‌کند.
+   eSpeak حذف نشد و آخرین چاره ماند: اگر Piper در دسترس نبود، ابزار وسط احیا
+   باید صدایی داشته باشد — صدای ماشینی از سکوت بهتر است. */
+const PIPER_VOICE = "fa_IR-gyro-medium";
+/* روی فایل محلی، fetch نسبی ممکن نیست؛ همان دارایی‌ها از سایت گرفته و در
+   همان مرورگر ذخیره می‌شوند تا دفعهٔ بعد آفلاین باشند. */
+const PIPER_BASE = location.protocol === "file:"
+  ? "https://fathifarshad.github.io/CPR-DrFarshadFathi/tts/piper/"
+  : "tts/piper/";
+const PIPER_ASSETS = [
+  ["ph-js",    "piper_phonemize_fa.js",     112282],
+  ["ph-wasm",  "piper_phonemize.wasm",      635212],
+  ["ph-data",  "piper_phonemize_fa.data",  1279935],
+  ["ort-js",   "ort.wasm.min.js",           142930],
+  ["ort-wasm", "ort-wasm-simd.wasm",      10595041],
+  ["cfg",      PIPER_VOICE + ".onnx.json",    5500],
+  ["model",    PIPER_VOICE + ".onnx",     63122309],
+];
+const PIPER_TOTAL = PIPER_ASSETS.reduce((n, a) => n + a[2], 0);
+let piperPromise = null, piperPct = 0, piperUsed = false;
+
+async function piperFetch(name, onBytes){
+  const key = "piper:" + name;
+  try{ const hit = await idbGet(key); if(hit && hit.byteLength){ onBytes(hit.byteLength); return hit; } }catch(e){}
+  const r = await fetch(PIPER_BASE + name);
+  if(!r.ok) throw new Error(name + " HTTP " + r.status);
+  let buf;
+  if(r.body && r.body.getReader){
+    const rd = r.body.getReader(), parts = []; let got = 0;
+    for(;;){ const c = await rd.read(); if(c.done) break; parts.push(c.value); got += c.value.length; onBytes(c.value.length); }
+    const u8 = new Uint8Array(got); let at = 0;
+    for(const q of parts){ u8.set(q, at); at += q.length; }
+    buf = u8.buffer;
+  }else{
+    buf = await r.arrayBuffer(); onBytes(buf.byteLength);
+  }
+  idbPut(key, buf).catch(()=>{});
+  return buf;
+}
+
+function piperScript(buf){
+  return new Promise((res, rej)=>{
+    const el = document.createElement("script");
+    el.onload = ()=>res(); el.onerror = ()=>rej(new Error("script"));
+    el.src = URL.createObjectURL(new Blob([buf], {type:"text/javascript"}));
+    document.head.appendChild(el);
+  });
+}
+
+function loadPiper(onProgress){
+  if(piperPromise) return piperPromise;
+  piperPromise = (async ()=>{
+    let done = 0;
+    const bump = n => { done += n; if(onProgress) onProgress(Math.min(99, Math.round(done * 100 / PIPER_TOTAL))); };
+    const buf = {};
+    for(const a of PIPER_ASSETS) buf[a[0]] = await piperFetch(a[1], bump);
+
+    const mk = (k, t)=> URL.createObjectURL(new Blob([buf[k]], {type:t}));
+    const phWasm = mk("ph-wasm", "application/wasm");
+    const phData = mk("ph-data", "application/octet-stream");
+    const ortWasm = mk("ort-wasm", "application/wasm");
+
+    if(!window.createPiperPhonemize) await piperScript(buf["ph-js"]);
+    if(!window.ort) await piperScript(buf["ort-js"]);
+
+    /* بدون هدرهای COOP/COEP — که گیت‌هاب پیجز نمی‌دهد — SharedArrayBuffer و
+       اجرای چندنخی در دسترس نیست، پس تک‌نخی اجرا می‌شود. */
+    ort.env.wasm.numThreads = 1;
+    ort.env.wasm.wasmPaths = {
+      "ort-wasm.wasm": ortWasm, "ort-wasm-simd.wasm": ortWasm,
+      "ort-wasm-threaded.wasm": ortWasm, "ort-wasm-simd-threaded.wasm": ortWasm,
+    };
+    const cfg = JSON.parse(new TextDecoder().decode(new Uint8Array(buf["cfg"])));
+    const session = await ort.InferenceSession.create(new Uint8Array(buf["model"]));
+    if(onProgress) onProgress(100);
+    return {cfg, session, phWasm, phData};
+  })();
+  piperPromise.catch(()=>{ piperPromise = null; });
+  return piperPromise;
+}
+
+function piperIds(pp, text){
+  return new Promise((res, rej)=>{
+    createPiperPhonemize({
+      print: l => { try{ res(JSON.parse(l).phoneme_ids); }catch(e){ rej(e); } },
+      printErr: l => rej(new Error(l)),
+      locateFile: f => f.endsWith(".wasm") ? pp.phWasm : f.endsWith(".data") ? pp.phData : f,
+    }).then(m => m.callMain(["-l", pp.cfg.espeak.voice, "--input",
+        JSON.stringify([{text: text}]), "--espeak_data", "/espeak-ng-data"])).catch(rej);
+  });
+}
+
+/* خروجی مدل، PCM شناور است؛ همین‌جا در قالب WAV بسته می‌شود تا از همان
+   مسیر پخشِ موجود (playBytes) عبور کند. */
+function pcmToWav(pcm, rate){
+  const n = pcm.length, b = new ArrayBuffer(44 + n*2), v = new DataView(b);
+  const put = (o, t)=>{ for(let i=0;i<t.length;i++) v.setUint8(o+i, t.charCodeAt(i)); };
+  put(0,"RIFF"); v.setUint32(4, 36+n*2, true); put(8,"WAVEfmt ");
+  v.setUint32(16,16,true); v.setUint16(20,1,true); v.setUint16(22,1,true);
+  v.setUint32(24,rate,true); v.setUint32(28,rate*2,true); v.setUint16(32,2,true); v.setUint16(34,16,true);
+  put(36,"data"); v.setUint32(40, n*2, true);
+  for(let i=0;i<n;i++){ const x = Math.max(-1, Math.min(1, pcm[i])); v.setInt16(44+i*2, x*32767, true); }
+  return new Uint8Array(b);
+}
+
+async function piperWav(text, onProgress){
+  const pp = await loadPiper(onProgress);
+  const ids = await piperIds(pp, text);
+  const out = await pp.session.run({
+    input: new ort.Tensor("int64", BigInt64Array.from(ids.map(BigInt)), [1, ids.length]),
+    input_lengths: new ort.Tensor("int64", BigInt64Array.from([BigInt(ids.length)])),
+    scales: new ort.Tensor("float32", Float32Array.from(
+      [pp.cfg.inference.noise_scale, pp.cfg.inference.length_scale, pp.cfg.inference.noise_w])),
+  });
+  return pcmToWav(out.output.data, pp.cfg.audio.sample_rate);
+}
+
+/* جمله‌به‌جمله ساخته و پخش می‌شود و جملهٔ بعدی حین پخشِ جملهٔ جاری آماده
+   می‌گردد: شنونده پس از نخستین جمله صدا را می‌شنود، نه پس از ساختِ کل پاسخ. */
+function piperSpeak(text, token, card, alive, finish, onFail){
+  const parts = chunkText(text, 150);
+  const prog = q => { if(alive()){ piperPct = q; paintVoiceNote(); if(q < 100) flash(L().vHumanShort(q), 60000); } };
+  let i = 0, ahead = null;
+  const step = async ()=>{
+    if(!alive()) return;
+    if(i >= parts.length){ finish(); return; }
+    let wav;
+    try{ wav = ahead ? await ahead : await piperWav(parts[i], prog); }
+    catch(e){ if(alive()) onFail(); return; }
+    if(!wav){ if(alive()) onFail(); return; }
+    if(!alive()) return;
+    i++;
+    ahead = i < parts.length ? piperWav(parts[i], prog).catch(()=>null) : null;
+    piperPct = 100; paintVoiceNote();
+    document.body.classList.remove("listening");
+    playBytes(wav, token, card, ok=>{
+      if(!alive()) return;
+      if(!ok){ onFail(); return; }
+      step();
+    });
+  };
+  step();
+}
+/* اگر پیش‌تر دانلود شده، همان اول آماده می‌شود تا پاسخ اول هم بی‌درنگ باشد */
+try{ if(localStorage.getItem("cpr-piper") === "1") setTimeout(()=>loadPiper(), 1500); }catch(e){}
+
 /* خط وضعیت صدا در پاورقی: پیش از آنکه کاربر وسط احیا بفهمد صدایی نمی‌آید،
    همین‌جا می‌بیند پاسخ را قرار است با چه صدایی بشنود. */
 function paintVoiceNote(){
   const el = $("voice-note"); if(!el) return;
   const L0 = UI[state.lang], v = pickVoice(state.lang);
   if(v){ el.innerHTML = L0.vOk(v.name); el.classList.remove("warn"); }
+  else if(piperUsed && piperPct >= 100){ el.innerHTML = L0.vHuman; el.classList.remove("warn"); }
+  else if(piperUsed){ el.innerHTML = L0.vHumanLoading(piperPct); el.classList.add("warn"); }
   else if(voiceFailed){ el.innerHTML = L0.vFail; el.classList.add("warn"); }
   else if(engineUsed && enginePct >= 100){ el.innerHTML = L0.vEngine; el.classList.remove("warn"); }
   else if(engineUsed){ el.innerHTML = L0.vLoading(enginePct); el.classList.add("warn"); }
@@ -2381,7 +2546,20 @@ function speakChain(text, card){
   const voice = pickVoice(lg);
   if(voice && synth){ nativeSpeak(chunkText(text), voice, tag, token, card); return; }
 
-  // ۲) موتور همراهِ صفحه — تنها راهی که فارسی را روی هر دستگاهی می‌گوید
+  // ۲) صدای عصبی فارسی — طبیعی، و پس از یک‌بار دانلود کاملاً آفلاین
+  if(lg === "fa"){
+    piperUsed = true; paintVoiceNote();
+    piperSpeak(text, token, card, alive, finish, ()=>{
+      piperUsed = false; paintVoiceNote();
+      espeakChain();
+    });
+    try{ localStorage.setItem("cpr-piper", "1"); }catch(e){}
+    return;
+  }
+  espeakChain();
+
+  // ۳) آخرین چاره: موتور فرمانتیِ همراه صفحه — ماشینی است، اما ساکت نمی‌ماند
+  function espeakChain(){
   engineUsed = true; paintVoiceNote();
   engineWav(text, lg, p=>{ if(alive()){ enginePct = p; paintVoiceNote(); flash(L().vLoadingShort(p), 60000); } })
     .then(wav=>{
@@ -2399,6 +2577,7 @@ function speakChain(text, card){
       engineUsed = false;
       legacyVoice(text, lg, tag, token, card);
     });
+  }
 }
 
 /* ۳) و ۴): صدای آنلاین، و در آخر موتور پیش‌فرض مرورگر.
