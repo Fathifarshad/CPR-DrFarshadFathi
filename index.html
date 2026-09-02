@@ -1413,7 +1413,8 @@ const UI = {
     vHuman:"<b>صدای پاسخ:</b> صدای طبیعی فارسی — روی همین دستگاه و بدون اینترنت.",
     vHumanLoading:p=>`<b>در حال دریافت صدای طبیعی فارسی…</b> ${p}٪ — حدود ۷۶ مگابایت، فقط همین یک بار؛ پس از آن آفلاین کار می‌کند.`,
     vHumanShort:p=>`در حال دریافت صدای طبیعی فارسی… ${p}٪`,
-    ver:"نسخهٔ ۵ — صدای طبیعی فارسی",
+    vEngineWarm:p=>`<b>صدای پاسخ:</b> موتور گفتار همراهِ صفحه (آفلاین) — و صدای طبیعی فارسی در پس‌زمینه در حال دریافت است (${p}٪)؛ از پاسخ‌های بعدی همان خوانده می‌شود.`,
+    ver:"نسخهٔ ۶ — صدای بی‌درنگ",
     listening:"در حال شنیدن… سؤالتان را بگویید", speakLbl:"خواندن پاسخ با صدا",
     autoOn:"خواندن خودکار پاسخ روشن شد", autoOff:"خواندن خودکار پاسخ خاموش شد",
     openTab:"باز کردن در تب جدید ↗", langLbl:"زبان پاسخ‌ها",
@@ -1454,7 +1455,8 @@ const UI = {
     vHuman:"<b>صوت الإجابة:</b> صوت فارسي طبيعي — على هذا الجهاز ودون إنترنت.",
     vHumanLoading:p=>`<b>جارٍ تنزيل الصوت الطبيعي…</b> ${p}٪ — نحو ٧٦ ميغابايت، مرة واحدة فقط.`,
     vHumanShort:p=>`جارٍ تنزيل الصوت الطبيعي… ${p}٪`,
-    ver:"الإصدار ٤",
+    vEngineWarm:p=>`<b>صوت الإجابة:</b> المحرك المضمّن (دون إنترنت) — ويجري تنزيل الصوت الطبيعي في الخلفية (${p}٪).`,
+    ver:"الإصدار ٦",
     listening:"جارٍ الاستماع… تفضّل بسؤالك", speakLbl:"قراءة الإجابة صوتياً",
     autoOn:"تم تفعيل القراءة التلقائية", autoOff:"تم إيقاف القراءة التلقائية",
     openTab:"افتح في تبويب جديد ↗", langLbl:"لغة الإجابات",
@@ -1495,7 +1497,8 @@ const UI = {
     vHuman:"<b>Yanıt sesi:</b> doğal Farsça ses — bu cihazda, internetsiz.",
     vHumanLoading:p=>`<b>Doğal ses indiriliyor…</b> %${p} — yaklaşık 76 MB, yalnızca ilk seferde.`,
     vHumanShort:p=>`Doğal ses indiriliyor… %${p}`,
-    ver:"Sürüm 4",
+    vEngineWarm:p=>`<b>Yanıt sesi:</b> gömülü motor (çevrimdışı) — doğal ses arka planda indiriliyor (%${p}).`,
+    ver:"Sürüm 6",
     listening:"Dinleniyor… sorunuzu söyleyin", speakLbl:"Yanıtı sesli oku",
     autoOn:"Otomatik okuma açıldı", autoOff:"Otomatik okuma kapatıldı",
     openTab:"Yeni sekmede aç ↗", langLbl:"Yanıt dili",
@@ -1536,7 +1539,8 @@ const UI = {
     vHuman:"<b>Answer voice:</b> natural Persian voice — on this device, no internet needed.",
     vHumanLoading:p=>`<b>Downloading the natural voice…</b> ${p}% — about 76 MB, one time only.`,
     vHumanShort:p=>`Downloading the natural voice… ${p}%`,
-    ver:"Version 4",
+    vEngineWarm:p=>`<b>Answer voice:</b> the bundled engine (offline) — the natural voice is downloading in the background (${p}%).`,
+    ver:"Version 6",
     listening:"Listening… say your question", speakLbl:"Read answer aloud",
     autoOn:"Auto-read turned on", autoOff:"Auto-read turned off",
     openTab:"Open in a new tab ↗", langLbl:"Answer language",
@@ -2265,7 +2269,14 @@ function nativeSpeak(chunks, voice, langTag, token, card){
    پس موتور گفتار کنار همین صفحه گذاشته شد: یک‌بار دانلود می‌شود، در حافظهٔ
    مرورگر (Cache Storage) می‌ماند و از آن پس آفلاین فارسی می‌خواند. صدایش
    ماشینی است، اما پاسخِ شنیده‌شده از پاسخِ نشنیده بی‌نهایت بهتر است. */
-const ENGINE_JS = "./tts/espeak-ng.js", ENGINE_WASM = "tts/espeak-ng.wasm";
+/* روی صفحهٔ محلی (file://) مسیر نسبی قابل fetch نیست و پوشهٔ tts کنار فایل وجود
+   ندارد؛ پس همان‌طور که برای Piper عمل می‌شود، دارایی‌ها از خودِ سایت گرفته و در
+   مرورگر ذخیره می‌شوند. در نسخهٔ آفلاین این دو ثابت با data: جایگزین می‌شوند. */
+const ENGINE_BASE = location.protocol === "file:"
+  ? "https://fathifarshad.github.io/CPR-DrFarshadFathi/tts/"
+  : "tts/";
+const ENGINE_JS = ENGINE_BASE + "espeak-ng.js", ENGINE_WASM = ENGINE_BASE + "espeak-ng.wasm";
+const ENGINE_EMBEDDED = false;
 const ENGINE_VOICE = {fa:"fa", ar:"ar", tr:"tr", en:"en-us"};
 let enginePromise = null;
 
@@ -2298,13 +2309,31 @@ async function idbPut(k, v){
   });
 }
 
+/* یک دانلودِ گیرکرده بدترین حالت است: نه تمام می‌شود نه خطا می‌دهد، پس هیچ‌وقت
+   نوبت لایهٔ بعدی نمی‌رسد و کاربر برای همیشه در سکوت می‌ماند. اگر ۲۵ ثانیه هیچ
+   بایتی نرسد، دانلود لغو می‌شود تا زنجیره به لایهٔ بعد برود. */
+function stallGuard(ms){
+  const c = new AbortController();
+  let t = setTimeout(()=>{ try{ c.abort(); }catch(e){} }, ms);
+  return {
+    signal: c.signal,
+    ping(){ clearTimeout(t); t = setTimeout(()=>{ try{ c.abort(); }catch(e){} }, ms); },
+    done(){ clearTimeout(t); },
+  };
+}
+
 async function engineBinary(onProgress){
-  try{
-    const hit = await idbGet("espeak");
-    if(hit && hit.byteLength > 1000000){ if(onProgress) onProgress(100); return hit; }
-  }catch(e){}
-  const net = await fetch(ENGINE_WASM);
-  if(!net.ok) throw new Error("HTTP " + net.status);
+  if(!ENGINE_EMBEDDED){
+    try{
+      const hit = await idbGet("espeak");
+      if(hit && hit.byteLength > 1000000){ if(onProgress) onProgress(100); return hit; }
+    }catch(e){}
+  }
+  const guard = stallGuard(25000);
+  let net;
+  try{ net = await fetch(ENGINE_WASM, {signal: guard.signal}); }
+  catch(e){ guard.done(); throw e; }
+  if(!net.ok){ guard.done(); throw new Error("HTTP " + net.status); }
   /* گیت‌هاب فایل را فشرده می‌فرستد، پس content-length اندازهٔ فشرده است در حالی که
      خواننده بایت‌های بازشده را می‌دهد؛ برای درصد، اندازهٔ واقعی مبنا قرار می‌گیرد. */
   const sent = +(net.headers.get("content-length") || 0);
@@ -2312,19 +2341,23 @@ async function engineBinary(onProgress){
   let buf;
   if(total && net.body && net.body.getReader){
     const reader = net.body.getReader(); const parts = []; let got = 0;
-    for(;;){
-      const r = await reader.read();
-      if(r.done) break;
-      parts.push(r.value); got += r.value.length;
-      if(onProgress) onProgress(Math.min(99, Math.round(got * 100 / total)));
-    }
+    try{
+      for(;;){
+        const r = await reader.read();
+        if(r.done) break;
+        guard.ping();
+        parts.push(r.value); got += r.value.length;
+        if(onProgress) onProgress(Math.min(99, Math.round(got * 100 / total)));
+      }
+    }catch(e){ guard.done(); throw e; }
     const u8 = new Uint8Array(got); let at = 0;
     for(const p of parts){ u8.set(p, at); at += p.length; }
     buf = u8.buffer;
   }else{
-    buf = await net.arrayBuffer();
+    try{ buf = await net.arrayBuffer(); }catch(e){ guard.done(); throw e; }
   }
-  idbPut("espeak", buf).catch(()=>{});
+  guard.done();
+  if(!ENGINE_EMBEDDED) idbPut("espeak", buf).catch(()=>{});
   return buf;
 }
 
@@ -2359,7 +2392,11 @@ try{ if(localStorage.getItem("cpr-tts") === "1") setTimeout(()=>loadEngine(), 12
 function playBytes(bytes, token, card, done){
   try{ ttsAudio = ttsAudio || new Audio(); }catch(e){ done(false); return; }
   const a = ttsAudio, url = URL.createObjectURL(new Blob([bytes], {type:"audio/wav"}));
-  const clean = ok=>{ try{ URL.revokeObjectURL(url); }catch(e){} done(ok); };
+  /* هم onerror و هم ردِ وعدهٔ play() ممکن است برای یک پخش با هم بیایند؛ بدون این
+     نگهبان، لایهٔ بعدی دوبار صدا زده می‌شد و دو صدا روی هم می‌افتاد. */
+  let settled = false;
+  const clean = ok=>{ if(settled) return; settled = true;
+    try{ URL.revokeObjectURL(url); }catch(e){} done(ok); };
   a.onended = ()=>clean(true);
   a.onerror = ()=>clean(false);
   a.src = url;
@@ -2392,22 +2429,29 @@ const PIPER_ASSETS = [
 ];
 const PIPER_TOTAL = PIPER_ASSETS.reduce((n, a) => n + a[2], 0);
 let piperPromise = null, piperPct = 0, piperUsed = false;
+let piperReady = false, piperLoading = false;   // آماده = دانلود و ساخت تمام شده
 
 async function piperFetch(name, onBytes){
   const key = "piper:" + name;
   try{ const hit = await idbGet(key); if(hit && hit.byteLength){ onBytes(hit.byteLength); return hit; } }catch(e){}
-  const r = await fetch(PIPER_BASE + name);
-  if(!r.ok) throw new Error(name + " HTTP " + r.status);
+  const guard = stallGuard(25000);
+  let r;
+  try{ r = await fetch(PIPER_BASE + name, {signal: guard.signal}); }
+  catch(e){ guard.done(); throw e; }
+  if(!r.ok){ guard.done(); throw new Error(name + " HTTP " + r.status); }
   let buf;
-  if(r.body && r.body.getReader){
-    const rd = r.body.getReader(), parts = []; let got = 0;
-    for(;;){ const c = await rd.read(); if(c.done) break; parts.push(c.value); got += c.value.length; onBytes(c.value.length); }
-    const u8 = new Uint8Array(got); let at = 0;
-    for(const q of parts){ u8.set(q, at); at += q.length; }
-    buf = u8.buffer;
-  }else{
-    buf = await r.arrayBuffer(); onBytes(buf.byteLength);
-  }
+  try{
+    if(r.body && r.body.getReader){
+      const rd = r.body.getReader(), parts = []; let got = 0;
+      for(;;){ const c = await rd.read(); if(c.done) break; guard.ping(); parts.push(c.value); got += c.value.length; onBytes(c.value.length); }
+      const u8 = new Uint8Array(got); let at = 0;
+      for(const q of parts){ u8.set(q, at); at += q.length; }
+      buf = u8.buffer;
+    }else{
+      buf = await r.arrayBuffer(); onBytes(buf.byteLength);
+    }
+  }catch(e){ guard.done(); throw e; }
+  guard.done();
   idbPut(key, buf).catch(()=>{});
   return buf;
 }
@@ -2447,10 +2491,26 @@ function loadPiper(onProgress){
     const cfg = JSON.parse(new TextDecoder().decode(new Uint8Array(buf["cfg"])));
     const session = await ort.InferenceSession.create(new Uint8Array(buf["model"]));
     if(onProgress) onProgress(100);
+    piperReady = true; piperLoading = false; piperPct = 100;
     return {cfg, session, phWasm, phData};
   })();
-  piperPromise.catch(()=>{ piperPromise = null; });
+  piperLoading = true;
+  piperPromise.catch(()=>{ piperPromise = null; piperLoading = false; piperReady = false; });
   return piperPromise;
+}
+
+/* دانلود صدای طبیعی در پس‌زمینه شروع می‌شود و هیچ‌کس منتظرش نمی‌ماند: پاسخِ همین
+   لحظه با موتور سبکِ همراه صفحه خوانده می‌شود و از پاسخ بعدی — هر وقت دانلود تمام
+   شد — صدای طبیعی جای آن را می‌گیرد. پیش از این، نخستین «بخوان» یک دانلود ۷۶
+   مگابایتی را گرو می‌گرفت و تا پایانش هیچ صدایی شنیده نمی‌شد؛ روی اینترنت کند یا
+   قطع، این یعنی سکوتِ کامل — همان چیزی که این ابزار نباید داشته باشد. */
+function warmPiper(){
+  if(piperPromise || piperReady || navigator.onLine === false) return;
+  try{ localStorage.setItem("cpr-piper", "1"); }catch(e){}
+  loadPiper(p=>{ piperPct = p; paintVoiceNote(); })
+    .then(()=>{ paintVoiceNote(); })
+    .catch(()=>{ paintVoiceNote(); });
+  paintVoiceNote();
 }
 
 function piperIds(pp, text){
@@ -2516,19 +2576,22 @@ function piperSpeak(text, token, card, alive, finish, onFail){
   step();
 }
 /* اگر پیش‌تر دانلود شده، همان اول آماده می‌شود تا پاسخ اول هم بی‌درنگ باشد */
-try{ if(localStorage.getItem("cpr-piper") === "1") setTimeout(()=>loadPiper(), 1500); }catch(e){}
+try{ if(localStorage.getItem("cpr-piper") === "1") setTimeout(()=>warmPiper(), 1500); }catch(e){}
 
 /* خط وضعیت صدا در پاورقی: پیش از آنکه کاربر وسط احیا بفهمد صدایی نمی‌آید،
    همین‌جا می‌بیند پاسخ را قرار است با چه صدایی بشنود. */
 function paintVoiceNote(){
   const el = $("voice-note"); if(!el) return;
   const L0 = UI[state.lang], v = pickVoice(state.lang);
+  /* ترتیب مهم است: نخست آنچه همین حالا شنیده می‌شود، و تنها در کنارش خبرِ
+     دانلودی که در پس‌زمینه جریان دارد — نه به‌جای آن. */
   if(v){ el.innerHTML = L0.vOk(v.name); el.classList.remove("warn"); }
-  else if(piperUsed && piperPct >= 100){ el.innerHTML = L0.vHuman; el.classList.remove("warn"); }
-  else if(piperUsed){ el.innerHTML = L0.vHumanLoading(piperPct); el.classList.add("warn"); }
-  else if(voiceFailed){ el.innerHTML = L0.vFail; el.classList.add("warn"); }
+  else if(piperUsed && piperReady){ el.innerHTML = L0.vHuman; el.classList.remove("warn"); }
+  else if(engineUsed && enginePct >= 100 && piperLoading){ el.innerHTML = L0.vEngineWarm(piperPct); el.classList.remove("warn"); }
   else if(engineUsed && enginePct >= 100){ el.innerHTML = L0.vEngine; el.classList.remove("warn"); }
   else if(engineUsed){ el.innerHTML = L0.vLoading(enginePct); el.classList.add("warn"); }
+  else if(piperLoading){ el.innerHTML = L0.vHumanLoading(piperPct); el.classList.add("warn"); }
+  else if(voiceFailed){ el.innerHTML = L0.vFail; el.classList.add("warn"); }
   else { el.innerHTML = L0.vNone; el.classList.add("warn"); }
   el.innerHTML += ' <span class="mono">· ' + L0.ver + '</span>';
 }
@@ -2546,15 +2609,20 @@ function speakChain(text, card){
   const voice = pickVoice(lg);
   if(voice && synth){ nativeSpeak(chunkText(text), voice, tag, token, card); return; }
 
-  // ۲) صدای عصبی فارسی — طبیعی، و پس از یک‌بار دانلود کاملاً آفلاین
+  /* ۲) صدای عصبی فارسی — طبیعی، و پس از یک‌بار دانلود کاملاً آفلاین.
+     فقط وقتی از این راه خوانده می‌شود که مدل همین حالا آماده باشد. اگر نیست،
+     دانلودش در پس‌زمینه آغاز می‌شود و پاسخ بی‌درنگ با موتور سبک خوانده می‌شود؛
+     شنونده هیچ‌وقت پشت یک دانلود نمی‌ماند. */
   if(lg === "fa"){
-    piperUsed = true; paintVoiceNote();
-    piperSpeak(text, token, card, alive, finish, ()=>{
-      piperUsed = false; paintVoiceNote();
-      espeakChain();
-    });
-    try{ localStorage.setItem("cpr-piper", "1"); }catch(e){}
-    return;
+    if(piperReady){
+      piperUsed = true; paintVoiceNote();
+      piperSpeak(text, token, card, alive, finish, ()=>{
+        piperUsed = false; paintVoiceNote();
+        espeakChain();
+      });
+      return;
+    }
+    warmPiper();
   }
   espeakChain();
 
