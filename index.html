@@ -2550,33 +2550,62 @@ async function piperWav(text, onProgress){
 }
 
 /* جمله‌به‌جمله ساخته و پخش می‌شود و جملهٔ بعدی حین پخشِ جملهٔ جاری آماده
-   می‌گردد: شنونده پس از نخستین جمله صدا را می‌شنود، نه پس از ساختِ کل پاسخ. */
-function piperSpeak(text, token, card, alive, finish, onFail){
+   می‌گردد: شنونده پس از نخستین جمله صدا را می‌شنود، نه پس از ساختِ کل پاسخ.
+
+   پیش از هر جمله، بهترین صدای در دسترسِ همان لحظه انتخاب می‌شود. صدای روانِ
+   فارسی (Piper) اولویت دارد و تنها وقتی از موتور سبک استفاده می‌شود که مدلِ
+   روان هنوز نرسیده باشد — و همین‌که رسید، از جملهٔ بعدی صدای روان جایش را
+   می‌گیرد. یعنی نه کسی پشت دانلود منتظر می‌ماند، نه پاسخ تا آخر با صدای
+   ماشینی خوانده می‌شود. ساختِ هر جمله با موتور سبک حدود ۵۰ میلی‌ثانیه است
+   (اندازه‌گیری‌شده)، پس جمله‌به‌جمله ساختن هزینه‌ای ندارد. */
+function speakSentences(text, lg, token, card, alive, finish, onDead){
   const parts = chunkText(text, 150);
-  const prog = q => { if(alive()){ piperPct = q; paintVoiceNote(); if(q < 100) flash(L().vHumanShort(q), 60000); } };
   let i = 0, ahead = null;
+
+  const pProg = q => { if(alive()){ piperPct = q; paintVoiceNote(); } };
+  const eProg = e => { if(alive()){ enginePct = e; paintVoiceNote(); flash(L().vLoadingShort(e), 60000); } };
+
+  const render = t => piperReady
+    ? {kind:"piper",  wav: piperWav(t, pProg).catch(()=>null)}
+    : {kind:"engine", wav: engineWav(t, lg, eProg).catch(()=>null)};
+
   const step = async ()=>{
     if(!alive()) return;
     if(i >= parts.length){ finish(); return; }
-    let wav;
-    try{ wav = ahead ? await ahead : await piperWav(parts[i], prog); }
-    catch(e){ if(alive()) onFail(); return; }
-    if(!wav){ if(alive()) onFail(); return; }
+    // اگر صدای روان همین حالا آماده شد، جملهٔ از پیش ساخته‌شده با موتور سبک دور ریخته می‌شود
+    if(ahead && ahead.kind === "engine" && piperReady) ahead = null;
+    const job = ahead || render(parts[i]);
+    ahead = null;
+    const wav = await job.wav;
     if(!alive()) return;
+    if(!wav){ onDead(); return; }
+    piperUsed  = job.kind === "piper";
+    engineUsed = job.kind === "engine";
+    if(engineUsed) enginePct = 100;
+    paintVoiceNote();
     i++;
-    ahead = i < parts.length ? piperWav(parts[i], prog).catch(()=>null) : null;
-    piperPct = 100; paintVoiceNote();
+    if(i < parts.length) ahead = render(parts[i]);
     document.body.classList.remove("listening");
     playBytes(wav, token, card, ok=>{
       if(!alive()) return;
-      if(!ok){ onFail(); return; }
+      if(!ok){ onDead(); return; }
       step();
     });
   };
   step();
 }
+
 /* اگر پیش‌تر دانلود شده، همان اول آماده می‌شود تا پاسخ اول هم بی‌درنگ باشد */
-try{ if(localStorage.getItem("cpr-piper") === "1") setTimeout(()=>warmPiper(), 1500); }catch(e){}
+/* صدای روان از همان آغاز در پس‌زمینه آماده می‌شود، نه پس از نخستین «بخوان»:
+   تا کاربر پرسشش را تایپ کند دانلود جلو رفته و پاسخ با صدای روان خوانده می‌شود.
+   روی اتصال‌های صرفه‌جو یا بسیار کند این کار انجام نمی‌شود. */
+setTimeout(()=>{
+  try{
+    const c = navigator.connection;
+    if(c && (c.saveData || /2g/.test(c.effectiveType || ""))) return;
+  }catch(e){}
+  warmPiper();
+}, 800);
 
 /* خط وضعیت صدا در پاورقی: پیش از آنکه کاربر وسط احیا بفهمد صدایی نمی‌آید،
    همین‌جا می‌بیند پاسخ را قرار است با چه صدایی بشنود. */
@@ -2614,15 +2643,12 @@ function speakChain(text, card){
      دانلودش در پس‌زمینه آغاز می‌شود و پاسخ بی‌درنگ با موتور سبک خوانده می‌شود؛
      شنونده هیچ‌وقت پشت یک دانلود نمی‌ماند. */
   if(lg === "fa"){
-    if(piperReady){
-      piperUsed = true; paintVoiceNote();
-      piperSpeak(text, token, card, alive, finish, ()=>{
-        piperUsed = false; paintVoiceNote();
-        espeakChain();
-      });
-      return;
-    }
     warmPiper();
+    speakSentences(text, lg, token, card, alive, finish, ()=>{
+      piperUsed = false; engineUsed = false; paintVoiceNote();
+      legacyVoice(text, lg, tag, token, card);
+    });
+    return;
   }
   espeakChain();
 
