@@ -329,7 +329,7 @@ main{padding:16px 0 64px}
    ولی با اسکرول کنار می‌رود و از ارتفاعِ همیشه‌روی‌صفحه چیزی کم نمی‌کند. */
 .topcredit{background:var(--ground); border-bottom:1px solid var(--line)}
 .topcredit .wrap{display:flex; align-items:center; gap:10px; padding:9px 16px}
-.tc-logo{flex:none; width:38px; height:38px; border-radius:10px; display:block}
+.tc-logo{flex:none; width:38px; height:38px; border-radius:50%; display:block}
 .tc-name{margin:0; font-size:.86rem; font-weight:800; color:var(--ink); line-height:1.35}
 .tc-role{margin:0; font-size:.7rem; color:var(--ink-2); line-height:1.45}
 @media(max-width:380px){ .tc-logo{width:33px; height:33px} .tc-name{font-size:.8rem} .tc-role{font-size:.65rem} }
@@ -394,7 +394,7 @@ main{padding-bottom:calc(64px + env(safe-area-inset-bottom,0px))}
 <div class="topcredit">
   <div class="wrap">
     <svg class="tc-logo" viewBox="0 0 200 200" role="img" aria-labelledby="logo-t">
-        <title id="logo-t">لوگوی دکتر فرشاد فتحی</title>
+        <title id="logo-t">لوگوی نوا — دکتر فرشاد فتحی</title>
         <defs>
           <linearGradient id="fn-gold" x1=".1" y1="0" x2=".9" y2="1">
             <stop offset="0" stop-color="#FBEAB8"/><stop offset=".3" stop-color="#E0B45C"/>
@@ -402,21 +402,31 @@ main{padding-bottom:calc(64px + env(safe-area-inset-bottom,0px))}
             <stop offset="1" stop-color="#C79433"/>
           </linearGradient>
         </defs>
-        <rect width="200" height="200" rx="44" fill="#0C0C0F"/>
+        <circle cx="100" cy="100" r="100" fill="#0C0C0F"/>
         <g fill="none" stroke="url(#fn-gold)" stroke-linecap="round" stroke-linejoin="round">
-          <ellipse cx="100" cy="100" rx="62" ry="80" stroke-width="2.2"/>
-          <ellipse cx="100" cy="100" rx="57.5" ry="75" stroke-width="1.5"/>
-          <path d="M97 33C74 39 57 57 51 80c-7 27-2 52 14 65 15 12 35 12 49 1 8-6 13-15 15-24" stroke-width="2"/>
-          <path d="M88 42C71 55 62 75 62 95c0 18 7 32 19 39" stroke-width="1.2"/>
+          <!-- حلقهٔ بیرونی کامل؛ حلقهٔ درونی پایین باز می‌ماند تا واژهٔ NEVA در دهانهٔ آن بنشیند -->
+          <ellipse cx="101.6" cy="98.8" rx="52" ry="71" stroke-width="2.4"/>
+          <path d="M62.7 136.7A47.5 66 0 1 1 140.5 136.7" stroke-width="1.4"/>
+          <!-- کمانِ پررنگِ زیر نام -->
+          <path d="M68 155Q101.6 175 135 155" stroke-width="3.2"/>
         </g>
-        <g fill="none" stroke="url(#fn-gold)" stroke-linecap="round" stroke-linejoin="round" transform="translate(55,52) scale(1.12)">
-          <path d="M14 0c8.5 3 12.5 10.5 10 18l-2.2 4.2c5.2 5.4 9.2 11.4 9.2 14.3 0 2.2-5 2.6-7.2 2.6 1.2 2.6 2 3.7 0 5.6-2 1.6 0 3.1-1.6 4.6-2 2.4-2 3.1-4.2 5.6-2.6 3-7.2 4.6-11.4 4.2C3.8 58.4 2 60 0 62.5" stroke-width="2.1"/>
-          <path d="M6.5 16.5c3.2-2.6 7.4-2.6 10 .5" stroke-width="1.4"/>
+        <!-- موها، نیم‌رخ و مونوگرام: همان طرح پیشین، کوچک‌شده تا درون بیضه بماند و جا برای نام باز شود -->
+        <g transform="translate(100,92) scale(0.76) translate(-100,-100)">
+          <g fill="none" stroke="url(#fn-gold)" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M97 33C74 39 57 57 51 80c-7 27-2 52 14 65 15 12 35 12 49 1 8-6 13-15 15-24" stroke-width="2.6"/>
+            <path d="M88 42C71 55 62 75 62 95c0 18 7 32 19 39" stroke-width="1.6"/>
+          </g>
+          <g fill="none" stroke="url(#fn-gold)" stroke-linecap="round" stroke-linejoin="round" transform="translate(49.2,45.3) scale(1.3)">
+            <path d="M14 0c8.5 3 12.5 10.5 10 18l-2.2 4.2c5.2 5.4 9.2 11.4 9.2 14.3 0 2.2-5 2.6-7.2 2.6 1.2 2.6 2 3.7 0 5.6-2 1.6 0 3.1-1.6 4.6-2 2.4-2 3.1-4.2 5.6-2.6 3-7.2 4.6-11.4 4.2C3.8 58.4 2 60 0 62.5" stroke-width="2.6"/>
+            <path d="M6.5 16.5c3.2-2.6 7.4-2.6 10 .5" stroke-width="1.7"/>
+          </g>
+          <g fill="url(#fn-gold)" font-family="Georgia,'Times New Roman',serif">
+            <text x="79" y="134" font-size="90">F</text>
+            <text x="103" y="140" font-size="72">N</text>
+          </g>
         </g>
-        <g fill="url(#fn-gold)" font-family="Georgia,'Times New Roman',serif">
-          <text x="79" y="134" font-size="90">F</text>
-          <text x="103" y="140" font-size="72">N</text>
-        </g>
+        <text x="101.6" y="153" text-anchor="middle" fill="url(#fn-gold)"
+              font-family="Georgia,'Times New Roman',serif" font-size="21" letter-spacing="1.6">NEVA</text>
       </svg>
     <div>
       <p class="tc-name" id="credit-name">دکتر فرشاد فتحی</p>
